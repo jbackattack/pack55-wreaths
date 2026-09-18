@@ -102,6 +102,7 @@ function WreathPOS() {
   const [checkout, setCheckout]   = useState(null);
   const [sellerName, setSellerName] = useState("");
   const [nameInput, setNameInput] = useState("");
+  const [rankInput, setRankInput] = useState("");
   const [leaderInput, setLeaderInput] = useState("");
   const [cart, setCart]           = useState([]);
   const [inventory, setInventory] = useState(DEFAULT_INV);
@@ -183,6 +184,7 @@ function WreathPOS() {
     const sale = {
       id: Date.now().toString(),
       sellerName,
+      sellerRank: rankInput,
       customer: { ...customer },
       items: cart.map(i => ({ id: i.id, name: i.name, price: i.price, qty: i.qty })),
       payment,
@@ -258,12 +260,23 @@ function WreathPOS() {
           placeholder="e.g. Sarah Johnson"
           value={nameInput}
           onChange={e => setNameInput(e.target.value)}
-          onKeyDown={e => e.key === "Enter" && nameInput.trim() && (setSellerName(nameInput.trim()), setView("pos"))}
         />
         <div style={{ height: 14 }} />
+        <label style={label}>Scout Rank</label>
+        <select
+          style={{ ...inputStyle, appearance: "none", background: WHITE, cursor: "pointer" }}
+          value={rankInput}
+          onChange={e => setRankInput(e.target.value)}
+        >
+          <option value="">Select rank...</option>
+          {["Lion", "Tiger", "Wolf", "Bear", "Webelo", "Arrow of Light"].map(r => (
+            <option key={r} value={r}>{r}</option>
+          ))}
+        </select>
+        <div style={{ height: 14 }} />
         <button
-          style={btn(G, WHITE, { opacity: nameInput.trim() ? 1 : 0.4, transition: "opacity 0.2s" })}
-          disabled={!nameInput.trim()}
+          style={btn(G, WHITE, { opacity: nameInput.trim() && rankInput ? 1 : 0.4, transition: "opacity 0.2s" })}
+          disabled={!nameInput.trim() || !rankInput}
           onClick={() => { setSellerName(nameInput.trim()); setView("pos"); }}
         >
           Start Selling 🎄
@@ -333,6 +346,7 @@ function WreathPOS() {
         <div>
           <div style={{ fontSize: 10, color: L, fontWeight: 700, textTransform: "uppercase", letterSpacing: 1.2 }}>{tableMode ? "Mode" : "Seller"}</div>
           <div style={{ color: WHITE, fontWeight: 800, fontSize: 17 }}>{tableMode ? "🪑 Table Sale" : sellerName}</div>
+          {!tableMode && rankInput && <div style={{ color: LIGHT, fontSize: 11, fontWeight: 700 }}>{rankInput}</div>}
         </div>
         <div style={{ textAlign: "right", display: "flex", flexDirection: "column", alignItems: "flex-end", gap: 2 }}>
           <button onClick={() => { setTableMode(false); setSellerName(""); setCart([]); setView("login"); }}
@@ -1189,30 +1203,78 @@ function WreathPOS() {
                 </button>
               )}
               {sales.length === 0 && <div style={{ textAlign: "center", padding: "32px 0", color: "#9CA3AF" }}><div style={{ fontSize: 40 }}>📋</div><p style={{ fontWeight: 700 }}>No sales recorded yet</p></div>}
-              {[...sales].reverse().map(sale => {
-                const pm   = PAYMENT_METHODS.find(p => p.id === sale.payment);
-                return (
-                  <div key={sale.id} style={card()}>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
-                      <div>
-                        <div style={{ fontWeight: 800, fontSize: 15 }}>{sale.customer.name || "Walk-in"}</div>
-                        <div style={{ fontSize: 12, color: M, fontWeight: 700 }}>📍 {sale.sellerName}</div>
-                        <div style={{ fontSize: 11, color: "#9CA3AF" }}>
-                          {new Date(sale.timestamp).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}
+              {/* Grouped by scout */}
+              {(() => {
+                const doorSales = [...sales].filter(s => s.sellerName !== "Table Sale");
+                const scouts = [...new Set(doorSales.map(s => s.sellerName))].sort();
+                if (scouts.length === 0 && sales.filter(s => s.sellerName === "Table Sale").length === 0) return null;
+                return scouts.map(scout => {
+                  const scoutSales = doorSales.filter(s => s.sellerName === scout).sort((a,b) => new Date(b.timestamp)-new Date(a.timestamp));
+                  const scoutTotal = scoutSales.reduce((s,x) => s+x.total, 0);
+                  const open = scoutSales.filter(s => (s.status||"open") !== "pickedup").length;
+                  const picked = scoutSales.filter(s => s.status === "pickedup").length;
+                  return (
+                    <div key={scout} style={{ background: WHITE, borderRadius: 18, overflow: "hidden", boxShadow: "0 2px 10px rgba(0,0,0,0.06)" }}>
+                      {/* Scout header */}
+                      <div style={{ background: "#1A3D2B", padding: "12px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                        <div>
+                          <div style={{ color: WHITE, fontWeight: 900, fontSize: 16 }}>👤 {scout}{(() => { const r = scoutSales[0]?.sellerRank; return r ? <span style={{ fontSize: 12, fontWeight: 700, color: "#52B788", marginLeft: 8 }}>· {r}</span> : null; })()}</div>
+                          <div style={{ color: "#52B788", fontSize: 12, fontWeight: 700, marginTop: 2 }}>
+                            {scoutSales.length} orders · {open > 0 ? `${open} pending` : "all picked up"}
+                          </div>
+                        </div>
+                        <div style={{ textAlign: "right" }}>
+                          <div style={{ color: "#FCD34D", fontWeight: 900, fontSize: 22 }}>${scoutTotal.toFixed(2)}</div>
+                          <div style={{ color: "#52B788", fontSize: 11, fontWeight: 700 }}>{picked}/{scoutSales.length} picked up</div>
                         </div>
                       </div>
-                      <div style={{ textAlign: "right" }}>
-                        <div style={{ fontWeight: 900, fontSize: 18, color: G }}>${sale.total.toFixed(2)}</div>
-                        <div style={{ fontSize: 12, color: "#9CA3AF" }}>{pm?.icon} {pm?.label}</div>
+                      {/* Orders */}
+                      <div style={{ display: "flex", flexDirection: "column", gap: 1, background: "#F3F4F6" }}>
+                        {scoutSales.map(sale => {
+                          const pm = PAYMENT_METHODS.find(p => p.id === sale.payment);
+                          const pickedUp = sale.status === "pickedup";
+                          return (
+                            <div key={sale.id} style={{ background: pickedUp ? "#F0FDF4" : WHITE, padding: "12px 16px" }}>
+                              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                                <div>
+                                  <div style={{ fontWeight: 800, fontSize: 14 }}>{sale.customer.name}</div>
+                                  {sale.customer.address && <div style={{ fontSize: 12, color: "#6B7280" }}>📍 {sale.customer.address}</div>}
+                                  {sale.customer.phone   && <div style={{ fontSize: 12, color: "#6B7280" }}>📞 {sale.customer.phone}</div>}
+                                  {sale.notes && <div style={{ fontSize: 12, color: "#92400E", background: "#FFFBEB", borderRadius: 6, padding: "3px 8px", marginTop: 4, display: "inline-block" }}>📝 {sale.notes}</div>}
+                                  <div style={{ fontSize: 11, color: "#9CA3AF", marginTop: 3 }}>
+                                    {new Date(sale.timestamp).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}
+                                  </div>
+                                </div>
+                                <div style={{ textAlign: "right", flexShrink: 0, marginLeft: 8 }}>
+                                  <div style={{ fontWeight: 900, fontSize: 16, color: "#1A3D2B" }}>${sale.total.toFixed(2)}</div>
+                                  <div style={{ fontSize: 11, color: "#9CA3AF" }}>{pm?.icon} {pm?.label}</div>
+                                </div>
+                              </div>
+                              <div style={{ fontSize: 12, color: "#6B7280", margin: "6px 0 8px" }}>
+                                {sale.items.map(i => `${i.qty}× ${i.name}`).join(" · ")}
+                              </div>
+                              <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                                {pickedUp ? (
+                                  <span style={{ background: "#D1FAE5", color: "#065F46", borderRadius: 10, padding: "6px 12px", fontSize: 12, fontWeight: 800 }}>✅ Picked Up</span>
+                                ) : (
+                                  <button
+                                    onClick={() => updateSaleStatus(sale.id, "pickedup")}
+                                    style={{ background: "#1A3D2B", color: WHITE, border: "none", borderRadius: 10, padding: "7px 14px", fontSize: 12, fontWeight: 800, cursor: "pointer", fontFamily: "inherit" }}
+                                  >
+                                    🎒 Mark Picked Up
+                                  </button>
+                                )}
+                              </div>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
-                    <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px solid #F3F4F6", fontSize: 12, color: "#9CA3AF" }}>
-                      {sale.items.map(i => `${i.qty}× ${i.name}`).join(" · ")}
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                });
+              })()}
             </div>
+          )}            </div>
           )}
         </div>
 
