@@ -303,7 +303,6 @@ function WreathPOS() {
     });
     setPayment("cash");
     setCheckout("receipt");
-    loadData();
   };
   const updateSaleStatus = async (saleId, newStatus) => {
     const updated = sales.map(s => s.id === saleId ? {
@@ -1996,7 +1995,7 @@ function WreathPOS() {
       await store.set("wreaths_sales", []);
       showToast("✅ All data cleared");
     };
-    const LTABS = [["summary", "📊", "Summary"], ["sellers", "👥", "Sellers"], ["inv", "📦", "Stock"], ["all", "📋", "Sales"], ["pickup", "🎒", "Pickup"], ["roster", "👤", "Roster"]];
+    const LTABS = [["summary", "📊", "Summary"], ["inv", "📦", "Stock"], ["all", "📋", "Sales"], ["pickup", "🎒", "Pickup"], ["roster", "👤", "Roster"]];
     const isWide = typeof window !== "undefined" && window.innerWidth >= 900;
     return /*#__PURE__*/React.createElement("div", {
       style: {
@@ -2411,356 +2410,51 @@ function WreathPOS() {
           }
         }, fmtHrShort(hour)));
       })));
-    })(), /*#__PURE__*/React.createElement("button", {
-      onClick: clearAll,
-      style: btn("#DC2626", WHITE, {})
-    }, "⚠️ Reset All Data")), ltab === "roster" && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
-      style: {
-        fontSize: 13,
-        color: "#6B7280",
-        fontWeight: 600,
-        margin: "0 0 16px"
-      }
-    }, "Scout names added here appear as autocomplete suggestions on the login screen."), /*#__PURE__*/React.createElement(RosterManager, {
-      roster: roster,
-      setRoster: setRoster,
-      store: store
-    })), ltab === "pickup" && /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        flexDirection: "column",
-        gap: 14
-      }
-    }, /*#__PURE__*/React.createElement("input", {
-      style: {
-        ...inputStyle,
-        background: WHITE
-      },
-      placeholder: "🔍 Search by scout name...",
-      value: pickupSearch,
-      onChange: e => setPickupSearch(e.target.value)
-    }), (() => {
-      const doorSales = sales.filter(s => s.sellerName !== "Table Sale");
-      const scouts = [...new Set(doorSales.map(s => s.sellerName))].sort().filter(s => s.toLowerCase().includes(pickupSearch.toLowerCase()));
-      if (scouts.length === 0) return /*#__PURE__*/React.createElement("div", {
-        style: {
-          textAlign: "center",
-          padding: "32px 0",
-          color: "#9CA3AF"
-        }
-      }, /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 40
-        }
-      }, "🎒"), /*#__PURE__*/React.createElement("p", {
-        style: {
-          fontWeight: 700,
-          marginTop: 8
-        }
-      }, "No orders yet"));
-      return scouts.map(scout => {
-        const pending = doorSales.filter(s => s.sellerName === scout && (s.status || "open") !== "pickedup");
-        const done = doorSales.filter(s => s.sellerName === scout && s.status === "pickedup");
-        // Aggregate items across all pending orders
-        const itemMap = {};
-        pending.forEach(sale => {
-          sale.items.forEach(item => {
-            itemMap[item.name] = (itemMap[item.name] || 0) + item.qty;
-          });
-        });
-        const itemList = Object.entries(itemMap).sort();
-        const scoutTotal = pending.reduce((s, x) => s + x.total, 0);
-        return /*#__PURE__*/React.createElement("div", {
-          key: scout,
-          style: card()
-        }, /*#__PURE__*/React.createElement("div", {
-          style: {
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: 10
-          }
-        }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-          style: {
-            fontWeight: 900,
-            fontSize: 16,
-            color: G
-          }
-        }, "👤 ", scout), /*#__PURE__*/React.createElement("div", {
-          style: {
-            fontSize: 12,
-            color: "#9CA3AF",
-            marginTop: 2
-          }
-        }, pending.length, " order", pending.length !== 1 ? "s" : "", " pending · ", done.length, " picked up")), pending.length === 0 ? /*#__PURE__*/React.createElement("span", {
-          style: {
-            background: "#D1FAE5",
-            color: "#065F46",
-            borderRadius: 10,
-            padding: "6px 12px",
-            fontSize: 12,
-            fontWeight: 800
-          }
-        }, "✅ All Picked Up") : /*#__PURE__*/React.createElement("span", {
-          style: {
-            background: "#FEF3C7",
-            color: "#92400E",
-            borderRadius: 10,
-            padding: "6px 12px",
-            fontSize: 13,
-            fontWeight: 900
-          }
-        }, "$", scoutTotal.toFixed(2))), pending.length === 0 ? /*#__PURE__*/React.createElement("p", {
-          style: {
-            fontSize: 13,
-            color: "#9CA3AF",
-            margin: 0
-          }
-        }, "Nothing left to pick up.") : /*#__PURE__*/React.createElement("div", {
-          style: {
-            borderTop: "1.5px solid #F3F4F6",
-            paddingTop: 10
-          }
-        }, itemList.map(([name, qty]) => /*#__PURE__*/React.createElement("div", {
-          key: name,
-          style: {
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "6px 0",
-            borderBottom: "1px solid #F9FAFB"
-          }
-        }, /*#__PURE__*/React.createElement("span", {
-          style: {
-            fontWeight: 700,
-            fontSize: 14
-          }
-        }, name), /*#__PURE__*/React.createElement("span", {
-          style: {
-            background: G,
-            color: WHITE,
-            borderRadius: 20,
-            padding: "3px 12px",
-            fontWeight: 900,
-            fontSize: 14
-          }
-        }, "×", qty))), /*#__PURE__*/React.createElement("button", {
-          onClick: () => updateScoutPickup(scout, "pickedup"),
-          style: {
-            marginTop: 14,
-            width: "100%",
-            background: G,
-            color: WHITE,
-            border: "none",
-            borderRadius: 12,
-            padding: "12px",
-            fontSize: 14,
-            fontWeight: 900,
-            cursor: "pointer",
-            fontFamily: "inherit"
-          }
-        }, "🎒 Mark All Picked Up")), pending.length === 0 && done.length > 0 && /*#__PURE__*/React.createElement("button", {
-          onClick: () => updateScoutPickup(scout, "open"),
-          style: {
-            marginTop: 10,
-            width: "100%",
-            background: "none",
-            color: "#9CA3AF",
-            border: "1.5px solid #E5E7EB",
-            borderRadius: 12,
-            padding: "10px",
-            fontSize: 13,
-            fontWeight: 700,
-            cursor: "pointer",
-            fontFamily: "inherit"
-          }
-        }, "↩ Undo Pickup"));
-      });
-    })()), ltab === "sellers" && /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: isWide ? "grid" : "flex",
-        gridTemplateColumns: isWide ? "1fr 1fr" : undefined,
-        flexDirection: "column",
-        gap: 16,
-        alignItems: "start"
-      }
-    }, sellers.filter(s => s !== "Table Sale").length === 0 && /*#__PURE__*/React.createElement("div", {
-      style: {
-        textAlign: "center",
-        padding: "32px 0",
-        color: "#9CA3AF"
-      }
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 40
-      }
-    }, "👤"), /*#__PURE__*/React.createElement("p", {
-      style: {
-        fontWeight: 700
-      }
-    }, "No sellers yet")), sellers.filter(s => s !== "Table Sale").map(seller => {
-      const ss = sales.filter(s => s.sellerName === seller);
-      const tot = ss.reduce((s, x) => s + x.total, 0);
-      const itm = ss.reduce((s, x) => s + x.items.reduce((a, i) => a + i.qty, 0), 0);
-      const open = ss.filter(s => (s.status || "open") === "open").length;
-      const fulfilled = ss.filter(s => s.status === "fulfilled").length;
-      const pickedup = ss.filter(s => s.status === "pickedup").length;
-      return {
-        seller,
-        ss,
-        tot,
-        itm,
-        open,
-        fulfilled,
-        pickedup
-      };
-    }).sort((a, b) => b.tot - a.tot).map(({
-      seller,
-      ss,
-      tot,
-      itm,
-      open,
-      fulfilled,
-      pickedup
-    }) => /*#__PURE__*/React.createElement("div", {
-      key: seller,
-      style: card()
-    }, /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: 12
-      }
-    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontWeight: 800,
-        fontSize: 16
-      }
-    }, "👤 ", seller), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontSize: 12,
-        color: "#9CA3AF",
-        marginTop: 2
-      }
-    }, ss.length, " orders · ", itm, " wreaths")), /*#__PURE__*/React.createElement("div", {
-      style: {
-        fontWeight: 900,
-        fontSize: 20,
-        color: G
-      }
-    }, "$", tot.toFixed(2))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        gap: 8,
-        marginBottom: 14,
-        flexWrap: "wrap"
-      }
-    }, [{
-      label: "Open",
-      count: open,
-      bg: "#FEF3C7",
-      text: "#92400E"
-    }, {
-      label: "Fulfilled",
-      count: fulfilled,
-      bg: "#DBEAFE",
-      text: "#1E40AF"
-    }, {
-      label: "Picked Up",
-      count: pickedup,
-      bg: "#D1FAE5",
-      text: "#065F46"
-    }].map(s => /*#__PURE__*/React.createElement("div", {
-      key: s.label,
-      style: {
-        background: s.bg,
-        color: s.text,
-        borderRadius: 10,
-        padding: "5px 10px",
-        fontSize: 12,
-        fontWeight: 800
-      }
-    }, s.count, " ", s.label))), /*#__PURE__*/React.createElement("div", {
-      style: {
-        display: "flex",
-        flexDirection: "column",
-        gap: 10
-      }
-    }, [...ss].reverse().map(sale => {
-      const status = sale.status || "open";
-      const STATUS_CFG = {
-        open: {
-          label: "Open",
-          bg: "#FEF3C7",
-          text: "#92400E",
-          icon: "🟡",
-          next: "fulfilled",
-          nextLabel: "Mark Fulfilled"
-        },
-        fulfilled: {
-          label: "Fulfilled",
-          bg: "#DBEAFE",
-          text: "#1E40AF",
-          icon: "🔵",
-          next: "pickedup",
-          nextLabel: "Mark Picked Up"
-        },
-        pickedup: {
-          label: "Picked Up",
-          bg: "#D1FAE5",
-          text: "#065F46",
-          icon: "✅",
-          next: null,
-          nextLabel: null
-        }
-      };
-      const cfg = STATUS_CFG[status];
-      const pm = PAYMENT_METHODS.find(p => p.id === sale.payment);
+    })(), (() => {
+      const tableSales = sales.filter(s => s.sellerName === "Table Sale");
+      if (tableSales.length === 0) return null;
+      const tableRev = tableSales.reduce((s, x) => s + x.total, 0);
+      const tableItms = tableSales.reduce((s, x) => s + x.items.reduce((a, i) => a + i.qty, 0), 0);
+      const cashSales = tableSales.filter(s => s.payment === "cash");
+      const zelleSales = tableSales.filter(s => s.payment === "zelle");
+      // Build product breakdown
+      const prodMap = {};
+      tableSales.forEach(s => s.items.forEach(i => {
+        prodMap[i.name] = (prodMap[i.name] || 0) + i.qty;
+      }));
       return /*#__PURE__*/React.createElement("div", {
-        key: sale.id,
+        style: card({
+          marginBottom: 14
+        })
+      }, /*#__PURE__*/React.createElement("h3", {
         style: {
-          background: "#F9FAFB",
-          borderRadius: 12,
-          padding: 12,
-          border: `1.5px solid ${status === "open" ? "#FDE68A" : status === "fulfilled" ? "#BFDBFE" : "#A7F3D0"}`
+          margin: "0 0 12px",
+          color: G,
+          fontSize: 15
         }
-      }, /*#__PURE__*/React.createElement("div", {
+      }, "🪑 Table Sales"), /*#__PURE__*/React.createElement("div", {
         style: {
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          marginBottom: 6
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gap: 8,
+          marginBottom: 12
         }
-      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      }, [{
+        label: "Transactions",
+        value: tableSales.length
+      }, {
+        label: "Wreaths",
+        value: tableItms
+      }, {
+        label: "Revenue",
+        value: `$${tableRev.toFixed(2)}`
+      }].map(s => /*#__PURE__*/React.createElement("div", {
+        key: s.label,
         style: {
-          fontWeight: 800,
-          fontSize: 14
-        }
-      }, sale.customer.name), sale.customer.address && /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 12,
-          color: "#6B7280"
-        }
-      }, "📍 ", sale.customer.address), sale.customer.phone && /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 12,
-          color: "#6B7280"
-        }
-      }, "📞 ", sale.customer.phone), /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 11,
-          color: "#9CA3AF",
-          marginTop: 2
-        }
-      }, new Date(sale.timestamp).toLocaleString("en-US", {
-        month: "short",
-        day: "numeric",
-        hour: "numeric",
-        minute: "2-digit"
-      }))), /*#__PURE__*/React.createElement("div", {
-        style: {
-          textAlign: "right"
+          background: "#F0FDF4",
+          borderRadius: 10,
+          padding: "8px",
+          textAlign: "center"
         }
       }, /*#__PURE__*/React.createElement("div", {
         style: {
@@ -2768,58 +2462,81 @@ function WreathPOS() {
           fontSize: 16,
           color: G
         }
-      }, "$", sale.total.toFixed(2)), /*#__PURE__*/React.createElement("div", {
+      }, s.value), /*#__PURE__*/React.createElement("div", {
         style: {
-          fontSize: 11,
-          color: "#9CA3AF"
+          fontSize: 10,
+          color: "#9CA3AF",
+          fontWeight: 700
         }
-      }, pm?.icon, " ", pm?.label))), /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 12,
-          color: "#6B7280",
-          marginBottom: sale.notes ? 6 : 10
-        }
-      }, sale.items.map(i => `${i.qty}× ${i.name}`).join(" · ")), sale.notes && /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 12,
-          background: "#FFFBEB",
-          border: "1px solid #FDE68A",
-          borderRadius: 8,
-          padding: "6px 10px",
-          color: "#92400E",
-          marginBottom: 10,
-          fontStyle: "italic"
-        }
-      }, "📝 ", sale.notes), /*#__PURE__*/React.createElement("div", {
+      }, s.label)))), /*#__PURE__*/React.createElement("div", {
         style: {
           display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between"
+          gap: 8,
+          marginBottom: 12
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          background: "#D1FAE5",
+          borderRadius: 10,
+          padding: "8px 10px",
+          textAlign: "center"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontWeight: 900,
+          fontSize: 15,
+          color: G
+        }
+      }, "💵 $", cashSales.reduce((s, x) => s + x.total, 0).toFixed(2)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: "#6B7280",
+          fontWeight: 700
+        }
+      }, "Cash (", cashSales.length, ")")), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          background: "#EDE9FE",
+          borderRadius: 10,
+          padding: "8px 10px",
+          textAlign: "center"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontWeight: 900,
+          fontSize: 15,
+          color: "#5B21B6"
+        }
+      }, "💜 $", zelleSales.reduce((s, x) => s + x.total, 0).toFixed(2)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: "#6B7280",
+          fontWeight: 700
+        }
+      }, "Zelle (", zelleSales.length, ")"))), Object.entries(prodMap).sort((a, b) => b[1] - a[1]).map(([name, qty]) => /*#__PURE__*/React.createElement("div", {
+        key: name,
+        style: {
+          display: "flex",
+          justifyContent: "space-between",
+          fontSize: 13,
+          padding: "5px 0",
+          borderBottom: "1px solid #F3F4F6"
         }
       }, /*#__PURE__*/React.createElement("span", {
         style: {
-          background: cfg.bg,
-          color: cfg.text,
-          borderRadius: 8,
-          padding: "5px 10px",
-          fontSize: 12,
-          fontWeight: 800
+          fontWeight: 600
         }
-      }, cfg.icon, " ", cfg.label), cfg.next && /*#__PURE__*/React.createElement("button", {
-        onClick: () => updateSaleStatus(sale.id, cfg.next),
+      }, name), /*#__PURE__*/React.createElement("span", {
         style: {
-          background: G,
-          color: WHITE,
-          border: "none",
-          borderRadius: 10,
-          padding: "8px 14px",
-          fontSize: 12,
-          fontWeight: 800,
-          cursor: "pointer",
-          fontFamily: "inherit"
+          fontWeight: 900,
+          color: G
         }
-      }, cfg.nextLabel, " →")));
-    }))))), ltab === "inv" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+      }, qty, " sold"))));
+    })(), /*#__PURE__*/React.createElement("button", {
+      onClick: clearAll,
+      style: btn("#DC2626", WHITE, {})
+    }, "⚠️ Reset All Data")), ltab === "inv" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
       style: {
         color: "#6B7280",
         fontSize: 14,
@@ -2842,7 +2559,17 @@ function WreathPOS() {
         alignItems: "center",
         gap: 12
       })
-    }, /*#__PURE__*/React.createElement("span", {
+    }, p.image ? /*#__PURE__*/React.createElement("img", {
+      src: p.image,
+      alt: p.name,
+      style: {
+        width: 44,
+        height: 44,
+        borderRadius: 10,
+        objectFit: "cover",
+        flexShrink: 0
+      }
+    }) : /*#__PURE__*/React.createElement("span", {
       style: {
         fontSize: 28
       }
@@ -3142,6 +2869,168 @@ function WreathPOS() {
             }
           }, "🎒 Mark Picked Up")));
         })));
+      });
+    })()), ltab === "roster" && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontSize: 13,
+        color: "#6B7280",
+        fontWeight: 600,
+        margin: "0 0 16px"
+      }
+    }, "Scout names added here appear as autocomplete suggestions on the login screen."), /*#__PURE__*/React.createElement(RosterManager, {
+      roster: roster,
+      setRoster: setRoster,
+      store: store
+    })), ltab === "pickup" && /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        gap: 14
+      }
+    }, /*#__PURE__*/React.createElement("input", {
+      style: {
+        ...inputStyle,
+        background: WHITE
+      },
+      placeholder: "🔍 Search by scout name...",
+      value: pickupSearch,
+      onChange: e => setPickupSearch(e.target.value)
+    }), (() => {
+      const doorSales = sales.filter(s => s.sellerName !== "Table Sale");
+      const scouts = [...new Set(doorSales.map(s => s.sellerName))].sort().filter(s => s.toLowerCase().includes(pickupSearch.toLowerCase()));
+      if (scouts.length === 0) return /*#__PURE__*/React.createElement("div", {
+        style: {
+          textAlign: "center",
+          padding: "32px 0",
+          color: "#9CA3AF"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 40
+        }
+      }, "🎒"), /*#__PURE__*/React.createElement("p", {
+        style: {
+          fontWeight: 700,
+          marginTop: 8
+        }
+      }, "No orders yet"));
+      return scouts.map(scout => {
+        const pending = doorSales.filter(s => s.sellerName === scout && (s.status || "open") !== "pickedup");
+        const done = doorSales.filter(s => s.sellerName === scout && s.status === "pickedup");
+        // Aggregate items across all pending orders
+        const itemMap = {};
+        pending.forEach(sale => {
+          sale.items.forEach(item => {
+            itemMap[item.name] = (itemMap[item.name] || 0) + item.qty;
+          });
+        });
+        const itemList = Object.entries(itemMap).sort();
+        const scoutTotal = pending.reduce((s, x) => s + x.total, 0);
+        return /*#__PURE__*/React.createElement("div", {
+          key: scout,
+          style: card()
+        }, /*#__PURE__*/React.createElement("div", {
+          style: {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 10
+          }
+        }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontWeight: 900,
+            fontSize: 16,
+            color: G
+          }
+        }, "👤 ", scout), /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontSize: 12,
+            color: "#9CA3AF",
+            marginTop: 2
+          }
+        }, pending.length, " order", pending.length !== 1 ? "s" : "", " pending · ", done.length, " picked up")), pending.length === 0 ? /*#__PURE__*/React.createElement("span", {
+          style: {
+            background: "#D1FAE5",
+            color: "#065F46",
+            borderRadius: 10,
+            padding: "6px 12px",
+            fontSize: 12,
+            fontWeight: 800
+          }
+        }, "✅ All Picked Up") : /*#__PURE__*/React.createElement("span", {
+          style: {
+            background: "#FEF3C7",
+            color: "#92400E",
+            borderRadius: 10,
+            padding: "6px 12px",
+            fontSize: 13,
+            fontWeight: 900
+          }
+        }, "$", scoutTotal.toFixed(2))), pending.length === 0 ? /*#__PURE__*/React.createElement("p", {
+          style: {
+            fontSize: 13,
+            color: "#9CA3AF",
+            margin: 0
+          }
+        }, "Nothing left to pick up.") : /*#__PURE__*/React.createElement("div", {
+          style: {
+            borderTop: "1.5px solid #F3F4F6",
+            paddingTop: 10
+          }
+        }, itemList.map(([name, qty]) => /*#__PURE__*/React.createElement("div", {
+          key: name,
+          style: {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "6px 0",
+            borderBottom: "1px solid #F9FAFB"
+          }
+        }, /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontWeight: 700,
+            fontSize: 14
+          }
+        }, name), /*#__PURE__*/React.createElement("span", {
+          style: {
+            background: G,
+            color: WHITE,
+            borderRadius: 20,
+            padding: "3px 12px",
+            fontWeight: 900,
+            fontSize: 14
+          }
+        }, "×", qty))), /*#__PURE__*/React.createElement("button", {
+          onClick: () => updateScoutPickup(scout, "pickedup"),
+          style: {
+            marginTop: 14,
+            width: "100%",
+            background: G,
+            color: WHITE,
+            border: "none",
+            borderRadius: 12,
+            padding: "12px",
+            fontSize: 14,
+            fontWeight: 900,
+            cursor: "pointer",
+            fontFamily: "inherit"
+          }
+        }, "🎒 Mark All Picked Up")), pending.length === 0 && done.length > 0 && /*#__PURE__*/React.createElement("button", {
+          onClick: () => updateScoutPickup(scout, "open"),
+          style: {
+            marginTop: 10,
+            width: "100%",
+            background: "none",
+            color: "#9CA3AF",
+            border: "1.5px solid #E5E7EB",
+            borderRadius: 12,
+            padding: "10px",
+            fontSize: 13,
+            fontWeight: 700,
+            cursor: "pointer",
+            fontFamily: "inherit"
+          }
+        }, "↩ Undo Pickup"));
       });
     })())), toast && /*#__PURE__*/React.createElement(Toast, {
       msg: toast
