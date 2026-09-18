@@ -9,14 +9,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body, #root { width: 100%; height: 100%; overflow: hidden; background: #FDF8EE; font-family: "Nunito", sans-serif; }
+  html, body, #root { width: 100%; height: 100%; overflow: hidden; background: #FDF8EE; font-family: 'Nunito', sans-serif; }
 </style>
 </head>
 <body>
 <div id="root"></div>
 <script>
 const { useState, useEffect, useRef } = React;
-import { jsxDEV as _jsxDEV, Fragment as _Fragment } from "react/jsx-dev-runtime";
 const PRODUCTS = [{
   id: "bw",
   name: "Bow",
@@ -335,934 +334,841 @@ function WreathPOS() {
   };
 
   // ── LOADING ──────────────────────────────────────────────────
-  if (loading) return /*#__PURE__*/_jsxDEV("div", {
+  if (loading) return /*#__PURE__*/React.createElement("div", {
     style: {
       ...appWrap,
       alignItems: "center",
       justifyContent: "center"
-    },
-    children: /*#__PURE__*/_jsxDEV("div", {
-      style: {
-        textAlign: "center"
-      },
-      children: [/*#__PURE__*/_jsxDEV("div", {
-        style: {
-          fontSize: 60,
-          animation: "spin 2s linear infinite"
-        },
-        children: "🎄"
-      }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-        style: {
-          color: G,
-          fontWeight: 800,
-          fontSize: 17,
-          marginTop: 12
-        },
-        children: "Loading..."
-      }, void 0, false), /*#__PURE__*/_jsxDEV("style", {
-        children: `@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }`
-      }, void 0, false)]
-    }, void 0, true)
-  }, void 0, false);
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "center"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 60,
+      animation: "spin 2s linear infinite"
+    }
+  }, "🎄"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: G,
+      fontWeight: 800,
+      fontSize: 17,
+      marginTop: 12
+    }
+  }, "Loading..."), /*#__PURE__*/React.createElement("style", null, `@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }`)));
 
   // ── LOGIN ────────────────────────────────────────────────────
-  if (view === "login") return /*#__PURE__*/_jsxDEV("div", {
+  if (view === "login") return /*#__PURE__*/React.createElement("div", {
     style: {
       ...appWrap,
       overflowY: "auto",
       WebkitOverflowScrolling: "touch"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: "100%",
+      padding: 24,
+      gap: 20
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "center"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 72,
+      lineHeight: 1,
+      filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.15))"
+    }
+  }, "🎄"), /*#__PURE__*/React.createElement("h1", {
+    style: {
+      fontFamily: "'Playfair Display', serif",
+      fontSize: 30,
+      color: G,
+      margin: "12px 0 4px",
+      lineHeight: 1.2
+    }
+  }, "Pack 55", /*#__PURE__*/React.createElement("br", null), "Wreath Sale"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: M,
+      fontWeight: 700,
+      margin: 0,
+      fontSize: 15,
+      letterSpacing: 0.5
+    }
+  }, "Cub Scout Sales & Inventory")), /*#__PURE__*/React.createElement("div", {
+    style: card({
+      width: "100%",
+      maxWidth: 360,
+      boxShadow: "0 4px 20px rgba(0,0,0,0.1)"
+    })
+  }, /*#__PURE__*/React.createElement("h2", {
+    style: {
+      margin: "0 0 14px",
+      color: G,
+      fontSize: 18,
+      display: "flex",
+      alignItems: "center",
+      gap: 8
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    style: {
+      background: "#D1FAE5",
+      borderRadius: 8,
+      padding: "4px 8px"
+    }
+  }, "👋"), " Who's selling?"), /*#__PURE__*/React.createElement("label", {
+    style: label
+  }, "Scout Name"), /*#__PURE__*/React.createElement("input", {
+    style: inputStyle,
+    placeholder: "e.g. Sarah Johnson",
+    value: nameInput,
+    onChange: e => setNameInput(e.target.value)
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 14
+    }
+  }), /*#__PURE__*/React.createElement("label", {
+    style: label
+  }, "Scout Rank"), /*#__PURE__*/React.createElement("select", {
+    style: {
+      ...inputStyle,
+      appearance: "none",
+      background: WHITE,
+      cursor: "pointer"
     },
-    children: [/*#__PURE__*/_jsxDEV("div", {
-      style: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: "100%",
-        padding: 24,
-        gap: 20
-      },
-      children: [/*#__PURE__*/_jsxDEV("div", {
-        style: {
-          textAlign: "center"
-        },
-        children: [/*#__PURE__*/_jsxDEV("div", {
-          style: {
-            fontSize: 72,
-            lineHeight: 1,
-            filter: "drop-shadow(0 4px 8px rgba(0,0,0,0.15))"
-          },
-          children: "🎄"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("h1", {
-          style: {
-            fontFamily: "'Playfair Display', serif",
-            fontSize: 30,
-            color: G,
-            margin: "12px 0 4px",
-            lineHeight: 1.2
-          },
-          children: ["Pack 55", /*#__PURE__*/_jsxDEV("br", {}, void 0, false), "Wreath Sale"]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("p", {
-          style: {
-            color: M,
-            fontWeight: 700,
-            margin: 0,
-            fontSize: 15,
-            letterSpacing: 0.5
-          },
-          children: "Cub Scout Sales & Inventory"
-        }, void 0, false)]
-      }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-        style: card({
-          width: "100%",
-          maxWidth: 360,
-          boxShadow: "0 4px 20px rgba(0,0,0,0.1)"
-        }),
-        children: [/*#__PURE__*/_jsxDEV("h2", {
-          style: {
-            margin: "0 0 14px",
-            color: G,
-            fontSize: 18,
-            display: "flex",
-            alignItems: "center",
-            gap: 8
-          },
-          children: [/*#__PURE__*/_jsxDEV("span", {
-            style: {
-              background: "#D1FAE5",
-              borderRadius: 8,
-              padding: "4px 8px"
-            },
-            children: "👋"
-          }, void 0, false), " Who's selling?"]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("label", {
-          style: label,
-          children: "Scout Name"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("input", {
-          style: inputStyle,
-          placeholder: "e.g. Sarah Johnson",
-          value: nameInput,
-          onChange: e => setNameInput(e.target.value)
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            height: 14
-          }
-        }, void 0, false), /*#__PURE__*/_jsxDEV("label", {
-          style: label,
-          children: "Scout Rank"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("select", {
-          style: {
-            ...inputStyle,
-            appearance: "none",
-            background: WHITE,
-            cursor: "pointer"
-          },
-          value: rankInput,
-          onChange: e => setRankInput(e.target.value),
-          children: [/*#__PURE__*/_jsxDEV("option", {
-            value: "",
-            children: "Select rank..."
-          }, void 0, false), ["Lion", "Tiger", "Wolf", "Bear", "Webelo", "Arrow of Light"].map(r => /*#__PURE__*/_jsxDEV("option", {
-            value: r,
-            children: r
-          }, r, false))]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            height: 14
-          }
-        }, void 0, false), /*#__PURE__*/_jsxDEV("button", {
-          style: btn(G, WHITE, {
-            opacity: nameInput.trim() && rankInput ? 1 : 0.4,
-            transition: "opacity 0.2s"
-          }),
-          disabled: !nameInput.trim() || !rankInput,
-          onClick: () => {
-            setSellerName(nameInput.trim());
-            setView("pos");
-          },
-          children: "Start Selling 🎄"
-        }, void 0, false)]
-      }, void 0, true), /*#__PURE__*/_jsxDEV("button", {
-        onClick: () => {
-          setTableMode(true);
-          setSellerName("Table Sale");
-          setView("pos");
-        },
-        style: {
-          background: "#FFF7ED",
-          border: `2px solid ${GOLD}`,
-          borderRadius: 14,
-          padding: "13px 20px",
-          color: G,
-          fontWeight: 800,
-          fontSize: 15,
-          cursor: "pointer",
-          fontFamily: "inherit",
-          width: "100%",
-          maxWidth: 360,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 10
-        },
-        children: ["🪑 Table Sale Mode", /*#__PURE__*/_jsxDEV("span", {
-          style: {
-            fontSize: 12,
-            fontWeight: 600,
-            color: "#92400E",
-            background: "#FEF3C7",
-            borderRadius: 8,
-            padding: "3px 8px"
-          },
-          children: "Quick checkout"
-        }, void 0, false)]
-      }, void 0, true), !showLeader ? /*#__PURE__*/_jsxDEV("button", {
-        onClick: () => setShowLeader(true),
-        style: {
-          background: "none",
-          border: "none",
-          color: M,
-          fontSize: 14,
-          cursor: "pointer",
-          fontWeight: 700,
-          fontFamily: "inherit",
-          display: "flex",
-          alignItems: "center",
-          gap: 6
-        },
-        children: "🔐 Troop Leader Access"
-      }, void 0, false) : /*#__PURE__*/_jsxDEV("div", {
-        style: card({
-          width: "100%",
-          maxWidth: 360,
-          border: `2px solid ${GOLD}`
-        }),
-        children: [/*#__PURE__*/_jsxDEV("h3", {
-          style: {
-            margin: "0 0 12px",
-            color: G,
-            fontSize: 16
-          },
-          children: "🏕️ Leader Login"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("label", {
-          style: label,
-          children: "Leader Code"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("input", {
-          style: inputStyle,
-          type: "password",
-          placeholder: "Enter code",
-          value: leaderInput,
-          onChange: e => setLeaderInput(e.target.value),
-          onKeyDown: e => e.key === "Enter" && (leaderInput === LEADER_CODE ? setView("leader") : showToast("❌ Incorrect code"))
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            height: 12
-          }
-        }, void 0, false), /*#__PURE__*/_jsxDEV("button", {
-          style: btn(GOLD),
-          onClick: () => leaderInput === LEADER_CODE ? setView("leader") : showToast("❌ Incorrect code"),
-          children: "Open Leader Dashboard"
-        }, void 0, false)]
-      }, void 0, true)]
-    }, void 0, true), toast && /*#__PURE__*/_jsxDEV(Toast, {
-      msg: toast
-    }, void 0, false)]
-  }, void 0, true);
+    value: rankInput,
+    onChange: e => setRankInput(e.target.value)
+  }, /*#__PURE__*/React.createElement("option", {
+    value: ""
+  }, "Select rank..."), ["Lion", "Tiger", "Wolf", "Bear", "Webelo", "Arrow of Light"].map(r => /*#__PURE__*/React.createElement("option", {
+    key: r,
+    value: r
+  }, r))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 14
+    }
+  }), /*#__PURE__*/React.createElement("button", {
+    style: btn(G, WHITE, {
+      opacity: nameInput.trim() && rankInput ? 1 : 0.4,
+      transition: "opacity 0.2s"
+    }),
+    disabled: !nameInput.trim() || !rankInput,
+    onClick: () => {
+      setSellerName(nameInput.trim());
+      setView("pos");
+    }
+  }, "Start Selling 🎄")), /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      setTableMode(true);
+      setSellerName("Table Sale");
+      setView("pos");
+    },
+    style: {
+      background: "#FFF7ED",
+      border: `2px solid ${GOLD}`,
+      borderRadius: 14,
+      padding: "13px 20px",
+      color: G,
+      fontWeight: 800,
+      fontSize: 15,
+      cursor: "pointer",
+      fontFamily: "inherit",
+      width: "100%",
+      maxWidth: 360,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      gap: 10
+    }
+  }, "🪑 Table Sale Mode", /*#__PURE__*/React.createElement("span", {
+    style: {
+      fontSize: 12,
+      fontWeight: 600,
+      color: "#92400E",
+      background: "#FEF3C7",
+      borderRadius: 8,
+      padding: "3px 8px"
+    }
+  }, "Quick checkout")), !showLeader ? /*#__PURE__*/React.createElement("button", {
+    onClick: () => setShowLeader(true),
+    style: {
+      background: "none",
+      border: "none",
+      color: M,
+      fontSize: 14,
+      cursor: "pointer",
+      fontWeight: 700,
+      fontFamily: "inherit",
+      display: "flex",
+      alignItems: "center",
+      gap: 6
+    }
+  }, "🔐 Troop Leader Access") : /*#__PURE__*/React.createElement("div", {
+    style: card({
+      width: "100%",
+      maxWidth: 360,
+      border: `2px solid ${GOLD}`
+    })
+  }, /*#__PURE__*/React.createElement("h3", {
+    style: {
+      margin: "0 0 12px",
+      color: G,
+      fontSize: 16
+    }
+  }, "🏕️ Leader Login"), /*#__PURE__*/React.createElement("label", {
+    style: label
+  }, "Leader Code"), /*#__PURE__*/React.createElement("input", {
+    style: inputStyle,
+    type: "password",
+    placeholder: "Enter code",
+    value: leaderInput,
+    onChange: e => setLeaderInput(e.target.value),
+    onKeyDown: e => e.key === "Enter" && (leaderInput === LEADER_CODE ? setView("leader") : showToast("❌ Incorrect code"))
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 12
+    }
+  }), /*#__PURE__*/React.createElement("button", {
+    style: btn(GOLD),
+    onClick: () => leaderInput === LEADER_CODE ? setView("leader") : showToast("❌ Incorrect code")
+  }, "Open Leader Dashboard"))), toast && /*#__PURE__*/React.createElement(Toast, {
+    msg: toast
+  }));
 
   // ── LEADER ────────────────────────────────────────────────────
-  if (view === "leader") return /*#__PURE__*/_jsxDEV(LeaderScreen, {}, void 0, false);
+  if (view === "leader") return /*#__PURE__*/React.createElement(LeaderScreen, null);
 
   // ── POS ───────────────────────────────────────────────────────
   const mySales = sales.filter(s => s.sellerName === sellerName);
   const myTotal = mySales.reduce((s, x) => s + x.total, 0);
-  return /*#__PURE__*/_jsxDEV("div", {
+  return /*#__PURE__*/React.createElement("div", {
     style: {
       ...appWrap
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: G,
+      padding: "12px 20px",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      position: "sticky",
+      top: 0,
+      zIndex: 10,
+      boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: L,
+      fontWeight: 700,
+      textTransform: "uppercase",
+      letterSpacing: 1.2
+    }
+  }, tableMode ? "Mode" : "Seller"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: WHITE,
+      fontWeight: 800,
+      fontSize: 17
+    }
+  }, tableMode ? "🪑 Table Sale" : sellerName), !tableMode && rankInput && /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: LIGHT,
+      fontSize: 11,
+      fontWeight: 700
+    }
+  }, rankInput)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      textAlign: "right",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-end",
+      gap: 2
+    }
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: () => {
+      setTableMode(false);
+      setSellerName("");
+      setCart([]);
+      setView("login");
     },
-    children: [/*#__PURE__*/_jsxDEV("div", {
-      style: {
-        background: G,
-        padding: "12px 20px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        position: "sticky",
-        top: 0,
-        zIndex: 10,
-        boxShadow: "0 2px 8px rgba(0,0,0,0.2)"
-      },
-      children: [/*#__PURE__*/_jsxDEV("div", {
-        children: [/*#__PURE__*/_jsxDEV("div", {
-          style: {
-            fontSize: 10,
-            color: L,
-            fontWeight: 700,
-            textTransform: "uppercase",
-            letterSpacing: 1.2
-          },
-          children: tableMode ? "Mode" : "Seller"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            color: WHITE,
-            fontWeight: 800,
-            fontSize: 17
-          },
-          children: tableMode ? "🪑 Table Sale" : sellerName
-        }, void 0, false), !tableMode && rankInput && /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            color: LIGHT,
-            fontSize: 11,
-            fontWeight: 700
-          },
-          children: rankInput
-        }, void 0, false)]
-      }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-        style: {
-          textAlign: "right",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "flex-end",
-          gap: 2
-        },
-        children: [/*#__PURE__*/_jsxDEV("button", {
-          onClick: () => {
-            setTableMode(false);
-            setSellerName("");
-            setCart([]);
-            setView("login");
-          },
-          style: {
-            background: "rgba(255,255,255,0.12)",
-            border: "none",
-            borderRadius: 8,
-            padding: "4px 10px",
-            color: "#fff",
-            fontSize: 11,
-            fontWeight: 800,
-            cursor: "pointer",
-            fontFamily: "inherit",
-            marginBottom: 2
-          },
-          children: "← Exit"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            fontSize: 10,
-            color: L,
-            fontWeight: 700,
-            textTransform: "uppercase",
-            letterSpacing: 1.2
-          },
-          children: "My Total"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            color: "#FCD34D",
-            fontWeight: 900,
-            fontSize: 18
-          },
-          children: ["$", myTotal.toFixed(2)]
-        }, void 0, true)]
-      }, void 0, true)]
-    }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-      style: {
-        flex: 1,
-        overflowY: "auto",
-        WebkitOverflowScrolling: "touch",
-        paddingBottom: 120
-      },
-      children: [tab === "sell" && /*#__PURE__*/_jsxDEV(SellTab, {}, void 0, false), tab === "sales" && /*#__PURE__*/_jsxDEV(MySalesTab, {}, void 0, false)]
-    }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-      style: {
-        position: "fixed",
-        bottom: 0,
-        left: "50%",
-        transform: "translateX(-50%)",
-        width: "100%",
-        maxWidth: 480,
-        background: WHITE,
-        borderTop: "1.5px solid #E5E7EB",
-        display: "flex",
-        zIndex: 20,
-        boxShadow: "0 -2px 10px rgba(0,0,0,0.06)",
-        paddingBottom: "env(safe-area-inset-bottom, 0px)"
-      },
-      children: [{
-        id: "sell",
-        icon: "🛍️",
-        label: "Sell",
-        badge: cartCount
-      }, ...(!tableMode ? [{
-        id: "sales",
-        icon: "📋",
-        label: "My Sales"
-      }] : [])].map(t => /*#__PURE__*/_jsxDEV("button", {
-        onClick: () => setTab(t.id),
-        style: {
-          flex: 1,
-          background: "none",
-          border: "none",
-          padding: "10px 0 8px",
-          cursor: "pointer",
-          fontFamily: "inherit",
-          position: "relative"
-        },
-        children: [/*#__PURE__*/_jsxDEV("div", {
-          style: {
-            fontSize: 22
-          },
-          children: t.icon
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            fontSize: 11,
-            fontWeight: tab === t.id ? 900 : 600,
-            color: tab === t.id ? G : "#9CA3AF",
-            marginTop: 2
-          },
-          children: t.label
-        }, void 0, false), tab === t.id && /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            position: "absolute",
-            bottom: 0,
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: 28,
-            height: 3,
-            background: G,
-            borderRadius: 3
-          }
-        }, void 0, false), t.badge > 0 && /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            position: "absolute",
-            top: 6,
-            right: "50%",
-            transform: "translateX(14px)",
-            background: "#EF4444",
-            color: WHITE,
-            borderRadius: "50%",
-            width: 18,
-            height: 18,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            fontSize: 11,
-            fontWeight: 800
-          },
-          children: t.badge
-        }, void 0, false)]
-      }, t.id, true))
-    }, void 0, false), checkout && /*#__PURE__*/_jsxDEV(CheckoutOverlay, {}, void 0, false), lightbox && /*#__PURE__*/_jsxDEV("div", {
-      onClick: () => setLightbox(null),
-      style: {
-        position: "fixed",
-        inset: 0,
-        zIndex: 100,
-        background: "rgba(0,0,0,0.88)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 24
-      },
-      children: [/*#__PURE__*/_jsxDEV("img", {
-        src: lightbox.image,
-        alt: lightbox.name,
-        style: {
-          maxWidth: "100%",
-          maxHeight: "75vh",
-          borderRadius: 18,
-          objectFit: "contain",
-          boxShadow: "0 8px 40px rgba(0,0,0,0.6)"
-        }
-      }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-        style: {
-          marginTop: 16,
-          textAlign: "center"
-        },
-        children: [/*#__PURE__*/_jsxDEV("div", {
-          style: {
-            color: "#fff",
-            fontWeight: 900,
-            fontSize: 20
-          },
-          children: lightbox.name
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            color: "#9CA3AF",
-            fontSize: 14,
-            marginTop: 4
-          },
-          children: lightbox.desc
-        }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            color: "#FCD34D",
-            fontWeight: 900,
-            fontSize: 22,
-            marginTop: 6
-          },
-          children: ["$", lightbox.price]
-        }, void 0, true)]
-      }, void 0, true), /*#__PURE__*/_jsxDEV("button", {
-        onClick: () => setLightbox(null),
-        style: {
-          marginTop: 24,
-          background: "rgba(255,255,255,0.15)",
-          border: "none",
-          borderRadius: 14,
-          padding: "12px 32px",
-          color: "#fff",
-          fontWeight: 800,
-          fontSize: 15,
-          cursor: "pointer",
-          fontFamily: "inherit",
-          backdropFilter: "blur(8px)"
-        },
-        children: "✕ Close"
-      }, void 0, false)]
-    }, void 0, true), toast && /*#__PURE__*/_jsxDEV(Toast, {
-      msg: toast
-    }, void 0, false)]
-  }, void 0, true);
+    style: {
+      background: "rgba(255,255,255,0.12)",
+      border: "none",
+      borderRadius: 8,
+      padding: "4px 10px",
+      color: "#fff",
+      fontSize: 11,
+      fontWeight: 800,
+      cursor: "pointer",
+      fontFamily: "inherit",
+      marginBottom: 2
+    }
+  }, "← Exit"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 10,
+      color: L,
+      fontWeight: 700,
+      textTransform: "uppercase",
+      letterSpacing: 1.2
+    }
+  }, "My Total"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: "#FCD34D",
+      fontWeight: 900,
+      fontSize: 18
+    }
+  }, "$", myTotal.toFixed(2)))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      flex: 1,
+      overflowY: "auto",
+      WebkitOverflowScrolling: "touch",
+      paddingBottom: 120
+    }
+  }, tab === "sell" && /*#__PURE__*/React.createElement(SellTab, null), tab === "sales" && /*#__PURE__*/React.createElement(MySalesTab, null)), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "fixed",
+      bottom: 0,
+      left: "50%",
+      transform: "translateX(-50%)",
+      width: "100%",
+      maxWidth: 480,
+      background: WHITE,
+      borderTop: "1.5px solid #E5E7EB",
+      display: "flex",
+      zIndex: 20,
+      boxShadow: "0 -2px 10px rgba(0,0,0,0.06)",
+      paddingBottom: "env(safe-area-inset-bottom, 0px)"
+    }
+  }, [{
+    id: "sell",
+    icon: "🛍️",
+    label: "Sell",
+    badge: cartCount
+  }, ...(!tableMode ? [{
+    id: "sales",
+    icon: "📋",
+    label: "My Sales"
+  }] : [])].map(t => /*#__PURE__*/React.createElement("button", {
+    key: t.id,
+    onClick: () => setTab(t.id),
+    style: {
+      flex: 1,
+      background: "none",
+      border: "none",
+      padding: "10px 0 8px",
+      cursor: "pointer",
+      fontFamily: "inherit",
+      position: "relative"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 22
+    }
+  }, t.icon), /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontSize: 11,
+      fontWeight: tab === t.id ? 900 : 600,
+      color: tab === t.id ? G : "#9CA3AF",
+      marginTop: 2
+    }
+  }, t.label), tab === t.id && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "absolute",
+      bottom: 0,
+      left: "50%",
+      transform: "translateX(-50%)",
+      width: 28,
+      height: 3,
+      background: G,
+      borderRadius: 3
+    }
+  }), t.badge > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "absolute",
+      top: 6,
+      right: "50%",
+      transform: "translateX(14px)",
+      background: "#EF4444",
+      color: WHITE,
+      borderRadius: "50%",
+      width: 18,
+      height: 18,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      fontSize: 11,
+      fontWeight: 800
+    }
+  }, t.badge)))), checkout && /*#__PURE__*/React.createElement(CheckoutOverlay, null), lightbox && /*#__PURE__*/React.createElement("div", {
+    onClick: () => setLightbox(null),
+    style: {
+      position: "fixed",
+      inset: 0,
+      zIndex: 100,
+      background: "rgba(0,0,0,0.88)",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: 24
+    }
+  }, /*#__PURE__*/React.createElement("img", {
+    src: lightbox.image,
+    alt: lightbox.name,
+    style: {
+      maxWidth: "100%",
+      maxHeight: "75vh",
+      borderRadius: 18,
+      objectFit: "contain",
+      boxShadow: "0 8px 40px rgba(0,0,0,0.6)"
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      marginTop: 16,
+      textAlign: "center"
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: "#fff",
+      fontWeight: 900,
+      fontSize: 20
+    }
+  }, lightbox.name), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: "#9CA3AF",
+      fontSize: 14,
+      marginTop: 4
+    }
+  }, lightbox.desc), /*#__PURE__*/React.createElement("div", {
+    style: {
+      color: "#FCD34D",
+      fontWeight: 900,
+      fontSize: 22,
+      marginTop: 6
+    }
+  }, "$", lightbox.price)), /*#__PURE__*/React.createElement("button", {
+    onClick: () => setLightbox(null),
+    style: {
+      marginTop: 24,
+      background: "rgba(255,255,255,0.15)",
+      border: "none",
+      borderRadius: 14,
+      padding: "12px 32px",
+      color: "#fff",
+      fontWeight: 800,
+      fontSize: 15,
+      cursor: "pointer",
+      fontFamily: "inherit",
+      backdropFilter: "blur(8px)"
+    }
+  }, "✕ Close")), toast && /*#__PURE__*/React.createElement(Toast, {
+    msg: toast
+  }));
 
   // ── SELL TAB ─────────────────────────────────────────────────
   function SellTab() {
-    return /*#__PURE__*/_jsxDEV("div", {
+    return /*#__PURE__*/React.createElement("div", {
       style: {
         padding: "16px 16px 0"
-      },
-      children: [/*#__PURE__*/_jsxDEV("p", {
+      }
+    }, /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: "0 0 12px",
+        color: M,
+        fontWeight: 700,
+        fontSize: 14
+      }
+    }, "Tap a product to add it to the cart"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 12,
+        marginBottom: 16
+      }
+    }, (tableMode ? PRODUCTS : PRODUCTS.filter(p => DOOR_PRODUCTS.includes(p.id))).map(p => {
+      const stock = inventory[p.id] ?? 0;
+      const inCart = cart.find(i => i.id === p.id)?.qty ?? 0;
+      const soldOut = stock <= 0;
+      return /*#__PURE__*/React.createElement("button", {
+        key: p.id,
+        onClick: () => addToCart(p),
+        disabled: soldOut,
         style: {
-          margin: "0 0 12px",
-          color: M,
-          fontWeight: 700,
-          fontSize: 14
-        },
-        children: "Tap a product to add it to the cart"
-      }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
+          background: soldOut ? "#F9FAFB" : WHITE,
+          border: inCart > 0 ? `2.5px solid ${G}` : "2px solid #E5E7EB",
+          borderRadius: 18,
+          padding: "14px 12px",
+          cursor: soldOut ? "not-allowed" : "pointer",
+          textAlign: "left",
+          fontFamily: "inherit",
+          opacity: soldOut ? 0.5 : 1,
+          position: "relative",
+          boxShadow: inCart > 0 ? `0 0 0 1px ${G}` : "0 2px 6px rgba(0,0,0,0.06)",
+          transition: "all 0.15s"
+        }
+      }, p.image ? /*#__PURE__*/React.createElement("div", {
         style: {
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: 12,
-          marginBottom: 16
-        },
-        children: (tableMode ? PRODUCTS : PRODUCTS.filter(p => DOOR_PRODUCTS.includes(p.id))).map(p => {
-          const stock = inventory[p.id] ?? 0;
-          const inCart = cart.find(i => i.id === p.id)?.qty ?? 0;
-          const soldOut = stock <= 0;
-          return /*#__PURE__*/_jsxDEV("button", {
-            onClick: () => addToCart(p),
-            disabled: soldOut,
-            style: {
-              background: soldOut ? "#F9FAFB" : WHITE,
-              border: inCart > 0 ? `2.5px solid ${G}` : "2px solid #E5E7EB",
-              borderRadius: 18,
-              padding: "14px 12px",
-              cursor: soldOut ? "not-allowed" : "pointer",
-              textAlign: "left",
-              fontFamily: "inherit",
-              opacity: soldOut ? 0.5 : 1,
-              position: "relative",
-              boxShadow: inCart > 0 ? `0 0 0 1px ${G}` : "0 2px 6px rgba(0,0,0,0.06)",
-              transition: "all 0.15s"
-            },
-            children: [p.image ? /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                width: "100%",
-                height: 110,
-                borderRadius: 12,
-                overflow: "hidden",
-                marginBottom: 8,
-                position: "relative"
-              },
-              children: [/*#__PURE__*/_jsxDEV("img", {
-                src: p.image,
-                alt: p.name,
-                style: {
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover"
-                }
-              }, void 0, false), /*#__PURE__*/_jsxDEV("button", {
-                onClick: e => {
-                  e.stopPropagation();
-                  setLightbox(p);
-                },
-                style: {
-                  position: "absolute",
-                  bottom: 6,
-                  right: 6,
-                  background: "rgba(0,0,0,0.45)",
-                  border: "none",
-                  borderRadius: 8,
-                  width: 28,
-                  height: 28,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  cursor: "pointer",
-                  color: "#fff",
-                  fontSize: 14,
-                  lineHeight: 1,
-                  backdropFilter: "blur(4px)"
-                },
-                "aria-label": "View larger photo",
-                children: "⛶"
-              }, void 0, false)]
-            }, void 0, true) : /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                width: "100%",
-                height: 110,
-                borderRadius: 12,
-                marginBottom: 8,
-                background: soldOut ? "#F3F4F6" : "#F0FDF4",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                border: "2px dashed #D1FAE5",
-                fontSize: 48
-              },
-              children: p.emoji
-            }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                fontWeight: 800,
-                fontSize: 14,
-                color: G,
-                lineHeight: 1.2
-              },
-              children: p.name
-            }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                fontSize: 11,
-                color: "#9CA3AF",
-                marginTop: 2
-              },
-              children: p.desc
-            }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                marginTop: 10,
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center"
-              },
-              children: [/*#__PURE__*/_jsxDEV("span", {
-                style: {
-                  fontWeight: 900,
-                  fontSize: 20,
-                  color: soldOut ? "#9CA3AF" : G
-                },
-                children: ["$", p.price]
-              }, void 0, true), /*#__PURE__*/_jsxDEV("span", {
-                style: {
-                  fontSize: 11,
-                  color: "#DC2626",
-                  fontWeight: 700
-                },
-                children: soldOut ? "SOLD OUT" : ""
-              }, void 0, false)]
-            }, void 0, true), inCart > 0 && /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                position: "absolute",
-                top: 9,
-                right: 9,
-                background: G,
-                color: WHITE,
-                borderRadius: "50%",
-                width: 22,
-                height: 22,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: 12,
-                fontWeight: 900
-              },
-              children: inCart
-            }, void 0, false)]
-          }, p.id, true);
-        })
-      }, void 0, false), cart.length > 0 ? /*#__PURE__*/_jsxDEV("div", {
-        style: card({
-          border: `2px solid ${G}`,
-          marginBottom: 20
-        }),
-        children: [/*#__PURE__*/_jsxDEV("h3", {
-          style: {
-            margin: "0 0 14px",
-            color: G,
-            fontSize: 16
-          },
-          children: ["🛒 Cart — ", cartCount, " item", cartCount !== 1 ? "s" : ""]
-        }, void 0, true), cart.map(item => /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            marginBottom: 10
-          },
-          children: [/*#__PURE__*/_jsxDEV("span", {
-            style: {
-              fontSize: 22
-            },
-            children: item.emoji
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              flex: 1
-            },
-            children: [/*#__PURE__*/_jsxDEV("div", {
-              style: {
-                fontWeight: 700,
-                fontSize: 14
-              },
-              children: item.name
-            }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                fontSize: 12,
-                color: "#9CA3AF"
-              },
-              children: ["$", item.price, " each"]
-            }, void 0, true)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              display: "flex",
-              alignItems: "center",
-              gap: 8
-            },
-            children: [/*#__PURE__*/_jsxDEV("button", {
-              onClick: () => changeQty(item.id, -1),
-              style: {
-                width: 30,
-                height: 30,
-                borderRadius: "50%",
-                border: `1.5px solid ${G}`,
-                background: WHITE,
-                cursor: "pointer",
-                fontSize: 18,
-                fontWeight: 800,
-                color: G,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center"
-              },
-              children: "−"
-            }, void 0, false), /*#__PURE__*/_jsxDEV("span", {
-              style: {
-                fontWeight: 800,
-                minWidth: 20,
-                textAlign: "center",
-                fontSize: 16
-              },
-              children: item.qty
-            }, void 0, false), /*#__PURE__*/_jsxDEV("button", {
-              onClick: () => changeQty(item.id, 1),
-              style: {
-                width: 30,
-                height: 30,
-                borderRadius: "50%",
-                border: "none",
-                background: G,
-                cursor: "pointer",
-                fontSize: 18,
-                fontWeight: 800,
-                color: WHITE,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center"
-              },
-              children: "+"
-            }, void 0, false), /*#__PURE__*/_jsxDEV("span", {
-              style: {
-                fontWeight: 800,
-                minWidth: 48,
-                textAlign: "right",
-                color: G
-              },
-              children: ["$", (item.price * item.qty).toFixed(2)]
-            }, void 0, true)]
-          }, void 0, true)]
-        }, item.id, true)), /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            borderTop: "2px dashed #E5E7EB",
-            paddingTop: 12,
-            marginTop: 6,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: 14
-          },
-          children: [/*#__PURE__*/_jsxDEV("span", {
-            style: {
-              fontWeight: 900,
-              fontSize: 17
-            },
-            children: "Total"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("span", {
-            style: {
-              fontWeight: 900,
-              fontSize: 26,
-              color: G
-            },
-            children: ["$", cartTotal.toFixed(2)]
-          }, void 0, true)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("button", {
-          style: btn(G),
-          onClick: () => tableMode ? setCheckout("payment") : setCheckout("customer"),
-          children: ["Checkout → $", cartTotal.toFixed(2)]
-        }, void 0, true)]
-      }, void 0, true) : /*#__PURE__*/_jsxDEV("div", {
+          width: "100%",
+          height: 110,
+          borderRadius: 12,
+          overflow: "hidden",
+          marginBottom: 8,
+          position: "relative"
+        }
+      }, /*#__PURE__*/React.createElement("img", {
+        src: p.image,
+        alt: p.name,
         style: {
-          textAlign: "center",
-          padding: "24px 0 32px",
-          color: "#9CA3AF"
+          width: "100%",
+          height: "100%",
+          objectFit: "cover"
+        }
+      }), /*#__PURE__*/React.createElement("button", {
+        onClick: e => {
+          e.stopPropagation();
+          setLightbox(p);
         },
-        children: [/*#__PURE__*/_jsxDEV("div", {
-          style: {
-            fontSize: 40
-          },
-          children: "🌿"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-          style: {
-            fontWeight: 700,
-            marginTop: 8
-          },
-          children: "Cart is empty"
-        }, void 0, false)]
-      }, void 0, true)]
-    }, void 0, true);
+        style: {
+          position: "absolute",
+          bottom: 6,
+          right: 6,
+          background: "rgba(0,0,0,0.45)",
+          border: "none",
+          borderRadius: 8,
+          width: 28,
+          height: 28,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          cursor: "pointer",
+          color: "#fff",
+          fontSize: 14,
+          lineHeight: 1,
+          backdropFilter: "blur(4px)"
+        },
+        "aria-label": "View larger photo"
+      }, "⛶")) : /*#__PURE__*/React.createElement("div", {
+        style: {
+          width: "100%",
+          height: 110,
+          borderRadius: 12,
+          marginBottom: 8,
+          background: soldOut ? "#F3F4F6" : "#F0FDF4",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          border: "2px dashed #D1FAE5",
+          fontSize: 48
+        }
+      }, p.emoji), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontWeight: 800,
+          fontSize: 14,
+          color: G,
+          lineHeight: 1.2
+        }
+      }, p.name), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 11,
+          color: "#9CA3AF",
+          marginTop: 2
+        }
+      }, p.desc), /*#__PURE__*/React.createElement("div", {
+        style: {
+          marginTop: 10,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 900,
+          fontSize: 20,
+          color: soldOut ? "#9CA3AF" : G
+        }
+      }, "$", p.price), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 11,
+          color: "#DC2626",
+          fontWeight: 700
+        }
+      }, soldOut ? "SOLD OUT" : "")), inCart > 0 && /*#__PURE__*/React.createElement("div", {
+        style: {
+          position: "absolute",
+          top: 9,
+          right: 9,
+          background: G,
+          color: WHITE,
+          borderRadius: "50%",
+          width: 22,
+          height: 22,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: 12,
+          fontWeight: 900
+        }
+      }, inCart));
+    })), cart.length > 0 ? /*#__PURE__*/React.createElement("div", {
+      style: card({
+        border: `2px solid ${G}`,
+        marginBottom: 20
+      })
+    }, /*#__PURE__*/React.createElement("h3", {
+      style: {
+        margin: "0 0 14px",
+        color: G,
+        fontSize: 16
+      }
+    }, "🛒 Cart — ", cartCount, " item", cartCount !== 1 ? "s" : ""), cart.map(item => /*#__PURE__*/React.createElement("div", {
+      key: item.id,
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: 10,
+        marginBottom: 10
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 22
+      }
+    }, item.emoji), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 700,
+        fontSize: 14
+      }
+    }, item.name), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: "#9CA3AF"
+      }
+    }, "$", item.price, " each")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        alignItems: "center",
+        gap: 8
+      }
+    }, /*#__PURE__*/React.createElement("button", {
+      onClick: () => changeQty(item.id, -1),
+      style: {
+        width: 30,
+        height: 30,
+        borderRadius: "50%",
+        border: `1.5px solid ${G}`,
+        background: WHITE,
+        cursor: "pointer",
+        fontSize: 18,
+        fontWeight: 800,
+        color: G,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }
+    }, "−"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 800,
+        minWidth: 20,
+        textAlign: "center",
+        fontSize: 16
+      }
+    }, item.qty), /*#__PURE__*/React.createElement("button", {
+      onClick: () => changeQty(item.id, 1),
+      style: {
+        width: 30,
+        height: 30,
+        borderRadius: "50%",
+        border: "none",
+        background: G,
+        cursor: "pointer",
+        fontSize: 18,
+        fontWeight: 800,
+        color: WHITE,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }
+    }, "+"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 800,
+        minWidth: 48,
+        textAlign: "right",
+        color: G
+      }
+    }, "$", (item.price * item.qty).toFixed(2))))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        borderTop: "2px dashed #E5E7EB",
+        paddingTop: 12,
+        marginTop: 6,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 14
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 900,
+        fontSize: 17
+      }
+    }, "Total"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 900,
+        fontSize: 26,
+        color: G
+      }
+    }, "$", cartTotal.toFixed(2))), /*#__PURE__*/React.createElement("button", {
+      style: btn(G),
+      onClick: () => tableMode ? setCheckout("payment") : setCheckout("customer")
+    }, "Checkout → $", cartTotal.toFixed(2))) : /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        padding: "24px 0 32px",
+        color: "#9CA3AF"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 40
+      }
+    }, "🌿"), /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontWeight: 700,
+        marginTop: 8
+      }
+    }, "Cart is empty")));
   }
 
   // ── INVENTORY TAB ────────────────────────────────────────────
   function InventoryTab() {
-    return /*#__PURE__*/_jsxDEV("div", {
+    return /*#__PURE__*/React.createElement("div", {
       style: {
         padding: 16
-      },
-      children: [/*#__PURE__*/_jsxDEV("div", {
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 14
+      }
+    }, /*#__PURE__*/React.createElement("h2", {
+      style: {
+        margin: 0,
+        color: G,
+        fontSize: 18
+      }
+    }, "Live Stock"), /*#__PURE__*/React.createElement("button", {
+      onClick: loadData,
+      style: {
+        background: "#D1FAE5",
+        border: "none",
+        borderRadius: 10,
+        padding: "8px 14px",
+        color: G,
+        fontWeight: 800,
+        cursor: "pointer",
+        fontSize: 13,
+        fontFamily: "inherit",
+        display: "flex",
+        alignItems: "center",
+        gap: 6
+      }
+    }, "↻ Refresh")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        gap: 10
+      }
+    }, PRODUCTS.filter(p => p.id !== 'wb').map(p => {
+      const stock = inventory[p.id] ?? 0;
+      const max = 20;
+      const pct = Math.min(100, Math.round(stock / max * 100));
+      const barColor = stock === 0 ? "#FCA5A5" : stock <= 5 ? "#FCD34D" : "#6EE7B7";
+      const textColor = stock === 0 ? "#DC2626" : stock <= 5 ? "#B45309" : M;
+      return /*#__PURE__*/React.createElement("div", {
+        key: p.id,
+        style: card()
+      }, /*#__PURE__*/React.createElement("div", {
         style: {
           display: "flex",
-          justifyContent: "space-between",
           alignItems: "center",
-          marginBottom: 14
-        },
-        children: [/*#__PURE__*/_jsxDEV("h2", {
-          style: {
-            margin: 0,
-            color: G,
-            fontSize: 18
-          },
-          children: "Live Stock"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("button", {
-          onClick: loadData,
-          style: {
-            background: "#D1FAE5",
-            border: "none",
-            borderRadius: 10,
-            padding: "8px 14px",
-            color: G,
-            fontWeight: 800,
-            cursor: "pointer",
-            fontSize: 13,
-            fontFamily: "inherit",
-            display: "flex",
-            alignItems: "center",
-            gap: 6
-          },
-          children: "↻ Refresh"
-        }, void 0, false)]
-      }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
+          gap: 12,
+          marginBottom: 10
+        }
+      }, p.image ? /*#__PURE__*/React.createElement("img", {
+        src: p.image,
+        alt: p.name,
         style: {
-          display: "flex",
-          flexDirection: "column",
-          gap: 10
-        },
-        children: PRODUCTS.filter(p => p.id !== 'wb').map(p => {
-          const stock = inventory[p.id] ?? 0;
-          const max = 20;
-          const pct = Math.min(100, Math.round(stock / max * 100));
-          const barColor = stock === 0 ? "#FCA5A5" : stock <= 5 ? "#FCD34D" : "#6EE7B7";
-          const textColor = stock === 0 ? "#DC2626" : stock <= 5 ? "#B45309" : M;
-          return /*#__PURE__*/_jsxDEV("div", {
-            style: card(),
-            children: [/*#__PURE__*/_jsxDEV("div", {
-              style: {
-                display: "flex",
-                alignItems: "center",
-                gap: 12,
-                marginBottom: 10
-              },
-              children: [p.image ? /*#__PURE__*/_jsxDEV("img", {
-                src: p.image,
-                alt: p.name,
-                style: {
-                  width: 44,
-                  height: 44,
-                  borderRadius: 10,
-                  objectFit: "cover",
-                  flexShrink: 0
-                }
-              }, void 0, false) : /*#__PURE__*/_jsxDEV("span", {
-                style: {
-                  fontSize: 28
-                },
-                children: p.emoji
-              }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  flex: 1
-                },
-                children: [/*#__PURE__*/_jsxDEV("div", {
-                  style: {
-                    fontWeight: 800,
-                    fontSize: 15
-                  },
-                  children: p.name
-                }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-                  style: {
-                    fontSize: 12,
-                    color: "#9CA3AF"
-                  },
-                  children: ["$", p.price]
-                }, void 0, true)]
-              }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  fontWeight: 900,
-                  fontSize: 24,
-                  color: textColor
-                },
-                children: stock
-              }, void 0, false)]
-            }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                background: "#F3F4F6",
-                borderRadius: 8,
-                height: 10,
-                overflow: "hidden"
-              },
-              children: /*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  width: `${pct}%`,
-                  height: "100%",
-                  background: barColor,
-                  borderRadius: 8,
-                  transition: "width 0.4s ease"
-                }
-              }, void 0, false)
-            }, void 0, false), stock === 0 && /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                fontSize: 12,
-                color: "#DC2626",
-                fontWeight: 800,
-                marginTop: 5
-              },
-              children: "❌ Sold out"
-            }, void 0, false), stock > 0 && stock <= 5 && /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                fontSize: 12,
-                color: "#B45309",
-                fontWeight: 800,
-                marginTop: 5
-              },
-              children: ["⚠️ Low stock — ", stock, " remaining"]
-            }, void 0, true)]
-          }, p.id, true);
-        })
-      }, void 0, false)]
-    }, void 0, true);
+          width: 44,
+          height: 44,
+          borderRadius: 10,
+          objectFit: "cover",
+          flexShrink: 0
+        }
+      }) : /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 28
+        }
+      }, p.emoji), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontWeight: 800,
+          fontSize: 15
+        }
+      }, p.name), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 12,
+          color: "#9CA3AF"
+        }
+      }, "$", p.price)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontWeight: 900,
+          fontSize: 24,
+          color: textColor
+        }
+      }, stock)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          background: "#F3F4F6",
+          borderRadius: 8,
+          height: 10,
+          overflow: "hidden"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          width: `${pct}%`,
+          height: "100%",
+          background: barColor,
+          borderRadius: 8,
+          transition: "width 0.4s ease"
+        }
+      })), stock === 0 && /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 12,
+          color: "#DC2626",
+          fontWeight: 800,
+          marginTop: 5
+        }
+      }, "❌ Sold out"), stock > 0 && stock <= 5 && /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 12,
+          color: "#B45309",
+          fontWeight: 800,
+          marginTop: 5
+        }
+      }, "⚠️ Low stock — ", stock, " remaining"));
+    })));
   }
 
   // ── MY SALES TAB ─────────────────────────────────────────────
@@ -1270,82 +1176,74 @@ function WreathPOS() {
     const myS = sales.filter(s => s.sellerName === sellerName && s.sellerName !== "Table Sale").sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
     const myTot = myS.reduce((s, x) => s + x.total, 0);
     const myItm = myS.reduce((s, x) => s + x.items.reduce((a, i) => a + i.qty, 0), 0);
-    return /*#__PURE__*/_jsxDEV("div", {
+    return /*#__PURE__*/React.createElement("div", {
       style: {
         padding: 16
-      },
-      children: [/*#__PURE__*/_jsxDEV("h2", {
-        style: {
-          margin: "0 0 14px",
-          color: G,
-          fontSize: 18
-        },
-        children: "My Sales"
-      }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-        style: {
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
-          gap: 10,
-          marginBottom: 16
-        },
-        children: [{
-          label: "Sales",
-          value: myS.length
-        }, {
-          label: "Wreaths",
-          value: myItm
-        }, {
-          label: "Revenue",
-          value: `$${myTot.toFixed(0)}`
-        }].map(stat => /*#__PURE__*/_jsxDEV("div", {
-          style: card({
-            textAlign: "center"
-          }),
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontWeight: 900,
-              fontSize: 22,
-              color: G
-            },
-            children: stat.value
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontSize: 11,
-              color: "#9CA3AF",
-              fontWeight: 700
-            },
-            children: stat.label
-          }, void 0, false)]
-        }, stat.label, true))
-      }, void 0, false), myS.length === 0 ? /*#__PURE__*/_jsxDEV("div", {
-        style: {
-          textAlign: "center",
-          padding: "32px 0",
-          color: "#9CA3AF"
-        },
-        children: [/*#__PURE__*/_jsxDEV("div", {
-          style: {
-            fontSize: 40
-          },
-          children: "📋"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-          style: {
-            fontWeight: 700,
-            marginTop: 8
-          },
-          children: "No sales recorded yet!"
-        }, void 0, false)]
-      }, void 0, true) : /*#__PURE__*/_jsxDEV("div", {
-        style: {
-          display: "flex",
-          flexDirection: "column",
-          gap: 10
-        },
-        children: myS.map(sale => /*#__PURE__*/_jsxDEV(SaleCard, {
-          sale: sale
-        }, sale.id, false))
-      }, void 0, false)]
-    }, void 0, true);
+      }
+    }, /*#__PURE__*/React.createElement("h2", {
+      style: {
+        margin: "0 0 14px",
+        color: G,
+        fontSize: 18
+      }
+    }, "My Sales"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr 1fr",
+        gap: 10,
+        marginBottom: 16
+      }
+    }, [{
+      label: "Sales",
+      value: myS.length
+    }, {
+      label: "Wreaths",
+      value: myItm
+    }, {
+      label: "Revenue",
+      value: `$${myTot.toFixed(0)}`
+    }].map(stat => /*#__PURE__*/React.createElement("div", {
+      key: stat.label,
+      style: card({
+        textAlign: "center"
+      })
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 900,
+        fontSize: 22,
+        color: G
+      }
+    }, stat.value), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 11,
+        color: "#9CA3AF",
+        fontWeight: 700
+      }
+    }, stat.label)))), myS.length === 0 ? /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        padding: "32px 0",
+        color: "#9CA3AF"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 40
+      }
+    }, "📋"), /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontWeight: 700,
+        marginTop: 8
+      }
+    }, "No sales recorded yet!")) : /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        gap: 10
+      }
+    }, myS.map(sale => /*#__PURE__*/React.createElement(SaleCard, {
+      key: sale.id,
+      sale: sale
+    }))));
   }
   function SaleCard({
     sale
@@ -1360,86 +1258,73 @@ function WreathPOS() {
       text: "#1E40AF"
     };
     const badge = sale.payment === "cash" ? cashBg : otherBg;
-    return /*#__PURE__*/_jsxDEV("div", {
-      style: card(),
-      children: [/*#__PURE__*/_jsxDEV("div", {
-        style: {
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start"
-        },
-        children: [/*#__PURE__*/_jsxDEV("div", {
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontWeight: 800,
-              fontSize: 15
-            },
-            children: sale.customer.name || (sale.sellerName === "Table Sale" ? "Table Sale" : "Walk-in Customer")
-          }, void 0, false), sale.customer.address && /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontSize: 12,
-              color: "#9CA3AF"
-            },
-            children: sale.customer.address
-          }, void 0, false), sale.customer.address && /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontSize: 12,
-              color: "#9CA3AF"
-            },
-            children: sale.customer.address
-          }, void 0, false), sale.customer.phone && /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontSize: 12,
-              color: "#9CA3AF"
-            },
-            children: sale.customer.phone
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontSize: 12,
-              color: "#9CA3AF",
-              marginTop: 2
-            },
-            children: new Date(sale.timestamp).toLocaleString("en-US", {
-              month: "short",
-              day: "numeric",
-              hour: "numeric",
-              minute: "2-digit"
-            })
-          }, void 0, false)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            textAlign: "right"
-          },
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontWeight: 900,
-              fontSize: 20,
-              color: G
-            },
-            children: ["$", sale.total.toFixed(2)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("span", {
-            style: {
-              background: badge.bg,
-              color: badge.text,
-              borderRadius: 8,
-              padding: "3px 8px",
-              fontSize: 12,
-              fontWeight: 800
-            },
-            children: [pm?.icon, " ", pm?.label]
-          }, void 0, true)]
-        }, void 0, true)]
-      }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-        style: {
-          marginTop: 8,
-          paddingTop: 8,
-          borderTop: "1px solid #F3F4F6",
-          fontSize: 12,
-          color: "#9CA3AF"
-        },
-        children: sale.items.map(i => `${i.qty}× ${i.name}`).join(" · ")
-      }, void 0, false)]
-    }, void 0, true);
+    return /*#__PURE__*/React.createElement("div", {
+      style: card()
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "flex-start"
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 800,
+        fontSize: 15
+      }
+    }, sale.customer.name || (sale.sellerName === "Table Sale" ? "Table Sale" : "Walk-in Customer")), sale.customer.address && /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: "#9CA3AF"
+      }
+    }, sale.customer.address), sale.customer.address && /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: "#9CA3AF"
+      }
+    }, sale.customer.address), sale.customer.phone && /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: "#9CA3AF"
+      }
+    }, sale.customer.phone), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: "#9CA3AF",
+        marginTop: 2
+      }
+    }, new Date(sale.timestamp).toLocaleString("en-US", {
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit"
+    }))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "right"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 900,
+        fontSize: 20,
+        color: G
+      }
+    }, "$", sale.total.toFixed(2)), /*#__PURE__*/React.createElement("span", {
+      style: {
+        background: badge.bg,
+        color: badge.text,
+        borderRadius: 8,
+        padding: "3px 8px",
+        fontSize: 12,
+        fontWeight: 800
+      }
+    }, pm?.icon, " ", pm?.label))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 8,
+        paddingTop: 8,
+        borderTop: "1px solid #F3F4F6",
+        fontSize: 12,
+        color: "#9CA3AF"
+      }
+    }, sale.items.map(i => `${i.qty}× ${i.name}`).join(" · ")));
   }
 
   // ── CHECKOUT OVERLAY ─────────────────────────────────────────
@@ -1450,8 +1335,8 @@ function WreathPOS() {
     const [localPhone, setLocalPhone] = useState(customer.phone || "");
     const [localNotes, setLocalNotes] = useState(customer.notes || "");
     const allFilled = localName.trim() && localAddress.trim() && localPhone.trim();
-    if (checkout === "receipt" && lastSale) return /*#__PURE__*/_jsxDEV(ReceiptScreen, {}, void 0, false);
-    return /*#__PURE__*/_jsxDEV("div", {
+    if (checkout === "receipt" && lastSale) return /*#__PURE__*/React.createElement(ReceiptScreen, null);
+    return /*#__PURE__*/React.createElement("div", {
       style: {
         position: "fixed",
         inset: 0,
@@ -1460,298 +1345,257 @@ function WreathPOS() {
         display: "flex",
         alignItems: "flex-end",
         justifyContent: "center"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: WHITE,
+        borderRadius: "24px 24px 0 0",
+        width: "100%",
+        maxWidth: 480,
+        padding: 24,
+        maxHeight: "92vh",
+        overflowY: "auto"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 20
+      }
+    }, /*#__PURE__*/React.createElement("h2", {
+      style: {
+        margin: 0,
+        color: G,
+        fontSize: 20
+      }
+    }, checkout === "customer" ? "👤 Customer Info" : "💳 Payment"), /*#__PURE__*/React.createElement("button", {
+      onClick: () => setCheckout(null),
+      style: {
+        background: "#F3F4F6",
+        border: "none",
+        borderRadius: "50%",
+        width: 34,
+        height: 34,
+        cursor: "pointer",
+        fontSize: 17,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
+      }
+    }, "✕")), checkout === "customer" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: "0 0 16px",
+        color: "#6B7280",
+        fontSize: 13,
+        fontWeight: 600
+      }
+    }, "All fields are required to complete the sale."), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginBottom: 14
+      }
+    }, /*#__PURE__*/React.createElement("label", {
+      style: label
+    }, "Customer Name ", /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: "#DC2626"
+      }
+    }, "*")), /*#__PURE__*/React.createElement("input", {
+      style: {
+        ...inputStyle,
+        borderColor: localName.trim() ? "#D1D5DB" : "#FCA5A5"
       },
-      children: /*#__PURE__*/_jsxDEV("div", {
-        style: {
-          background: WHITE,
-          borderRadius: "24px 24px 0 0",
-          width: "100%",
-          maxWidth: 480,
-          padding: 24,
-          maxHeight: "92vh",
-          overflowY: "auto"
-        },
-        children: [/*#__PURE__*/_jsxDEV("div", {
-          style: {
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginBottom: 20
-          },
-          children: [/*#__PURE__*/_jsxDEV("h2", {
-            style: {
-              margin: 0,
-              color: G,
-              fontSize: 20
-            },
-            children: checkout === "customer" ? "👤 Customer Info" : "💳 Payment"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("button", {
-            onClick: () => setCheckout(null),
-            style: {
-              background: "#F3F4F6",
-              border: "none",
-              borderRadius: "50%",
-              width: 34,
-              height: 34,
-              cursor: "pointer",
-              fontSize: 17,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center"
-            },
-            children: "✕"
-          }, void 0, false)]
-        }, void 0, true), checkout === "customer" && /*#__PURE__*/_jsxDEV(_Fragment, {
-          children: [/*#__PURE__*/_jsxDEV("p", {
-            style: {
-              margin: "0 0 16px",
-              color: "#6B7280",
-              fontSize: 13,
-              fontWeight: 600
-            },
-            children: "All fields are required to complete the sale."
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              marginBottom: 14
-            },
-            children: [/*#__PURE__*/_jsxDEV("label", {
-              style: label,
-              children: ["Customer Name ", /*#__PURE__*/_jsxDEV("span", {
-                style: {
-                  color: "#DC2626"
-                },
-                children: "*"
-              }, void 0, false)]
-            }, void 0, true), /*#__PURE__*/_jsxDEV("input", {
-              style: {
-                ...inputStyle,
-                borderColor: localName.trim() ? "#D1D5DB" : "#FCA5A5"
-              },
-              placeholder: "e.g. Jane Smith",
-              value: localName,
-              onChange: e => setLocalName(e.target.value),
-              autoComplete: "name"
-            }, void 0, false)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              marginBottom: 14
-            },
-            children: [/*#__PURE__*/_jsxDEV("label", {
-              style: label,
-              children: ["Street Address ", /*#__PURE__*/_jsxDEV("span", {
-                style: {
-                  color: "#DC2626"
-                },
-                children: "*"
-              }, void 0, false)]
-            }, void 0, true), /*#__PURE__*/_jsxDEV("input", {
-              style: {
-                ...inputStyle,
-                borderColor: localAddress.trim() ? "#D1D5DB" : "#FCA5A5"
-              },
-              placeholder: "e.g. 123 Maple Street",
-              value: localAddress,
-              onChange: e => setLocalAddress(e.target.value),
-              autoComplete: "street-address"
-            }, void 0, false)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              marginBottom: 14
-            },
-            children: [/*#__PURE__*/_jsxDEV("label", {
-              style: label,
-              children: ["Phone Number ", /*#__PURE__*/_jsxDEV("span", {
-                style: {
-                  color: "#DC2626"
-                },
-                children: "*"
-              }, void 0, false)]
-            }, void 0, true), /*#__PURE__*/_jsxDEV("input", {
-              style: {
-                ...inputStyle,
-                borderColor: localPhone.trim() ? "#D1D5DB" : "#FCA5A5"
-              },
-              placeholder: "e.g. 555-867-5309",
-              value: localPhone,
-              type: "tel",
-              onChange: e => setLocalPhone(e.target.value),
-              autoComplete: "tel"
-            }, void 0, false)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              marginBottom: 20
-            },
-            children: [/*#__PURE__*/_jsxDEV("label", {
-              style: label,
-              children: ["Order Notes ", /*#__PURE__*/_jsxDEV("span", {
-                style: {
-                  color: "#9CA3AF",
-                  fontWeight: 400
-                },
-                children: "(optional)"
-              }, void 0, false)]
-            }, void 0, true), /*#__PURE__*/_jsxDEV("textarea", {
-              style: {
-                ...inputStyle,
-                height: 72,
-                resize: "none",
-                lineHeight: 1.5
-              },
-              placeholder: "e.g. Leave at back door · Ring doorbell · Call on arrival · Gift — do not deliver before Dec 20",
-              value: localNotes,
-              onChange: e => setLocalNotes(e.target.value)
-            }, void 0, false)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              background: CREAM,
-              borderRadius: 14,
-              padding: 16,
-              marginBottom: 20
-            },
-            children: [cart.map(i => /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                display: "flex",
-                justifyContent: "space-between",
-                marginBottom: 8,
-                fontSize: 14
-              },
-              children: [/*#__PURE__*/_jsxDEV("span", {
-                children: [i.qty, "× ", i.name]
-              }, void 0, true), /*#__PURE__*/_jsxDEV("span", {
-                style: {
-                  fontWeight: 800
-                },
-                children: ["$", (i.price * i.qty).toFixed(2)]
-              }, void 0, true)]
-            }, i.id, true)), /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                borderTop: "1.5px solid #E5E7EB",
-                paddingTop: 10,
-                marginTop: 4,
-                display: "flex",
-                justifyContent: "space-between"
-              },
-              children: [/*#__PURE__*/_jsxDEV("span", {
-                style: {
-                  fontWeight: 800,
-                  fontSize: 16
-                },
-                children: "Total"
-              }, void 0, false), /*#__PURE__*/_jsxDEV("span", {
-                style: {
-                  fontWeight: 900,
-                  color: G,
-                  fontSize: 20
-                },
-                children: ["$", cartTotal.toFixed(2)]
-              }, void 0, true)]
-            }, void 0, true)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("button", {
-            style: btn(G, WHITE, {
-              opacity: allFilled ? 1 : 0.4,
-              transition: "opacity 0.2s"
-            }),
-            disabled: !allFilled,
-            onClick: () => {
-              setCustomer({
-                name: localName.trim(),
-                address: localAddress.trim(),
-                phone: localPhone.trim(),
-                notes: localNotes.trim()
-              });
-              setCheckout("payment");
-            },
-            children: "Choose Payment →"
-          }, void 0, false)]
-        }, void 0, true), checkout === "payment" && /*#__PURE__*/_jsxDEV(_Fragment, {
-          children: [/*#__PURE__*/_jsxDEV("p", {
-            style: {
-              color: "#6B7280",
-              fontWeight: 700,
-              margin: "0 0 16px",
-              fontSize: 14
-            },
-            children: "Select how the customer is paying:"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 12,
-              marginBottom: 20
-            },
-            children: PAYMENT_METHODS.map(pm => /*#__PURE__*/_jsxDEV("button", {
-              onClick: () => setPayment(pm.id),
-              style: {
-                background: payment === pm.id ? G : WHITE,
-                color: payment === pm.id ? WHITE : G,
-                border: `2.5px solid ${payment === pm.id ? G : "#E5E7EB"}`,
-                borderRadius: 18,
-                padding: "18px 12px",
-                cursor: "pointer",
-                fontFamily: "inherit",
-                transition: "all 0.15s",
-                boxShadow: payment === pm.id ? `0 4px 12px rgba(26,61,43,0.3)` : "none"
-              },
-              children: [/*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  fontSize: 34,
-                  marginBottom: 6
-                },
-                children: pm.icon
-              }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  fontWeight: 800,
-                  fontSize: 16
-                },
-                children: pm.label
-              }, void 0, false)]
-            }, pm.id, true))
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              background: CREAM,
-              borderRadius: 14,
-              padding: 14,
-              marginBottom: 20,
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center"
-            },
-            children: [/*#__PURE__*/_jsxDEV("div", {
-              children: [/*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  fontWeight: 800
-                },
-                children: customer.name || "Customer"
-              }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  fontSize: 12,
-                  color: "#9CA3AF"
-                },
-                children: cart.map(i => `${i.qty}× ${i.name}`).join(", ")
-              }, void 0, false)]
-            }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                fontWeight: 900,
-                fontSize: 24,
-                color: G
-              },
-              children: ["$", cartTotal.toFixed(2)]
-            }, void 0, true)]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("button", {
-            style: btn(G),
-            onClick: completeSale,
-            children: ["✓ Complete Sale — $", cartTotal.toFixed(2)]
-          }, void 0, true)]
-        }, void 0, true)]
-      }, void 0, true)
-    }, void 0, false);
+      placeholder: "e.g. Jane Smith",
+      value: localName,
+      onChange: e => setLocalName(e.target.value),
+      autoComplete: "name"
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginBottom: 14
+      }
+    }, /*#__PURE__*/React.createElement("label", {
+      style: label
+    }, "Street Address ", /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: "#DC2626"
+      }
+    }, "*")), /*#__PURE__*/React.createElement("input", {
+      style: {
+        ...inputStyle,
+        borderColor: localAddress.trim() ? "#D1D5DB" : "#FCA5A5"
+      },
+      placeholder: "e.g. 123 Maple Street",
+      value: localAddress,
+      onChange: e => setLocalAddress(e.target.value),
+      autoComplete: "street-address"
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginBottom: 14
+      }
+    }, /*#__PURE__*/React.createElement("label", {
+      style: label
+    }, "Phone Number ", /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: "#DC2626"
+      }
+    }, "*")), /*#__PURE__*/React.createElement("input", {
+      style: {
+        ...inputStyle,
+        borderColor: localPhone.trim() ? "#D1D5DB" : "#FCA5A5"
+      },
+      placeholder: "e.g. 555-867-5309",
+      value: localPhone,
+      type: "tel",
+      onChange: e => setLocalPhone(e.target.value),
+      autoComplete: "tel"
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginBottom: 20
+      }
+    }, /*#__PURE__*/React.createElement("label", {
+      style: label
+    }, "Order Notes ", /*#__PURE__*/React.createElement("span", {
+      style: {
+        color: "#9CA3AF",
+        fontWeight: 400
+      }
+    }, "(optional)")), /*#__PURE__*/React.createElement("textarea", {
+      style: {
+        ...inputStyle,
+        height: 72,
+        resize: "none",
+        lineHeight: 1.5
+      },
+      placeholder: "e.g. Leave at back door · Ring doorbell · Call on arrival · Gift — do not deliver before Dec 20",
+      value: localNotes,
+      onChange: e => setLocalNotes(e.target.value)
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: CREAM,
+        borderRadius: 14,
+        padding: 16,
+        marginBottom: 20
+      }
+    }, cart.map(i => /*#__PURE__*/React.createElement("div", {
+      key: i.id,
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        marginBottom: 8,
+        fontSize: 14
+      }
+    }, /*#__PURE__*/React.createElement("span", null, i.qty, "× ", i.name), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 800
+      }
+    }, "$", (i.price * i.qty).toFixed(2)))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        borderTop: "1.5px solid #E5E7EB",
+        paddingTop: 10,
+        marginTop: 4,
+        display: "flex",
+        justifyContent: "space-between"
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 800,
+        fontSize: 16
+      }
+    }, "Total"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 900,
+        color: G,
+        fontSize: 20
+      }
+    }, "$", cartTotal.toFixed(2)))), /*#__PURE__*/React.createElement("button", {
+      style: btn(G, WHITE, {
+        opacity: allFilled ? 1 : 0.4,
+        transition: "opacity 0.2s"
+      }),
+      disabled: !allFilled,
+      onClick: () => {
+        setCustomer({
+          name: localName.trim(),
+          address: localAddress.trim(),
+          phone: localPhone.trim(),
+          notes: localNotes.trim()
+        });
+        setCheckout("payment");
+      }
+    }, "Choose Payment →")), checkout === "payment" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+      style: {
+        color: "#6B7280",
+        fontWeight: 700,
+        margin: "0 0 16px",
+        fontSize: 14
+      }
+    }, "Select how the customer is paying:"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "grid",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 12,
+        marginBottom: 20
+      }
+    }, PAYMENT_METHODS.map(pm => /*#__PURE__*/React.createElement("button", {
+      key: pm.id,
+      onClick: () => setPayment(pm.id),
+      style: {
+        background: payment === pm.id ? G : WHITE,
+        color: payment === pm.id ? WHITE : G,
+        border: `2.5px solid ${payment === pm.id ? G : "#E5E7EB"}`,
+        borderRadius: 18,
+        padding: "18px 12px",
+        cursor: "pointer",
+        fontFamily: "inherit",
+        transition: "all 0.15s",
+        boxShadow: payment === pm.id ? `0 4px 12px rgba(26,61,43,0.3)` : "none"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 34,
+        marginBottom: 6
+      }
+    }, pm.icon), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 800,
+        fontSize: 16
+      }
+    }, pm.label)))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: CREAM,
+        borderRadius: 14,
+        padding: 14,
+        marginBottom: 20,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 800
+      }
+    }, customer.name || "Customer"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: "#9CA3AF"
+      }
+    }, cart.map(i => `${i.qty}× ${i.name}`).join(", "))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 900,
+        fontSize: 24,
+        color: G
+      }
+    }, "$", cartTotal.toFixed(2))), /*#__PURE__*/React.createElement("button", {
+      style: btn(G),
+      onClick: completeSale
+    }, "✓ Complete Sale — $", cartTotal.toFixed(2)))));
   }
 
   // ── RECEIPT ──────────────────────────────────────────────────
   function ReceiptScreen() {
     const sale = lastSale;
     const pm = PAYMENT_METHODS.find(p => p.id === sale.payment);
-    return /*#__PURE__*/_jsxDEV("div", {
+    return /*#__PURE__*/React.createElement("div", {
       style: {
         position: "fixed",
         inset: 0,
@@ -1763,161 +1607,140 @@ function WreathPOS() {
         justifyContent: "center",
         padding: 24,
         overflowY: "auto"
-      },
-      children: [/*#__PURE__*/_jsxDEV("div", {
-        style: {
-          textAlign: "center",
-          marginBottom: 20
-        },
-        children: [/*#__PURE__*/_jsxDEV("div", {
-          style: {
-            fontSize: 70,
-            filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.3))"
-          },
-          children: "✅"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("h1", {
-          style: {
-            fontFamily: "'Playfair Display', serif",
-            color: WHITE,
-            fontSize: 30,
-            margin: "12px 0 4px"
-          },
-          children: "Sale Complete!"
-        }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-          style: {
-            color: L,
-            fontWeight: 700,
-            margin: 0,
-            fontSize: 15
-          },
-          children: "Thanks for supporting Pack 55! 🏕️"
-        }, void 0, false)]
-      }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-        style: {
-          background: WHITE,
-          borderRadius: 20,
-          padding: 22,
-          width: "100%",
-          maxWidth: 360,
-          marginBottom: 20
-        },
-        children: [/*#__PURE__*/_jsxDEV("div", {
-          style: {
-            textAlign: "center",
-            borderBottom: "2px dashed #E5E7EB",
-            paddingBottom: 14,
-            marginBottom: 14
-          },
-          children: [sale.customer.name ? /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontWeight: 900,
-              fontSize: 19,
-              color: G
-            },
-            children: sale.customer.name
-          }, void 0, false) : /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontWeight: 700,
-              fontSize: 16,
-              color: "#9CA3AF"
-            },
-            children: "Walk-in Customer"
-          }, void 0, false), sale.customer.phone && /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontSize: 13,
-              color: "#9CA3AF"
-            },
-            children: sale.customer.phone
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontSize: 12,
-              color: "#9CA3AF",
-              marginTop: 4
-            },
-            children: new Date(sale.timestamp).toLocaleString("en-US", {
-              weekday: "short",
-              month: "short",
-              day: "numeric",
-              hour: "numeric",
-              minute: "2-digit"
-            })
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontSize: 12,
-              color: M,
-              fontWeight: 700,
-              marginTop: 2
-            },
-            children: ["Sold by: ", sale.sellerName]
-          }, void 0, true)]
-        }, void 0, true), sale.items.map(i => /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            display: "flex",
-            justifyContent: "space-between",
-            marginBottom: 10,
-            fontSize: 15
-          },
-          children: [/*#__PURE__*/_jsxDEV("span", {
-            children: [i.qty, "× ", i.name]
-          }, void 0, true), /*#__PURE__*/_jsxDEV("span", {
-            style: {
-              fontWeight: 800
-            },
-            children: ["$", (i.price * i.qty).toFixed(2)]
-          }, void 0, true)]
-        }, i.id, true)), /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            borderTop: "2px dashed #E5E7EB",
-            paddingTop: 12,
-            marginTop: 6,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center"
-          },
-          children: [/*#__PURE__*/_jsxDEV("span", {
-            style: {
-              fontWeight: 900,
-              fontSize: 18
-            },
-            children: "TOTAL"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("span", {
-            style: {
-              fontWeight: 900,
-              fontSize: 30,
-              color: G
-            },
-            children: ["$", sale.total.toFixed(2)]
-          }, void 0, true)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            marginTop: 14,
-            textAlign: "center"
-          },
-          children: /*#__PURE__*/_jsxDEV("span", {
-            style: {
-              background: sale.payment === "cash" ? "#D1FAE5" : "#DBEAFE",
-              color: sale.payment === "cash" ? "#065F46" : "#1E40AF",
-              borderRadius: 20,
-              padding: "8px 18px",
-              fontWeight: 800,
-              fontSize: 14,
-              display: "inline-block"
-            },
-            children: [pm?.icon, " Paid via ", pm?.label]
-          }, void 0, true)
-        }, void 0, false)]
-      }, void 0, true), /*#__PURE__*/_jsxDEV("button", {
-        style: btn(GOLD, G, {
-          maxWidth: 360,
-          fontSize: 17
-        }),
-        onClick: () => {
-          setCheckout(null);
-          setTab("sell");
-        },
-        children: "🎄 Next Sale"
-      }, void 0, false)]
-    }, void 0, true);
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        marginBottom: 20
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 70,
+        filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.3))"
+      }
+    }, "✅"), /*#__PURE__*/React.createElement("h1", {
+      style: {
+        fontFamily: "'Playfair Display', serif",
+        color: WHITE,
+        fontSize: 30,
+        margin: "12px 0 4px"
+      }
+    }, "Sale Complete!"), /*#__PURE__*/React.createElement("p", {
+      style: {
+        color: L,
+        fontWeight: 700,
+        margin: 0,
+        fontSize: 15
+      }
+    }, "Thanks for supporting Pack 55! 🏕️")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: WHITE,
+        borderRadius: 20,
+        padding: 22,
+        width: "100%",
+        maxWidth: 360,
+        marginBottom: 20
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        borderBottom: "2px dashed #E5E7EB",
+        paddingBottom: 14,
+        marginBottom: 14
+      }
+    }, sale.customer.name ? /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 900,
+        fontSize: 19,
+        color: G
+      }
+    }, sale.customer.name) : /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 700,
+        fontSize: 16,
+        color: "#9CA3AF"
+      }
+    }, "Walk-in Customer"), sale.customer.phone && /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13,
+        color: "#9CA3AF"
+      }
+    }, sale.customer.phone), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: "#9CA3AF",
+        marginTop: 4
+      }
+    }, new Date(sale.timestamp).toLocaleString("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      hour: "numeric",
+      minute: "2-digit"
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: M,
+        fontWeight: 700,
+        marginTop: 2
+      }
+    }, "Sold by: ", sale.sellerName)), sale.items.map(i => /*#__PURE__*/React.createElement("div", {
+      key: i.id,
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        marginBottom: 10,
+        fontSize: 15
+      }
+    }, /*#__PURE__*/React.createElement("span", null, i.qty, "× ", i.name), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 800
+      }
+    }, "$", (i.price * i.qty).toFixed(2)))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        borderTop: "2px dashed #E5E7EB",
+        paddingTop: 12,
+        marginTop: 6,
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 900,
+        fontSize: 18
+      }
+    }, "TOTAL"), /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 900,
+        fontSize: 30,
+        color: G
+      }
+    }, "$", sale.total.toFixed(2))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: 14,
+        textAlign: "center"
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        background: sale.payment === "cash" ? "#D1FAE5" : "#DBEAFE",
+        color: sale.payment === "cash" ? "#065F46" : "#1E40AF",
+        borderRadius: 20,
+        padding: "8px 18px",
+        fontWeight: 800,
+        fontSize: 14,
+        display: "inline-block"
+      }
+    }, pm?.icon, " Paid via ", pm?.label))), /*#__PURE__*/React.createElement("button", {
+      style: btn(GOLD, G, {
+        maxWidth: 360,
+        fontSize: 17
+      }),
+      onClick: () => {
+        setCheckout(null);
+        setTab("sell");
+      }
+    }, "🎄 Next Sale"));
   }
 
   // ── LEADER DASHBOARD ─────────────────────────────────────────
@@ -1950,745 +1773,668 @@ function WreathPOS() {
     };
     const LTABS = [["summary", "📊", "Summary"], ["sellers", "👥", "Sellers"], ["inv", "📦", "Stock"], ["all", "📋", "Sales"]];
     const isWide = typeof window !== "undefined" && window.innerWidth >= 900;
-    return /*#__PURE__*/_jsxDEV("div", {
+    return /*#__PURE__*/React.createElement("div", {
       style: {
         ...appWrap,
         maxWidth: isWide ? "100%" : undefined
-      },
-      children: [/*#__PURE__*/_jsxDEV("div", {
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: `linear-gradient(135deg, ${GOLD} 0%, #E8A020 100%)`,
+        padding: "14px 28px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.15)"
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 10,
+        color: "rgba(0,0,0,0.45)",
+        fontWeight: 700,
+        textTransform: "uppercase",
+        letterSpacing: 1.5
+      }
+    }, "Leader Mode"), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 900,
+        fontSize: 18,
+        color: G
+      }
+    }, "🏕️ Pack 55 Dashboard")), /*#__PURE__*/React.createElement("button", {
+      onClick: () => setView("login"),
+      style: {
+        background: "rgba(0,0,0,0.12)",
+        border: "none",
+        borderRadius: 10,
+        padding: "8px 14px",
+        cursor: "pointer",
+        fontWeight: 800,
+        fontSize: 13,
+        fontFamily: "inherit",
+        color: G
+      }
+    }, "← Exit")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        background: WHITE,
+        borderBottom: "2px solid #F3F4F6",
+        padding: isWide ? "0 24px" : 0
+      }
+    }, LTABS.map(([id, icon, lbl]) => /*#__PURE__*/React.createElement("button", {
+      key: id,
+      onClick: () => setLtab(id),
+      style: {
+        flex: isWide ? 0 : 1,
+        background: "none",
+        border: "none",
+        borderBottom: ltab === id ? `3px solid ${G}` : "3px solid transparent",
+        padding: isWide ? "14px 28px 12px" : "12px 4px 10px",
+        cursor: "pointer",
+        fontFamily: "inherit",
+        transition: "border-color 0.15s",
+        display: "flex",
+        alignItems: "center",
+        gap: isWide ? 8 : 0,
+        flexDirection: isWide ? "row" : "column"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: isWide ? 20 : 18
+      }
+    }, icon), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: isWide ? 14 : 11,
+        fontWeight: ltab === id ? 900 : 600,
+        color: ltab === id ? G : "#9CA3AF"
+      }
+    }, lbl)))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1,
+        overflowY: "auto",
+        WebkitOverflowScrolling: "touch",
+        padding: isWide ? 28 : 16,
+        paddingBottom: isWide ? 28 : 80
+      }
+    }, ["📱 Add Zelle QR code for payments"].length > 0 && /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: "#FFFBEB",
+        border: "2px solid #FDE68A",
+        borderRadius: 14,
+        padding: "12px 16px",
+        marginBottom: 20
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 900,
+        fontSize: 13,
+        color: "#92400E",
+        marginBottom: 8,
+        textTransform: "uppercase",
+        letterSpacing: 0.8
+      }
+    }, "⚠️ Still needs to be done"), ["📱 Add Zelle QR code for payments"].map((item, i) => /*#__PURE__*/React.createElement("div", {
+      key: i,
+      style: {
+        fontSize: 14,
+        color: "#78350F",
+        fontWeight: 700,
+        padding: "4px 0",
+        borderTop: i > 0 ? "1px solid #FDE68A" : "none"
+      }
+    }, item))), ltab === "summary" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "grid",
+        gridTemplateColumns: isWide ? "1fr 1fr 1fr 1fr" : "1fr 1fr",
+        gap: 12,
+        marginBottom: 20
+      }
+    }, [{
+      label: "Total Revenue",
+      value: `$${totalRev.toFixed(2)}`,
+      icon: "💰"
+    }, {
+      label: "Wreaths Sold",
+      value: totalItm,
+      icon: "🌿"
+    }, {
+      label: "Transactions",
+      value: sales.length,
+      icon: "🧾"
+    }, {
+      label: "Active Sellers",
+      value: sellers.length,
+      icon: "👤"
+    }].map(stat => /*#__PURE__*/React.createElement("div", {
+      key: stat.label,
+      style: card({
+        textAlign: "center"
+      })
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: isWide ? 36 : 30,
+        marginBottom: 4
+      }
+    }, stat.icon), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 900,
+        fontSize: isWide ? 30 : 24,
+        color: G
+      }
+    }, stat.value), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 13,
+        color: "#9CA3AF",
+        fontWeight: 700
+      }
+    }, stat.label)))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: isWide ? "grid" : "block",
+        gridTemplateColumns: "1fr 1fr",
+        gap: 16,
+        marginBottom: 16
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: card({
+        marginBottom: isWide ? 0 : 14
+      })
+    }, /*#__PURE__*/React.createElement("h3", {
+      style: {
+        margin: "0 0 12px",
+        color: G,
+        fontSize: 15
+      }
+    }, "💳 By Payment Method"), PAYMENT_METHODS.map(pm => {
+      const pms = sales.filter(s => s.payment === pm.id);
+      if (!pms.length) return null;
+      const tot = pms.reduce((s, x) => s + x.total, 0);
+      return /*#__PURE__*/React.createElement("div", {
+        key: pm.id,
         style: {
-          background: `linear-gradient(135deg, ${GOLD} 0%, #E8A020 100%)`,
-          padding: "14px 28px",
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: 8,
+          fontSize: 14
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 600
+        }
+      }, pm.icon, " ", pm.label), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 800,
+          color: G
+        }
+      }, "$", tot.toFixed(2), " ", /*#__PURE__*/React.createElement("span", {
+        style: {
+          color: "#9CA3AF",
+          fontWeight: 600
+        }
+      }, "(", pms.length, ")")));
+    }).filter(Boolean), sales.length === 0 && /*#__PURE__*/React.createElement("p", {
+      style: {
+        color: "#9CA3AF",
+        fontSize: 14,
+        margin: 0
+      }
+    }, "No sales yet.")), /*#__PURE__*/React.createElement("div", {
+      style: card({
+        marginBottom: 14
+      })
+    }, /*#__PURE__*/React.createElement("h3", {
+      style: {
+        margin: "0 0 12px",
+        color: G,
+        fontSize: 15
+      }
+    }, "🌿 Top Products"), PRODUCTS.map(p => {
+      const sold = sales.reduce((s, x) => s + (x.items.find(i => i.id === p.id)?.qty ?? 0), 0);
+      return sold > 0 ? /*#__PURE__*/React.createElement("div", {
+        key: p.id,
+        style: {
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: 8,
+          fontSize: 14
+        }
+      }, /*#__PURE__*/React.createElement("span", null, p.emoji, " ", p.name), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 800,
+          color: G
+        }
+      }, sold, " sold")) : null;
+    }).filter(Boolean), sales.length === 0 && /*#__PURE__*/React.createElement("p", {
+      style: {
+        color: "#9CA3AF",
+        fontSize: 14,
+        margin: 0
+      }
+    }, "No sales yet."))), (() => {
+      const tableSales = sales.filter(s => s.sellerName === "Table Sale");
+      if (tableSales.length === 0) return /*#__PURE__*/React.createElement("div", {
+        style: card({
+          marginBottom: 14
+        })
+      }, /*#__PURE__*/React.createElement("h3", {
+        style: {
+          margin: "0 0 6px",
+          color: G,
+          fontSize: 15
+        }
+      }, "🕐 Peak Sale Hours"), /*#__PURE__*/React.createElement("p", {
+        style: {
+          color: "#9CA3AF",
+          fontSize: 13,
+          margin: 0
+        }
+      }, "No table sales recorded yet."));
+      // Build hour buckets 0-23
+      const buckets = Array(24).fill(0);
+      tableSales.forEach(s => {
+        const h = new Date(s.timestamp).getHours();
+        buckets[h]++;
+      });
+      const max = Math.max(...buckets, 1);
+      // Only show hours that have any sales, plus 1hr buffer either side
+      const firstHr = Math.max(0, buckets.findIndex(b => b > 0) - 1);
+      const lastHr = Math.min(23, buckets.length - 1 - [...buckets].reverse().findIndex(b => b > 0) + 1);
+      const visible = buckets.slice(firstHr, lastHr + 1).map((count, i) => ({
+        hour: firstHr + i,
+        count
+      }));
+      const fmtHr = h => {
+        if (h === 0) return "12a";
+        if (h === 12) return "12p";
+        return h < 12 ? `${h}a` : `${h - 12}p`;
+      };
+      const peakHour = buckets.indexOf(max);
+      return /*#__PURE__*/React.createElement("div", {
+        style: card({
+          marginBottom: 14
+        })
+      }, /*#__PURE__*/React.createElement("h3", {
+        style: {
+          margin: "0 0 4px",
+          color: G,
+          fontSize: 15
+        }
+      }, "🕐 Peak Sale Hours"), /*#__PURE__*/React.createElement("p", {
+        style: {
+          margin: "0 0 14px",
+          fontSize: 12,
+          color: "#9CA3AF",
+          fontWeight: 600
+        }
+      }, "Table sales only · Busiest: ", /*#__PURE__*/React.createElement("span", {
+        style: {
+          color: G,
+          fontWeight: 800
+        }
+      }, fmtHr(peakHour), "–", fmtHr(peakHour + 1))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          alignItems: "flex-end",
+          gap: 4,
+          height: 80
+        }
+      }, visible.map(({
+        hour,
+        count
+      }) => {
+        const pct = count / max;
+        const isTop = count === max && count > 0;
+        return /*#__PURE__*/React.createElement("div", {
+          key: hour,
+          style: {
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 3
+          }
+        }, /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontSize: 10,
+            fontWeight: 800,
+            color: isTop ? GOLD : "transparent",
+            lineHeight: 1
+          }
+        }, count > 0 ? count : ""), /*#__PURE__*/React.createElement("div", {
+          style: {
+            width: "100%",
+            borderRadius: "4px 4px 0 0",
+            height: Math.max(4, pct * 52),
+            background: isTop ? `linear-gradient(180deg, ${GOLD} 0%, #E8A020 100%)` : count > 0 ? `linear-gradient(180deg, ${L} 0%, ${M} 100%)` : "#F3F4F6",
+            transition: "height 0.3s ease"
+          }
+        }), /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontSize: 9,
+            color: "#9CA3AF",
+            fontWeight: 700,
+            whiteSpace: "nowrap"
+          }
+        }, fmtHr(hour)));
+      })));
+    })(), /*#__PURE__*/React.createElement("button", {
+      onClick: clearAll,
+      style: btn("#DC2626", WHITE, {})
+    }, "⚠️ Reset All Data")), ltab === "sellers" && /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: isWide ? "grid" : "flex",
+        gridTemplateColumns: isWide ? "1fr 1fr" : undefined,
+        flexDirection: "column",
+        gap: 16,
+        alignItems: "start"
+      }
+    }, sellers.filter(s => s !== "Table Sale").length === 0 && /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        padding: "32px 0",
+        color: "#9CA3AF"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 40
+      }
+    }, "👤"), /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontWeight: 700
+      }
+    }, "No sellers yet")), sellers.filter(s => s !== "Table Sale").map(seller => {
+      const ss = sales.filter(s => s.sellerName === seller);
+      const tot = ss.reduce((s, x) => s + x.total, 0);
+      const itm = ss.reduce((s, x) => s + x.items.reduce((a, i) => a + i.qty, 0), 0);
+      const open = ss.filter(s => (s.status || "open") === "open").length;
+      const fulfilled = ss.filter(s => s.status === "fulfilled").length;
+      const pickedup = ss.filter(s => s.status === "pickedup").length;
+      return {
+        seller,
+        ss,
+        tot,
+        itm,
+        open,
+        fulfilled,
+        pickedup
+      };
+    }).sort((a, b) => b.tot - a.tot).map(({
+      seller,
+      ss,
+      tot,
+      itm,
+      open,
+      fulfilled,
+      pickedup
+    }) => /*#__PURE__*/React.createElement("div", {
+      key: seller,
+      style: card()
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 12
+      }
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 800,
+        fontSize: 16
+      }
+    }, "👤 ", seller), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: "#9CA3AF",
+        marginTop: 2
+      }
+    }, ss.length, " orders · ", itm, " wreaths")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 900,
+        fontSize: 20,
+        color: G
+      }
+    }, "$", tot.toFixed(2))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        gap: 8,
+        marginBottom: 14,
+        flexWrap: "wrap"
+      }
+    }, [{
+      label: "Open",
+      count: open,
+      bg: "#FEF3C7",
+      text: "#92400E"
+    }, {
+      label: "Fulfilled",
+      count: fulfilled,
+      bg: "#DBEAFE",
+      text: "#1E40AF"
+    }, {
+      label: "Picked Up",
+      count: pickedup,
+      bg: "#D1FAE5",
+      text: "#065F46"
+    }].map(s => /*#__PURE__*/React.createElement("div", {
+      key: s.label,
+      style: {
+        background: s.bg,
+        color: s.text,
+        borderRadius: 10,
+        padding: "5px 10px",
+        fontSize: 12,
+        fontWeight: 800
+      }
+    }, s.count, " ", s.label))), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        gap: 10
+      }
+    }, [...ss].reverse().map(sale => {
+      const status = sale.status || "open";
+      const STATUS_CFG = {
+        open: {
+          label: "Open",
+          bg: "#FEF3C7",
+          text: "#92400E",
+          icon: "🟡",
+          next: "fulfilled",
+          nextLabel: "Mark Fulfilled"
+        },
+        fulfilled: {
+          label: "Fulfilled",
+          bg: "#DBEAFE",
+          text: "#1E40AF",
+          icon: "🔵",
+          next: "pickedup",
+          nextLabel: "Mark Picked Up"
+        },
+        pickedup: {
+          label: "Picked Up",
+          bg: "#D1FAE5",
+          text: "#065F46",
+          icon: "✅",
+          next: null,
+          nextLabel: null
+        }
+      };
+      const cfg = STATUS_CFG[status];
+      const pm = PAYMENT_METHODS.find(p => p.id === sale.payment);
+      return /*#__PURE__*/React.createElement("div", {
+        key: sale.id,
+        style: {
+          background: "#F9FAFB",
+          borderRadius: 12,
+          padding: 12,
+          border: `1.5px solid ${status === "open" ? "#FDE68A" : status === "fulfilled" ? "#BFDBFE" : "#A7F3D0"}`
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          marginBottom: 6
+        }
+      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontWeight: 800,
+          fontSize: 14
+        }
+      }, sale.customer.name), sale.customer.address && /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 12,
+          color: "#6B7280"
+        }
+      }, "📍 ", sale.customer.address), sale.customer.phone && /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 12,
+          color: "#6B7280"
+        }
+      }, "📞 ", sale.customer.phone), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 11,
+          color: "#9CA3AF",
+          marginTop: 2
+        }
+      }, new Date(sale.timestamp).toLocaleString("en-US", {
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      }))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          textAlign: "right"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontWeight: 900,
+          fontSize: 16,
+          color: G
+        }
+      }, "$", sale.total.toFixed(2)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 11,
+          color: "#9CA3AF"
+        }
+      }, pm?.icon, " ", pm?.label))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 12,
+          color: "#6B7280",
+          marginBottom: sale.notes ? 6 : 10
+        }
+      }, sale.items.map(i => `${i.qty}× ${i.name}`).join(" · ")), sale.notes && /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 12,
+          background: "#FFFBEB",
+          border: "1px solid #FDE68A",
+          borderRadius: 8,
+          padding: "6px 10px",
+          color: "#92400E",
+          marginBottom: 10,
+          fontStyle: "italic"
+        }
+      }, "📝 ", sale.notes), /*#__PURE__*/React.createElement("div", {
+        style: {
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.15)"
-        },
-        children: [/*#__PURE__*/_jsxDEV("div", {
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontSize: 10,
-              color: "rgba(0,0,0,0.45)",
-              fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: 1.5
-            },
-            children: "Leader Mode"
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontWeight: 900,
-              fontSize: 18,
-              color: G
-            },
-            children: "🏕️ Pack 55 Dashboard"
-          }, void 0, false)]
-        }, void 0, true), /*#__PURE__*/_jsxDEV("button", {
-          onClick: () => setView("login"),
-          style: {
-            background: "rgba(0,0,0,0.12)",
-            border: "none",
-            borderRadius: 10,
-            padding: "8px 14px",
-            cursor: "pointer",
-            fontWeight: 800,
-            fontSize: 13,
-            fontFamily: "inherit",
-            color: G
-          },
-          children: "← Exit"
-        }, void 0, false)]
-      }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
+          justifyContent: "space-between"
+        }
+      }, /*#__PURE__*/React.createElement("span", {
         style: {
-          display: "flex",
-          background: WHITE,
-          borderBottom: "2px solid #F3F4F6",
-          padding: isWide ? "0 24px" : 0
-        },
-        children: LTABS.map(([id, icon, lbl]) => /*#__PURE__*/_jsxDEV("button", {
-          onClick: () => setLtab(id),
-          style: {
-            flex: isWide ? 0 : 1,
-            background: "none",
-            border: "none",
-            borderBottom: ltab === id ? `3px solid ${G}` : "3px solid transparent",
-            padding: isWide ? "14px 28px 12px" : "12px 4px 10px",
-            cursor: "pointer",
-            fontFamily: "inherit",
-            transition: "border-color 0.15s",
-            display: "flex",
-            alignItems: "center",
-            gap: isWide ? 8 : 0,
-            flexDirection: isWide ? "row" : "column"
-          },
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontSize: isWide ? 20 : 18
-            },
-            children: icon
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontSize: isWide ? 14 : 11,
-              fontWeight: ltab === id ? 900 : 600,
-              color: ltab === id ? G : "#9CA3AF"
-            },
-            children: lbl
-          }, void 0, false)]
-        }, id, true))
-      }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
+          background: cfg.bg,
+          color: cfg.text,
+          borderRadius: 8,
+          padding: "5px 10px",
+          fontSize: 12,
+          fontWeight: 800
+        }
+      }, cfg.icon, " ", cfg.label), cfg.next && /*#__PURE__*/React.createElement("button", {
+        onClick: () => updateSaleStatus(sale.id, cfg.next),
         style: {
-          flex: 1,
-          overflowY: "auto",
-          WebkitOverflowScrolling: "touch",
-          padding: isWide ? 28 : 16,
-          paddingBottom: isWide ? 28 : 80
-        },
-        children: [["📱 Add Zelle QR code for payments"].length > 0 && /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            background: "#FFFBEB",
-            border: "2px solid #FDE68A",
-            borderRadius: 14,
-            padding: "12px 16px",
-            marginBottom: 20
-          },
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontWeight: 900,
-              fontSize: 13,
-              color: "#92400E",
-              marginBottom: 8,
-              textTransform: "uppercase",
-              letterSpacing: 0.8
-            },
-            children: "⚠️ Still needs to be done"
-          }, void 0, false), ["📱 Add Zelle QR code for payments"].map((item, i) => /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              fontSize: 14,
-              color: "#78350F",
-              fontWeight: 700,
-              padding: "4px 0",
-              borderTop: i > 0 ? "1px solid #FDE68A" : "none"
-            },
-            children: item
-          }, i, false))]
-        }, void 0, true), ltab === "summary" && /*#__PURE__*/_jsxDEV(_Fragment, {
-          children: [/*#__PURE__*/_jsxDEV("div", {
-            style: {
-              display: "grid",
-              gridTemplateColumns: isWide ? "1fr 1fr 1fr 1fr" : "1fr 1fr",
-              gap: 12,
-              marginBottom: 20
-            },
-            children: [{
-              label: "Total Revenue",
-              value: `$${totalRev.toFixed(2)}`,
-              icon: "💰"
-            }, {
-              label: "Wreaths Sold",
-              value: totalItm,
-              icon: "🌿"
-            }, {
-              label: "Transactions",
-              value: sales.length,
-              icon: "🧾"
-            }, {
-              label: "Active Sellers",
-              value: sellers.length,
-              icon: "👤"
-            }].map(stat => /*#__PURE__*/_jsxDEV("div", {
-              style: card({
-                textAlign: "center"
-              }),
-              children: [/*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  fontSize: isWide ? 36 : 30,
-                  marginBottom: 4
-                },
-                children: stat.icon
-              }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  fontWeight: 900,
-                  fontSize: isWide ? 30 : 24,
-                  color: G
-                },
-                children: stat.value
-              }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  fontSize: 13,
-                  color: "#9CA3AF",
-                  fontWeight: 700
-                },
-                children: stat.label
-              }, void 0, false)]
-            }, stat.label, true))
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              display: isWide ? "grid" : "block",
-              gridTemplateColumns: "1fr 1fr",
-              gap: 16,
-              marginBottom: 16
-            },
-            children: [/*#__PURE__*/_jsxDEV("div", {
-              style: card({
-                marginBottom: isWide ? 0 : 14
-              }),
-              children: [/*#__PURE__*/_jsxDEV("h3", {
-                style: {
-                  margin: "0 0 12px",
-                  color: G,
-                  fontSize: 15
-                },
-                children: "💳 By Payment Method"
-              }, void 0, false), PAYMENT_METHODS.map(pm => {
-                const pms = sales.filter(s => s.payment === pm.id);
-                if (!pms.length) return null;
-                const tot = pms.reduce((s, x) => s + x.total, 0);
-                return /*#__PURE__*/_jsxDEV("div", {
-                  style: {
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginBottom: 8,
-                    fontSize: 14
-                  },
-                  children: [/*#__PURE__*/_jsxDEV("span", {
-                    style: {
-                      fontWeight: 600
-                    },
-                    children: [pm.icon, " ", pm.label]
-                  }, void 0, true), /*#__PURE__*/_jsxDEV("span", {
-                    style: {
-                      fontWeight: 800,
-                      color: G
-                    },
-                    children: ["$", tot.toFixed(2), " ", /*#__PURE__*/_jsxDEV("span", {
-                      style: {
-                        color: "#9CA3AF",
-                        fontWeight: 600
-                      },
-                      children: ["(", pms.length, ")"]
-                    }, void 0, true)]
-                  }, void 0, true)]
-                }, pm.id, true);
-              }).filter(Boolean), sales.length === 0 && /*#__PURE__*/_jsxDEV("p", {
-                style: {
-                  color: "#9CA3AF",
-                  fontSize: 14,
-                  margin: 0
-                },
-                children: "No sales yet."
-              }, void 0, false)]
-            }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-              style: card({
-                marginBottom: 14
-              }),
-              children: [/*#__PURE__*/_jsxDEV("h3", {
-                style: {
-                  margin: "0 0 12px",
-                  color: G,
-                  fontSize: 15
-                },
-                children: "🌿 Top Products"
-              }, void 0, false), PRODUCTS.map(p => {
-                const sold = sales.reduce((s, x) => s + (x.items.find(i => i.id === p.id)?.qty ?? 0), 0);
-                return sold > 0 ? /*#__PURE__*/_jsxDEV("div", {
-                  style: {
-                    display: "flex",
-                    justifyContent: "space-between",
-                    marginBottom: 8,
-                    fontSize: 14
-                  },
-                  children: [/*#__PURE__*/_jsxDEV("span", {
-                    children: [p.emoji, " ", p.name]
-                  }, void 0, true), /*#__PURE__*/_jsxDEV("span", {
-                    style: {
-                      fontWeight: 800,
-                      color: G
-                    },
-                    children: [sold, " sold"]
-                  }, void 0, true)]
-                }, p.id, true) : null;
-              }).filter(Boolean), sales.length === 0 && /*#__PURE__*/_jsxDEV("p", {
-                style: {
-                  color: "#9CA3AF",
-                  fontSize: 14,
-                  margin: 0
-                },
-                children: "No sales yet."
-              }, void 0, false)]
-            }, void 0, true)]
-          }, void 0, true), (() => {
-            const tableSales = sales.filter(s => s.sellerName === "Table Sale");
-            if (tableSales.length === 0) return /*#__PURE__*/_jsxDEV("div", {
-              style: card({
-                marginBottom: 14
-              }),
-              children: [/*#__PURE__*/_jsxDEV("h3", {
-                style: {
-                  margin: "0 0 6px",
-                  color: G,
-                  fontSize: 15
-                },
-                children: "🕐 Peak Sale Hours"
-              }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-                style: {
-                  color: "#9CA3AF",
-                  fontSize: 13,
-                  margin: 0
-                },
-                children: "No table sales recorded yet."
-              }, void 0, false)]
-            }, void 0, true);
-            // Build hour buckets 0-23
-            const buckets = Array(24).fill(0);
-            tableSales.forEach(s => {
-              const h = new Date(s.timestamp).getHours();
-              buckets[h]++;
-            });
-            const max = Math.max(...buckets, 1);
-            // Only show hours that have any sales, plus 1hr buffer either side
-            const firstHr = Math.max(0, buckets.findIndex(b => b > 0) - 1);
-            const lastHr = Math.min(23, buckets.length - 1 - [...buckets].reverse().findIndex(b => b > 0) + 1);
-            const visible = buckets.slice(firstHr, lastHr + 1).map((count, i) => ({
-              hour: firstHr + i,
-              count
-            }));
-            const fmtHr = h => {
-              if (h === 0) return "12a";
-              if (h === 12) return "12p";
-              return h < 12 ? `${h}a` : `${h - 12}p`;
-            };
-            const peakHour = buckets.indexOf(max);
-            return /*#__PURE__*/_jsxDEV("div", {
-              style: card({
-                marginBottom: 14
-              }),
-              children: [/*#__PURE__*/_jsxDEV("h3", {
-                style: {
-                  margin: "0 0 4px",
-                  color: G,
-                  fontSize: 15
-                },
-                children: "🕐 Peak Sale Hours"
-              }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-                style: {
-                  margin: "0 0 14px",
-                  fontSize: 12,
-                  color: "#9CA3AF",
-                  fontWeight: 600
-                },
-                children: ["Table sales only · Busiest: ", /*#__PURE__*/_jsxDEV("span", {
-                  style: {
-                    color: G,
-                    fontWeight: 800
-                  },
-                  children: [fmtHr(peakHour), "–", fmtHr(peakHour + 1)]
-                }, void 0, true)]
-              }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  display: "flex",
-                  alignItems: "flex-end",
-                  gap: 4,
-                  height: 80
-                },
-                children: visible.map(({
-                  hour,
-                  count
-                }) => {
-                  const pct = count / max;
-                  const isTop = count === max && count > 0;
-                  return /*#__PURE__*/_jsxDEV("div", {
-                    style: {
-                      flex: 1,
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      gap: 3
-                    },
-                    children: [/*#__PURE__*/_jsxDEV("div", {
-                      style: {
-                        fontSize: 10,
-                        fontWeight: 800,
-                        color: isTop ? GOLD : "transparent",
-                        lineHeight: 1
-                      },
-                      children: count > 0 ? count : ""
-                    }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-                      style: {
-                        width: "100%",
-                        borderRadius: "4px 4px 0 0",
-                        height: Math.max(4, pct * 52),
-                        background: isTop ? `linear-gradient(180deg, ${GOLD} 0%, #E8A020 100%)` : count > 0 ? `linear-gradient(180deg, ${L} 0%, ${M} 100%)` : "#F3F4F6",
-                        transition: "height 0.3s ease"
-                      }
-                    }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-                      style: {
-                        fontSize: 9,
-                        color: "#9CA3AF",
-                        fontWeight: 700,
-                        whiteSpace: "nowrap"
-                      },
-                      children: fmtHr(hour)
-                    }, void 0, false)]
-                  }, hour, true);
-                })
-              }, void 0, false)]
-            }, void 0, true);
-          })(), /*#__PURE__*/_jsxDEV("button", {
-            onClick: clearAll,
-            style: btn("#DC2626", WHITE, {}),
-            children: "⚠️ Reset All Data"
-          }, void 0, false)]
-        }, void 0, true), ltab === "sellers" && /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            display: isWide ? "grid" : "flex",
-            gridTemplateColumns: isWide ? "1fr 1fr" : undefined,
-            flexDirection: "column",
-            gap: 16,
-            alignItems: "start"
-          },
-          children: [sellers.filter(s => s !== "Table Sale").length === 0 && /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              textAlign: "center",
-              padding: "32px 0",
-              color: "#9CA3AF"
-            },
-            children: [/*#__PURE__*/_jsxDEV("div", {
-              style: {
-                fontSize: 40
-              },
-              children: "👤"
-            }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-              style: {
-                fontWeight: 700
-              },
-              children: "No sellers yet"
-            }, void 0, false)]
-          }, void 0, true), sellers.filter(s => s !== "Table Sale").map(seller => {
-            const ss = sales.filter(s => s.sellerName === seller);
-            const tot = ss.reduce((s, x) => s + x.total, 0);
-            const itm = ss.reduce((s, x) => s + x.items.reduce((a, i) => a + i.qty, 0), 0);
-            const open = ss.filter(s => (s.status || "open") === "open").length;
-            const fulfilled = ss.filter(s => s.status === "fulfilled").length;
-            const pickedup = ss.filter(s => s.status === "pickedup").length;
-            return {
-              seller,
-              ss,
-              tot,
-              itm,
-              open,
-              fulfilled,
-              pickedup
-            };
-          }).sort((a, b) => b.tot - a.tot).map(({
-            seller,
-            ss,
-            tot,
-            itm,
-            open,
-            fulfilled,
-            pickedup
-          }) => /*#__PURE__*/_jsxDEV("div", {
-            style: card(),
-            children: [/*#__PURE__*/_jsxDEV("div", {
-              style: {
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: 12
-              },
-              children: [/*#__PURE__*/_jsxDEV("div", {
-                children: [/*#__PURE__*/_jsxDEV("div", {
-                  style: {
-                    fontWeight: 800,
-                    fontSize: 16
-                  },
-                  children: ["👤 ", seller]
-                }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                  style: {
-                    fontSize: 12,
-                    color: "#9CA3AF",
-                    marginTop: 2
-                  },
-                  children: [ss.length, " orders · ", itm, " wreaths"]
-                }, void 0, true)]
-              }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  fontWeight: 900,
-                  fontSize: 20,
-                  color: G
-                },
-                children: ["$", tot.toFixed(2)]
-              }, void 0, true)]
-            }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                display: "flex",
-                gap: 8,
-                marginBottom: 14,
-                flexWrap: "wrap"
-              },
-              children: [{
-                label: "Open",
-                count: open,
-                bg: "#FEF3C7",
-                text: "#92400E"
-              }, {
-                label: "Fulfilled",
-                count: fulfilled,
-                bg: "#DBEAFE",
-                text: "#1E40AF"
-              }, {
-                label: "Picked Up",
-                count: pickedup,
-                bg: "#D1FAE5",
-                text: "#065F46"
-              }].map(s => /*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  background: s.bg,
-                  color: s.text,
-                  borderRadius: 10,
-                  padding: "5px 10px",
-                  fontSize: 12,
-                  fontWeight: 800
-                },
-                children: [s.count, " ", s.label]
-              }, s.label, true))
-            }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-              style: {
-                display: "flex",
-                flexDirection: "column",
-                gap: 10
-              },
-              children: [...ss].reverse().map(sale => {
-                const status = sale.status || "open";
-                const STATUS_CFG = {
-                  open: {
-                    label: "Open",
-                    bg: "#FEF3C7",
-                    text: "#92400E",
-                    icon: "🟡",
-                    next: "fulfilled",
-                    nextLabel: "Mark Fulfilled"
-                  },
-                  fulfilled: {
-                    label: "Fulfilled",
-                    bg: "#DBEAFE",
-                    text: "#1E40AF",
-                    icon: "🔵",
-                    next: "pickedup",
-                    nextLabel: "Mark Picked Up"
-                  },
-                  pickedup: {
-                    label: "Picked Up",
-                    bg: "#D1FAE5",
-                    text: "#065F46",
-                    icon: "✅",
-                    next: null,
-                    nextLabel: null
-                  }
-                };
-                const cfg = STATUS_CFG[status];
-                const pm = PAYMENT_METHODS.find(p => p.id === sale.payment);
-                return /*#__PURE__*/_jsxDEV("div", {
-                  style: {
-                    background: "#F9FAFB",
-                    borderRadius: 12,
-                    padding: 12,
-                    border: `1.5px solid ${status === "open" ? "#FDE68A" : status === "fulfilled" ? "#BFDBFE" : "#A7F3D0"}`
-                  },
-                  children: [/*#__PURE__*/_jsxDEV("div", {
-                    style: {
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "flex-start",
-                      marginBottom: 6
-                    },
-                    children: [/*#__PURE__*/_jsxDEV("div", {
-                      children: [/*#__PURE__*/_jsxDEV("div", {
-                        style: {
-                          fontWeight: 800,
-                          fontSize: 14
-                        },
-                        children: sale.customer.name
-                      }, void 0, false), sale.customer.address && /*#__PURE__*/_jsxDEV("div", {
-                        style: {
-                          fontSize: 12,
-                          color: "#6B7280"
-                        },
-                        children: ["📍 ", sale.customer.address]
-                      }, void 0, true), sale.customer.phone && /*#__PURE__*/_jsxDEV("div", {
-                        style: {
-                          fontSize: 12,
-                          color: "#6B7280"
-                        },
-                        children: ["📞 ", sale.customer.phone]
-                      }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                        style: {
-                          fontSize: 11,
-                          color: "#9CA3AF",
-                          marginTop: 2
-                        },
-                        children: new Date(sale.timestamp).toLocaleString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          hour: "numeric",
-                          minute: "2-digit"
-                        })
-                      }, void 0, false)]
-                    }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                      style: {
-                        textAlign: "right"
-                      },
-                      children: [/*#__PURE__*/_jsxDEV("div", {
-                        style: {
-                          fontWeight: 900,
-                          fontSize: 16,
-                          color: G
-                        },
-                        children: ["$", sale.total.toFixed(2)]
-                      }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                        style: {
-                          fontSize: 11,
-                          color: "#9CA3AF"
-                        },
-                        children: [pm?.icon, " ", pm?.label]
-                      }, void 0, true)]
-                    }, void 0, true)]
-                  }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                    style: {
-                      fontSize: 12,
-                      color: "#6B7280",
-                      marginBottom: sale.notes ? 6 : 10
-                    },
-                    children: sale.items.map(i => `${i.qty}× ${i.name}`).join(" · ")
-                  }, void 0, false), sale.notes && /*#__PURE__*/_jsxDEV("div", {
-                    style: {
-                      fontSize: 12,
-                      background: "#FFFBEB",
-                      border: "1px solid #FDE68A",
-                      borderRadius: 8,
-                      padding: "6px 10px",
-                      color: "#92400E",
-                      marginBottom: 10,
-                      fontStyle: "italic"
-                    },
-                    children: ["📝 ", sale.notes]
-                  }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                    style: {
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between"
-                    },
-                    children: [/*#__PURE__*/_jsxDEV("span", {
-                      style: {
-                        background: cfg.bg,
-                        color: cfg.text,
-                        borderRadius: 8,
-                        padding: "5px 10px",
-                        fontSize: 12,
-                        fontWeight: 800
-                      },
-                      children: [cfg.icon, " ", cfg.label]
-                    }, void 0, true), cfg.next && /*#__PURE__*/_jsxDEV("button", {
-                      onClick: () => updateSaleStatus(sale.id, cfg.next),
-                      style: {
-                        background: G,
-                        color: WHITE,
-                        border: "none",
-                        borderRadius: 10,
-                        padding: "8px 14px",
-                        fontSize: 12,
-                        fontWeight: 800,
-                        cursor: "pointer",
-                        fontFamily: "inherit"
-                      },
-                      children: [cfg.nextLabel, " →"]
-                    }, void 0, true)]
-                  }, void 0, true)]
-                }, sale.id, true);
-              })
-            }, void 0, false)]
-          }, seller, true))]
-        }, void 0, true), ltab === "inv" && /*#__PURE__*/_jsxDEV(_Fragment, {
-          children: [/*#__PURE__*/_jsxDEV("p", {
-            style: {
-              color: "#6B7280",
-              fontSize: 14,
-              margin: "0 0 14px",
-              fontWeight: 600
-            },
-            children: "Adjust starting quantities or restock items below."
-          }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              display: isWide ? "grid" : "flex",
-              gridTemplateColumns: isWide ? "1fr 1fr" : undefined,
-              flexDirection: "column",
-              gap: 10,
-              marginBottom: 16,
-              alignItems: "start"
-            },
-            children: PRODUCTS.filter(p => p.id !== 'wb').map(p => /*#__PURE__*/_jsxDEV("div", {
-              style: card({
-                display: "flex",
-                alignItems: "center",
-                gap: 12
-              }),
-              children: [/*#__PURE__*/_jsxDEV("span", {
-                style: {
-                  fontSize: 28
-                },
-                children: p.emoji
-              }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  flex: 1
-                },
-                children: [/*#__PURE__*/_jsxDEV("div", {
-                  style: {
-                    fontWeight: 800,
-                    fontSize: 15
-                  },
-                  children: p.name
-                }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-                  style: {
-                    fontSize: 12,
-                    color: "#9CA3AF"
-                  },
-                  children: ["$", p.price, " · ", inventory[p.id] ?? 0, " in stock"]
-                }, void 0, true)]
-              }, void 0, true), /*#__PURE__*/_jsxDEV("input", {
-                type: "number",
-                min: 0,
-                value: invEdit[p.id] ?? 0,
-                onChange: e => setInvEdit(prev => ({
-                  ...prev,
-                  [p.id]: e.target.value
-                })),
-                style: {
-                  ...inputStyle,
-                  width: 72,
-                  textAlign: "center",
-                  padding: "10px 8px"
-                }
-              }, void 0, false)]
-            }, p.id, true))
-          }, void 0, false), /*#__PURE__*/_jsxDEV("button", {
-            style: btn(G),
-            onClick: saveInv,
-            children: "💾 Save Inventory"
-          }, void 0, false)]
-        }, void 0, true), ltab === "all" && /*#__PURE__*/_jsxDEV("div", {
-          style: {
-            display: "flex",
-            flexDirection: "column",
-            gap: 10
-          },
-          children: [sales.length > 0 && /*#__PURE__*/_jsxDEV("button", {
-            onClick: () => {
-              const doorSales = [...sales].filter(s => s.sellerName !== "Table Sale").sort((a, b) => a.sellerName.localeCompare(b.sellerName) || new Date(a.timestamp) - new Date(b.timestamp));
-              const statusLabel = {
-                open: "🟡 Open",
-                fulfilled: "🔵 Fulfilled",
-                pickedup: "✅ Picked Up"
-              };
-              const rows = doorSales.map(s => `
+          background: G,
+          color: WHITE,
+          border: "none",
+          borderRadius: 10,
+          padding: "8px 14px",
+          fontSize: 12,
+          fontWeight: 800,
+          cursor: "pointer",
+          fontFamily: "inherit"
+        }
+      }, cfg.nextLabel, " →")));
+    }))))), ltab === "inv" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+      style: {
+        color: "#6B7280",
+        fontSize: 14,
+        margin: "0 0 14px",
+        fontWeight: 600
+      }
+    }, "Adjust starting quantities or restock items below."), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: isWide ? "grid" : "flex",
+        gridTemplateColumns: isWide ? "1fr 1fr" : undefined,
+        flexDirection: "column",
+        gap: 10,
+        marginBottom: 16,
+        alignItems: "start"
+      }
+    }, PRODUCTS.filter(p => p.id !== 'wb').map(p => /*#__PURE__*/React.createElement("div", {
+      key: p.id,
+      style: card({
+        display: "flex",
+        alignItems: "center",
+        gap: 12
+      })
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 28
+      }
+    }, p.emoji), /*#__PURE__*/React.createElement("div", {
+      style: {
+        flex: 1
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontWeight: 800,
+        fontSize: 15
+      }
+    }, p.name), /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 12,
+        color: "#9CA3AF"
+      }
+    }, "$", p.price, " · ", inventory[p.id] ?? 0, " in stock")), /*#__PURE__*/React.createElement("input", {
+      type: "number",
+      min: 0,
+      value: invEdit[p.id] ?? 0,
+      onChange: e => setInvEdit(prev => ({
+        ...prev,
+        [p.id]: e.target.value
+      })),
+      style: {
+        ...inputStyle,
+        width: 72,
+        textAlign: "center",
+        padding: "10px 8px"
+      }
+    })))), /*#__PURE__*/React.createElement("button", {
+      style: btn(G),
+      onClick: saveInv
+    }, "💾 Save Inventory")), ltab === "all" && /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        gap: 10
+      }
+    }, sales.length > 0 && /*#__PURE__*/React.createElement("button", {
+      onClick: () => {
+        const doorSales = [...sales].filter(s => s.sellerName !== "Table Sale").sort((a, b) => a.sellerName.localeCompare(b.sellerName) || new Date(a.timestamp) - new Date(b.timestamp));
+        const statusLabel = {
+          open: "🟡 Open",
+          fulfilled: "🔵 Fulfilled",
+          pickedup: "✅ Picked Up"
+        };
+        const rows = doorSales.map(s => `
                       <tr style="border-bottom:1px solid #e5e7eb; page-break-inside:avoid">
                         <td style="padding:8px 10px;font-weight:700">${s.sellerName}</td>
                         <td style="padding:8px 10px">
@@ -2702,9 +2448,9 @@ function WreathPOS() {
                         <td style="padding:8px 10px">${s.payment === "cash" ? "💵 Cash" : "💜 Zelle"}</td>
                         <td style="padding:8px 10px">${statusLabel[s.status || "open"] || "🟡 Open"}</td>
                       </tr>`).join("");
-              const total = doorSales.reduce((s, x) => s + x.total, 0);
-              const win = window.open("", "_blank");
-              win.document.write(`<!DOCTYPE html><html><head><title>Pack 55 Wreath Orders</title>
+        const total = doorSales.reduce((s, x) => s + x.total, 0);
+        const win = window.open("", "_blank");
+        win.document.write(`<!DOCTYPE html><html><head><title>Pack 55 Wreath Orders</title>
                       <style>
                         body { font-family: sans-serif; padding: 24px; color: #1c1917; }
                         h1 { color: #1A3D2B; margin-bottom: 4px; }
@@ -2717,12 +2463,12 @@ function WreathPOS() {
                       </style></head><body>
                       <h1>🎄 Pack 55 — Wreath Orders</h1>
                       <p>Printed ${new Date().toLocaleString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-                hour: "numeric",
-                minute: "2-digit"
-              })} · ${doorSales.length} orders</p>
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "2-digit"
+        })} · ${doorSales.length} orders</p>
                       <button onclick="window.print()" style="margin-bottom:16px;padding:10px 20px;background:#1A3D2B;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;font-weight:700">🖨️ Print</button>
                       <table>
                         <thead><tr>
@@ -2737,249 +2483,217 @@ function WreathPOS() {
                         </tbody>
                       </table>
                       </body></html>`);
-              win.document.close();
-            },
+        win.document.close();
+      },
+      style: {
+        background: "#D1FAE5",
+        border: "none",
+        borderRadius: 12,
+        padding: "12px 18px",
+        color: G,
+        fontWeight: 800,
+        cursor: "pointer",
+        fontSize: 14,
+        fontFamily: "inherit",
+        display: "flex",
+        alignItems: "center",
+        gap: 8,
+        alignSelf: "flex-start"
+      }
+    }, "🖨️ Print Order List"), sales.length === 0 && /*#__PURE__*/React.createElement("div", {
+      style: {
+        textAlign: "center",
+        padding: "32px 0",
+        color: "#9CA3AF"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
+        fontSize: 40
+      }
+    }, "📋"), /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontWeight: 700
+      }
+    }, "No sales recorded yet")), (() => {
+      const doorSales = [...sales].filter(s => s.sellerName !== "Table Sale");
+      const scouts = [...new Set(doorSales.map(s => s.sellerName))].sort();
+      if (scouts.length === 0 && sales.filter(s => s.sellerName === "Table Sale").length === 0) return null;
+      return scouts.map(scout => {
+        const scoutSales = doorSales.filter(s => s.sellerName === scout).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+        const scoutTotal = scoutSales.reduce((s, x) => s + x.total, 0);
+        const open = scoutSales.filter(s => (s.status || "open") !== "pickedup").length;
+        const picked = scoutSales.filter(s => s.status === "pickedup").length;
+        return /*#__PURE__*/React.createElement("div", {
+          key: scout,
+          style: {
+            background: WHITE,
+            borderRadius: 18,
+            overflow: "hidden",
+            boxShadow: "0 2px 10px rgba(0,0,0,0.06)"
+          }
+        }, /*#__PURE__*/React.createElement("div", {
+          style: {
+            background: "#1A3D2B",
+            padding: "12px 16px",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center"
+          }
+        }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+          style: {
+            color: WHITE,
+            fontWeight: 900,
+            fontSize: 16
+          }
+        }, "👤 ", scout, scoutSales[0]?.sellerRank && /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontSize: 12,
+            fontWeight: 700,
+            color: "#52B788",
+            marginLeft: 8
+          }
+        }, "· ", scoutSales[0].sellerRank)), /*#__PURE__*/React.createElement("div", {
+          style: {
+            color: "#52B788",
+            fontSize: 12,
+            fontWeight: 700,
+            marginTop: 2
+          }
+        }, scoutSales.length, " orders · ", open > 0 ? `${open} pending` : "all picked up")), /*#__PURE__*/React.createElement("div", {
+          style: {
+            textAlign: "right"
+          }
+        }, /*#__PURE__*/React.createElement("div", {
+          style: {
+            color: "#FCD34D",
+            fontWeight: 900,
+            fontSize: 22
+          }
+        }, "$", scoutTotal.toFixed(2)), /*#__PURE__*/React.createElement("div", {
+          style: {
+            color: "#52B788",
+            fontSize: 11,
+            fontWeight: 700
+          }
+        }, picked, "/", scoutSales.length, " picked up"))), /*#__PURE__*/React.createElement("div", {
+          style: {
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+            background: "#F3F4F6"
+          }
+        }, scoutSales.map(sale => {
+          const pm = PAYMENT_METHODS.find(p => p.id === sale.payment);
+          const pickedUp = sale.status === "pickedup";
+          return /*#__PURE__*/React.createElement("div", {
+            key: sale.id,
+            style: {
+              background: pickedUp ? "#F0FDF4" : WHITE,
+              padding: "12px 16px"
+            }
+          }, /*#__PURE__*/React.createElement("div", {
+            style: {
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start"
+            }
+          }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+            style: {
+              fontWeight: 800,
+              fontSize: 14
+            }
+          }, sale.customer.name), sale.customer.address && /*#__PURE__*/React.createElement("div", {
+            style: {
+              fontSize: 12,
+              color: "#6B7280"
+            }
+          }, "📍 ", sale.customer.address), sale.customer.phone && /*#__PURE__*/React.createElement("div", {
+            style: {
+              fontSize: 12,
+              color: "#6B7280"
+            }
+          }, "📞 ", sale.customer.phone), sale.notes && /*#__PURE__*/React.createElement("div", {
+            style: {
+              fontSize: 12,
+              color: "#92400E",
+              background: "#FFFBEB",
+              borderRadius: 6,
+              padding: "3px 8px",
+              marginTop: 4,
+              display: "inline-block"
+            }
+          }, "📝 ", sale.notes), /*#__PURE__*/React.createElement("div", {
+            style: {
+              fontSize: 11,
+              color: "#9CA3AF",
+              marginTop: 3
+            }
+          }, new Date(sale.timestamp).toLocaleString("en-US", {
+            month: "short",
+            day: "numeric",
+            hour: "numeric",
+            minute: "2-digit"
+          }))), /*#__PURE__*/React.createElement("div", {
+            style: {
+              textAlign: "right",
+              flexShrink: 0,
+              marginLeft: 8
+            }
+          }, /*#__PURE__*/React.createElement("div", {
+            style: {
+              fontWeight: 900,
+              fontSize: 16,
+              color: "#1A3D2B"
+            }
+          }, "$", sale.total.toFixed(2)), /*#__PURE__*/React.createElement("div", {
+            style: {
+              fontSize: 11,
+              color: "#9CA3AF"
+            }
+          }, pm?.icon, " ", pm?.label))), /*#__PURE__*/React.createElement("div", {
+            style: {
+              fontSize: 12,
+              color: "#6B7280",
+              margin: "6px 0 8px"
+            }
+          }, sale.items.map(i => `${i.qty}× ${i.name}`).join(" · ")), /*#__PURE__*/React.createElement("div", {
+            style: {
+              display: "flex",
+              justifyContent: "flex-end"
+            }
+          }, pickedUp ? /*#__PURE__*/React.createElement("span", {
             style: {
               background: "#D1FAE5",
+              color: "#065F46",
+              borderRadius: 10,
+              padding: "6px 12px",
+              fontSize: 12,
+              fontWeight: 800
+            }
+          }, "✅ Picked Up") : /*#__PURE__*/React.createElement("button", {
+            onClick: () => updateSaleStatus(sale.id, "pickedup"),
+            style: {
+              background: "#1A3D2B",
+              color: WHITE,
               border: "none",
-              borderRadius: 12,
-              padding: "12px 18px",
-              color: G,
+              borderRadius: 10,
+              padding: "7px 14px",
+              fontSize: 12,
               fontWeight: 800,
               cursor: "pointer",
-              fontSize: 14,
-              fontFamily: "inherit",
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              alignSelf: "flex-start"
-            },
-            children: "🖨️ Print Order List"
-          }, void 0, false), sales.length === 0 && /*#__PURE__*/_jsxDEV("div", {
-            style: {
-              textAlign: "center",
-              padding: "32px 0",
-              color: "#9CA3AF"
-            },
-            children: [/*#__PURE__*/_jsxDEV("div", {
-              style: {
-                fontSize: 40
-              },
-              children: "📋"
-            }, void 0, false), /*#__PURE__*/_jsxDEV("p", {
-              style: {
-                fontWeight: 700
-              },
-              children: "No sales recorded yet"
-            }, void 0, false)]
-          }, void 0, true), (() => {
-            const doorSales = [...sales].filter(s => s.sellerName !== "Table Sale");
-            const scouts = [...new Set(doorSales.map(s => s.sellerName))].sort();
-            if (scouts.length === 0 && sales.filter(s => s.sellerName === "Table Sale").length === 0) return null;
-            return scouts.map(scout => {
-              const scoutSales = doorSales.filter(s => s.sellerName === scout).sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-              const scoutTotal = scoutSales.reduce((s, x) => s + x.total, 0);
-              const open = scoutSales.filter(s => (s.status || "open") !== "pickedup").length;
-              const picked = scoutSales.filter(s => s.status === "pickedup").length;
-              return /*#__PURE__*/_jsxDEV("div", {
-                style: {
-                  background: WHITE,
-                  borderRadius: 18,
-                  overflow: "hidden",
-                  boxShadow: "0 2px 10px rgba(0,0,0,0.06)"
-                },
-                children: [/*#__PURE__*/_jsxDEV("div", {
-                  style: {
-                    background: "#1A3D2B",
-                    padding: "12px 16px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center"
-                  },
-                  children: [/*#__PURE__*/_jsxDEV("div", {
-                    children: [/*#__PURE__*/_jsxDEV("div", {
-                      style: {
-                        color: WHITE,
-                        fontWeight: 900,
-                        fontSize: 16
-                      },
-                      children: ["👤 ", scout, scoutSales[0]?.sellerRank && /*#__PURE__*/_jsxDEV("span", {
-                        style: {
-                          fontSize: 12,
-                          fontWeight: 700,
-                          color: "#52B788",
-                          marginLeft: 8
-                        },
-                        children: ["· ", scoutSales[0].sellerRank]
-                      }, void 0, true)]
-                    }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                      style: {
-                        color: "#52B788",
-                        fontSize: 12,
-                        fontWeight: 700,
-                        marginTop: 2
-                      },
-                      children: [scoutSales.length, " orders · ", open > 0 ? `${open} pending` : "all picked up"]
-                    }, void 0, true)]
-                  }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                    style: {
-                      textAlign: "right"
-                    },
-                    children: [/*#__PURE__*/_jsxDEV("div", {
-                      style: {
-                        color: "#FCD34D",
-                        fontWeight: 900,
-                        fontSize: 22
-                      },
-                      children: ["$", scoutTotal.toFixed(2)]
-                    }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                      style: {
-                        color: "#52B788",
-                        fontSize: 11,
-                        fontWeight: 700
-                      },
-                      children: [picked, "/", scoutSales.length, " picked up"]
-                    }, void 0, true)]
-                  }, void 0, true)]
-                }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                  style: {
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: 1,
-                    background: "#F3F4F6"
-                  },
-                  children: scoutSales.map(sale => {
-                    const pm = PAYMENT_METHODS.find(p => p.id === sale.payment);
-                    const pickedUp = sale.status === "pickedup";
-                    return /*#__PURE__*/_jsxDEV("div", {
-                      style: {
-                        background: pickedUp ? "#F0FDF4" : WHITE,
-                        padding: "12px 16px"
-                      },
-                      children: [/*#__PURE__*/_jsxDEV("div", {
-                        style: {
-                          display: "flex",
-                          justifyContent: "space-between",
-                          alignItems: "flex-start"
-                        },
-                        children: [/*#__PURE__*/_jsxDEV("div", {
-                          children: [/*#__PURE__*/_jsxDEV("div", {
-                            style: {
-                              fontWeight: 800,
-                              fontSize: 14
-                            },
-                            children: sale.customer.name
-                          }, void 0, false), sale.customer.address && /*#__PURE__*/_jsxDEV("div", {
-                            style: {
-                              fontSize: 12,
-                              color: "#6B7280"
-                            },
-                            children: ["📍 ", sale.customer.address]
-                          }, void 0, true), sale.customer.phone && /*#__PURE__*/_jsxDEV("div", {
-                            style: {
-                              fontSize: 12,
-                              color: "#6B7280"
-                            },
-                            children: ["📞 ", sale.customer.phone]
-                          }, void 0, true), sale.notes && /*#__PURE__*/_jsxDEV("div", {
-                            style: {
-                              fontSize: 12,
-                              color: "#92400E",
-                              background: "#FFFBEB",
-                              borderRadius: 6,
-                              padding: "3px 8px",
-                              marginTop: 4,
-                              display: "inline-block"
-                            },
-                            children: ["📝 ", sale.notes]
-                          }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                            style: {
-                              fontSize: 11,
-                              color: "#9CA3AF",
-                              marginTop: 3
-                            },
-                            children: new Date(sale.timestamp).toLocaleString("en-US", {
-                              month: "short",
-                              day: "numeric",
-                              hour: "numeric",
-                              minute: "2-digit"
-                            })
-                          }, void 0, false)]
-                        }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                          style: {
-                            textAlign: "right",
-                            flexShrink: 0,
-                            marginLeft: 8
-                          },
-                          children: [/*#__PURE__*/_jsxDEV("div", {
-                            style: {
-                              fontWeight: 900,
-                              fontSize: 16,
-                              color: "#1A3D2B"
-                            },
-                            children: ["$", sale.total.toFixed(2)]
-                          }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                            style: {
-                              fontSize: 11,
-                              color: "#9CA3AF"
-                            },
-                            children: [pm?.icon, " ", pm?.label]
-                          }, void 0, true)]
-                        }, void 0, true)]
-                      }, void 0, true), /*#__PURE__*/_jsxDEV("div", {
-                        style: {
-                          fontSize: 12,
-                          color: "#6B7280",
-                          margin: "6px 0 8px"
-                        },
-                        children: sale.items.map(i => `${i.qty}× ${i.name}`).join(" · ")
-                      }, void 0, false), /*#__PURE__*/_jsxDEV("div", {
-                        style: {
-                          display: "flex",
-                          justifyContent: "flex-end"
-                        },
-                        children: pickedUp ? /*#__PURE__*/_jsxDEV("span", {
-                          style: {
-                            background: "#D1FAE5",
-                            color: "#065F46",
-                            borderRadius: 10,
-                            padding: "6px 12px",
-                            fontSize: 12,
-                            fontWeight: 800
-                          },
-                          children: "✅ Picked Up"
-                        }, void 0, false) : /*#__PURE__*/_jsxDEV("button", {
-                          onClick: () => updateSaleStatus(sale.id, "pickedup"),
-                          style: {
-                            background: "#1A3D2B",
-                            color: WHITE,
-                            border: "none",
-                            borderRadius: 10,
-                            padding: "7px 14px",
-                            fontSize: 12,
-                            fontWeight: 800,
-                            cursor: "pointer",
-                            fontFamily: "inherit"
-                          },
-                          children: "🎒 Mark Picked Up"
-                        }, void 0, false)
-                      }, void 0, false)]
-                    }, sale.id, true);
-                  })
-                }, void 0, false)]
-              }, scout, true);
-            });
-          })()]
-        }, void 0, true)]
-      }, void 0, true), toast && /*#__PURE__*/_jsxDEV(Toast, {
-        msg: toast
-      }, void 0, false)]
-    }, void 0, true);
+              fontFamily: "inherit"
+            }
+          }, "🎒 Mark Picked Up")));
+        })));
+      });
+    })())), toast && /*#__PURE__*/React.createElement(Toast, {
+      msg: toast
+    }));
   }
   function Toast({
     msg
   }) {
-    return /*#__PURE__*/_jsxDEV("div", {
+    return /*#__PURE__*/React.createElement("div", {
       style: {
         position: "fixed",
         top: 22,
@@ -2994,12 +2708,11 @@ function WreathPOS() {
         whiteSpace: "nowrap",
         boxShadow: "0 4px 20px rgba(0,0,0,0.3)",
         fontSize: 14
-      },
-      children: msg
-    }, void 0, false);
+      }
+    }, msg);
   }
 }
-ReactDOM.createRoot(document.getElementById("root")).render(React.createElement(WreathPOS));
+ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(WreathPOS));
 </script>
 </body>
 </html>
