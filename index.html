@@ -171,6 +171,11 @@ function WreathPOS() {
   const [sellerName, setSellerName] = useState("");
   const [nameInput, setNameInput] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [loginStep, setLoginStep] = useState("name"); // "name" | "pin" | "newpin"
+  const [pinInput, setPinInput] = useState("");
+  const [newPin1, setNewPin1] = useState("");
+  const [newPin2, setNewPin2] = useState("");
+  const [pinError, setPinError] = useState("");
   const [rankInput, setRankInput] = useState("");
   const [leaderInput, setLeaderInput] = useState("");
   const [cart, setCart] = useState([]);
@@ -217,6 +222,35 @@ function WreathPOS() {
       if (s) s.remove();
     };
   }, []);
+
+  // Get scout from roster (handles both old string[] and new object[] format)
+  const getRosterScout = name => {
+    const entry = roster.find(r => (typeof r === "string" ? r : r.name) === name);
+    if (!entry) return null;
+    if (typeof entry === "string") return {
+      name: entry,
+      pin: null,
+      firstLogin: true
+    };
+    return entry;
+  };
+  const saveRosterScout = async (name, updates) => {
+    const updated = roster.map(r => {
+      const n = typeof r === "string" ? r : r.name;
+      if (n !== name) return r;
+      const base = typeof r === "string" ? {
+        name: r,
+        pin: null,
+        firstLogin: true
+      } : r;
+      return {
+        ...base,
+        ...updates
+      };
+    });
+    setRoster(updated);
+    await store.set("wreaths_roster", updated);
+  };
   const loadData = async () => {
     setLoading(true);
     const inv = await store.get("wreaths_inventory");
@@ -419,7 +453,7 @@ function WreathPOS() {
       maxWidth: 360,
       boxShadow: "0 4px 20px rgba(0,0,0,0.1)"
     })
-  }, /*#__PURE__*/React.createElement("h2", {
+  }, loginStep === "name" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("h2", {
     style: {
       margin: "0 0 14px",
       color: G,
@@ -451,36 +485,39 @@ function WreathPOS() {
     },
     onFocus: () => setShowSuggestions(true),
     onBlur: () => setTimeout(() => setShowSuggestions(false), 150)
-  }), showSuggestions && nameInput.trim() && roster.filter(n => n.toLowerCase().includes(nameInput.toLowerCase())).length > 0 && /*#__PURE__*/React.createElement("div", {
-    style: {
-      position: "absolute",
-      top: "100%",
-      left: 0,
-      right: 0,
-      background: WHITE,
-      border: "1.5px solid #D1D5DB",
-      borderRadius: 12,
-      boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
-      zIndex: 50,
-      overflow: "hidden",
-      marginTop: 4
-    }
-  }, roster.filter(n => n.toLowerCase().includes(nameInput.toLowerCase())).sort().map(name => /*#__PURE__*/React.createElement("div", {
-    key: name,
-    onMouseDown: () => {
-      setNameInput(name);
-      setShowSuggestions(false);
-    },
-    style: {
-      padding: "12px 16px",
-      cursor: "pointer",
-      fontSize: 15,
-      fontWeight: 700,
-      borderBottom: "1px solid #F3F4F6"
-    },
-    onMouseEnter: e => e.currentTarget.style.background = "#F0FDF4",
-    onMouseLeave: e => e.currentTarget.style.background = WHITE
-  }, name)))), /*#__PURE__*/React.createElement("div", {
+  }), showSuggestions && nameInput.trim() && (() => {
+    const matches = roster.map(r => typeof r === "string" ? r : r.name).filter(n => n.toLowerCase().includes(nameInput.toLowerCase()));
+    return matches.length > 0 ? /*#__PURE__*/React.createElement("div", {
+      style: {
+        position: "absolute",
+        top: "100%",
+        left: 0,
+        right: 0,
+        background: WHITE,
+        border: "1.5px solid #D1D5DB",
+        borderRadius: 12,
+        boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
+        zIndex: 50,
+        overflow: "hidden",
+        marginTop: 4
+      }
+    }, matches.sort().map(name => /*#__PURE__*/React.createElement("div", {
+      key: name,
+      onMouseDown: () => {
+        setNameInput(name);
+        setShowSuggestions(false);
+      },
+      style: {
+        padding: "12px 16px",
+        cursor: "pointer",
+        fontSize: 15,
+        fontWeight: 700,
+        borderBottom: "1px solid #F3F4F6"
+      },
+      onMouseEnter: e => e.currentTarget.style.background = "#F0FDF4",
+      onMouseLeave: e => e.currentTarget.style.background = WHITE
+    }, name))) : null;
+  })()), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 14
     }
@@ -511,24 +548,185 @@ function WreathPOS() {
     }),
     disabled: !nameInput.trim() || !rankInput,
     onClick: () => {
+      setPinInput("");
+      setPinError("");
+      setLoginStep("pin");
+    }
+  }, "Next →")), loginStep === "pin" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("button", {
+    onClick: () => setLoginStep("name"),
+    style: {
+      background: "none",
+      border: "none",
+      color: M,
+      fontWeight: 700,
+      fontSize: 13,
+      cursor: "pointer",
+      fontFamily: "inherit",
+      marginBottom: 12,
+      padding: 0
+    }
+  }, "← Back"), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      margin: "0 0 4px",
+      color: G,
+      fontSize: 18
+    }
+  }, "🔐 Enter Your PIN"), /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: "#9CA3AF",
+      fontSize: 13,
+      fontWeight: 600,
+      margin: "0 0 16px"
+    }
+  }, nameInput), /*#__PURE__*/React.createElement("input", {
+    style: {
+      ...inputStyle,
+      letterSpacing: 8,
+      fontSize: 22,
+      textAlign: "center"
+    },
+    type: "password",
+    inputMode: "numeric",
+    maxLength: 4,
+    placeholder: "••••",
+    value: pinInput,
+    onChange: e => {
+      setPinInput(e.target.value.replace(/[^0-9]/g, ""));
+      setPinError("");
+    }
+  }), pinError && /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: "#DC2626",
+      fontSize: 13,
+      fontWeight: 700,
+      margin: "8px 0 0"
+    }
+  }, pinError), /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 14
+    }
+  }), /*#__PURE__*/React.createElement("button", {
+    style: btn(G, WHITE, {
+      opacity: pinInput.length === 4 ? 1 : 0.4
+    }),
+    disabled: pinInput.length !== 4,
+    onClick: () => {
+      const scout = getRosterScout(nameInput.trim());
+      if (!scout || !scout.pin) {
+        setPinError("No PIN set — ask your troop leader.");
+        return;
+      }
+      if (pinInput !== scout.pin) {
+        setPinError("Incorrect PIN. Try again.");
+        setPinInput("");
+        return;
+      }
+      if (scout.firstLogin) {
+        setNewPin1("");
+        setNewPin2("");
+        setPinError("");
+        setLoginStep("newpin");
+        return;
+      }
       setSellerName(nameInput.trim());
       setView("pos");
       setTab("sell");
     }
-  }, "Start Selling 🎄"), /*#__PURE__*/React.createElement("button", {
-    style: btn("transparent", G, {
-      opacity: nameInput.trim() && rankInput ? 1 : 0.4,
-      transition: "opacity 0.2s",
-      border: `2px solid ${G}`,
-      marginTop: 8
+  }, "Continue")), loginStep === "newpin" && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      background: "#FEF3C7",
+      border: "1.5px solid #FDE68A",
+      borderRadius: 12,
+      padding: "10px 14px",
+      marginBottom: 16
+    }
+  }, /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: "#92400E",
+      fontWeight: 800,
+      fontSize: 13,
+      margin: 0
+    }
+  }, "🔒 Create your personal PIN before you start selling. Keep it private!")), /*#__PURE__*/React.createElement("h2", {
+    style: {
+      margin: "0 0 16px",
+      color: G,
+      fontSize: 18
+    }
+  }, "Set Your New PIN"), /*#__PURE__*/React.createElement("label", {
+    style: label
+  }, "New 4-digit PIN"), /*#__PURE__*/React.createElement("input", {
+    style: {
+      ...inputStyle,
+      letterSpacing: 8,
+      fontSize: 22,
+      textAlign: "center",
+      marginBottom: 14
+    },
+    type: "password",
+    inputMode: "numeric",
+    maxLength: 4,
+    placeholder: "••••",
+    value: newPin1,
+    onChange: e => {
+      setNewPin1(e.target.value.replace(/[^0-9]/g, ""));
+      setPinError("");
+    }
+  }), /*#__PURE__*/React.createElement("label", {
+    style: label
+  }, "Confirm PIN"), /*#__PURE__*/React.createElement("input", {
+    style: {
+      ...inputStyle,
+      letterSpacing: 8,
+      fontSize: 22,
+      textAlign: "center"
+    },
+    type: "password",
+    inputMode: "numeric",
+    maxLength: 4,
+    placeholder: "••••",
+    value: newPin2,
+    onChange: e => {
+      setNewPin2(e.target.value.replace(/[^0-9]/g, ""));
+      setPinError("");
+    }
+  }), pinError && /*#__PURE__*/React.createElement("p", {
+    style: {
+      color: "#DC2626",
+      fontSize: 13,
+      fontWeight: 700,
+      margin: "8px 0 0"
+    }
+  }, pinError), /*#__PURE__*/React.createElement("div", {
+    style: {
+      height: 14
+    }
+  }), /*#__PURE__*/React.createElement("button", {
+    style: btn(G, WHITE, {
+      opacity: newPin1.length === 4 && newPin2.length === 4 ? 1 : 0.4
     }),
-    disabled: !nameInput.trim() || !rankInput,
-    onClick: () => {
+    disabled: newPin1.length !== 4 || newPin2.length !== 4,
+    onClick: async () => {
+      if (newPin1 !== newPin2) {
+        setPinError("PINs don't match. Try again.");
+        setNewPin2("");
+        return;
+      }
+      if (newPin1 === pinInput) {
+        setPinError("New PIN must be different from your temp PIN.");
+        setNewPin1("");
+        setNewPin2("");
+        return;
+      }
+      await saveRosterScout(nameInput.trim(), {
+        pin: newPin1,
+        firstLogin: false
+      });
       setSellerName(nameInput.trim());
       setView("pos");
-      setTab("sales");
+      setTab("sell");
     }
-  }, "📋 View My Sales")), /*#__PURE__*/React.createElement("button", {
+  }, "Save PIN & Start Selling 🎄"))), /*#__PURE__*/React.createElement("button", {
     onClick: () => {
       setTableMode(true);
       setSellerName("Table Sale");
@@ -662,6 +860,8 @@ function WreathPOS() {
       setSellerName("");
       setCart([]);
       setView("login");
+      setLoginStep("name");
+      setPinInput("");
     },
     style: {
       background: "rgba(255,255,255,0.12)",
@@ -1831,15 +2031,37 @@ function WreathPOS() {
     store
   }) {
     const [newName, setNewName] = useState("");
+    const [newPin, setNewPin] = useState("1234");
     const [bulkText, setBulkText] = useState("");
     const [showBulk, setShowBulk] = useState(false);
+    const [editId, setEditId] = useState(null); // name being edited
+    const [editPin, setEditPin] = useState("");
+    const [showPins, setShowPins] = useState({}); // which PINs are revealed
+
     const saveRoster = async updated => {
-      setRoster(updated);
-      await store.set("wreaths_roster", updated);
+      // Normalize: always store as objects
+      const normalized = updated.map(r => typeof r === "string" ? {
+        name: r,
+        pin: "1234",
+        firstLogin: true
+      } : r);
+      setRoster(normalized);
+      await store.set("wreaths_roster", normalized);
     };
     const importBulk = () => {
-      const names = bulkText.split(/[\n,]+/).map(n => n.trim()).filter(n => n.length > 0);
-      const merged = [...new Set([...roster, ...names])].sort();
+      const names = bulkText.split(/[\n\r,]+/).map(n => n.trim()).filter(n => n.length > 0);
+      const existing = roster.map(r => typeof r === "string" ? r : r.name);
+      const toAdd = names.filter(n => !existing.includes(n));
+      const newEntries = toAdd.map(name => ({
+        name,
+        pin: "1234",
+        firstLogin: true
+      }));
+      const merged = [...roster.map(r => typeof r === "string" ? {
+        name: r,
+        pin: "1234",
+        firstLogin: true
+      } : r), ...newEntries].sort((a, b) => a.name.localeCompare(b.name));
       saveRoster(merged);
       setBulkText("");
       setShowBulk(false);
@@ -1848,7 +2070,7 @@ function WreathPOS() {
       style: {
         display: "flex",
         gap: 8,
-        marginBottom: 12
+        marginBottom: 8
       }
     }, /*#__PURE__*/React.createElement("input", {
       style: {
@@ -1857,18 +2079,31 @@ function WreathPOS() {
       },
       placeholder: "Scout name...",
       value: newName,
-      onChange: e => setNewName(e.target.value),
-      onKeyDown: e => {
-        if (e.key === "Enter" && newName.trim() && !roster.includes(newName.trim())) {
-          saveRoster([...roster, newName.trim()].sort());
-          setNewName("");
-        }
-      }
+      onChange: e => setNewName(e.target.value)
+    }), /*#__PURE__*/React.createElement("input", {
+      style: {
+        ...inputStyle,
+        width: 80,
+        textAlign: "center",
+        letterSpacing: 4,
+        fontWeight: 800
+      },
+      placeholder: "PIN",
+      maxLength: 4,
+      value: newPin,
+      onChange: e => setNewPin(e.target.value.replace(/[^0-9]/g, ""))
     }), /*#__PURE__*/React.createElement("button", {
       onClick: () => {
-        if (newName.trim() && !roster.includes(newName.trim())) {
-          saveRoster([...roster, newName.trim()].sort());
+        const existing = roster.map(r => typeof r === "string" ? r : r.name);
+        if (newName.trim() && !existing.includes(newName.trim())) {
+          const entry = {
+            name: newName.trim(),
+            pin: newPin || "1234",
+            firstLogin: true
+          };
+          saveRoster([...roster, entry].sort((a, b) => a.name.localeCompare(b.name)));
           setNewName("");
+          setNewPin("1234");
         }
       },
       style: {
@@ -1876,14 +2111,21 @@ function WreathPOS() {
         color: WHITE,
         border: "none",
         borderRadius: 12,
-        padding: "0 18px",
+        padding: "0 16px",
         fontWeight: 800,
         fontSize: 14,
         cursor: "pointer",
         fontFamily: "inherit",
         flexShrink: 0
       }
-    }, "+ Add")), /*#__PURE__*/React.createElement("button", {
+    }, "+ Add")), /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontSize: 11,
+        color: "#9CA3AF",
+        fontWeight: 600,
+        margin: "0 0 14px"
+      }
+    }, "PIN defaults to 1234. Scout must change it on first login."), /*#__PURE__*/React.createElement("button", {
       onClick: () => setShowBulk(!showBulk),
       style: {
         background: "none",
@@ -1967,24 +2209,132 @@ function WreathPOS() {
         flexDirection: "column",
         gap: 8
       }
-    }, [...roster].sort().map(name => /*#__PURE__*/React.createElement("div", {
-      key: name,
+    }, [...roster].map(r => typeof r === "string" ? {
+      name: r,
+      pin: "1234",
+      firstLogin: true
+    } : r).sort((a, b) => a.name.localeCompare(b.name)).map(scout => /*#__PURE__*/React.createElement("div", {
+      key: scout.name,
       style: {
         background: WHITE,
         border: "1.5px solid #E5E7EB",
         borderRadius: 12,
-        padding: "10px 14px",
+        padding: "10px 14px"
+      }
+    }, /*#__PURE__*/React.createElement("div", {
+      style: {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center"
       }
-    }, /*#__PURE__*/React.createElement("span", {
+    }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("span", {
       style: {
         fontWeight: 700,
         fontSize: 14
       }
-    }, "👤 ", name), /*#__PURE__*/React.createElement("button", {
-      onClick: () => saveRoster(roster.filter(n => n !== name)),
+    }, "👤 ", scout.name), scout.firstLogin && /*#__PURE__*/React.createElement("span", {
+      style: {
+        marginLeft: 8,
+        fontSize: 10,
+        background: "#FEF3C7",
+        color: "#92400E",
+        borderRadius: 6,
+        padding: "2px 6px",
+        fontWeight: 700
+      }
+    }, "TEMP PIN")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        gap: 8,
+        alignItems: "center"
+      }
+    }, editId === scout.name ? /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("input", {
+      style: {
+        width: 70,
+        padding: "6px 8px",
+        borderRadius: 8,
+        border: "1.5px solid #D1D5DB",
+        fontSize: 14,
+        textAlign: "center",
+        letterSpacing: 4,
+        fontWeight: 800,
+        fontFamily: "inherit"
+      },
+      type: "text",
+      maxLength: 4,
+      value: editPin,
+      onChange: e => setEditPin(e.target.value.replace(/[^0-9]/g, "")),
+      autoFocus: true
+    }), /*#__PURE__*/React.createElement("button", {
+      onClick: async () => {
+        if (editPin.length === 4) {
+          await saveRoster(roster.map(r => {
+            const n = typeof r === "string" ? r : r.name;
+            if (n !== scout.name) return r;
+            return {
+              ...(typeof r === "string" ? {
+                name: r
+              } : r),
+              pin: editPin,
+              firstLogin: true
+            };
+          }));
+          setEditId(null);
+        }
+      },
+      style: {
+        background: G,
+        color: WHITE,
+        border: "none",
+        borderRadius: 8,
+        padding: "6px 12px",
+        fontWeight: 800,
+        fontSize: 12,
+        cursor: "pointer",
+        fontFamily: "inherit"
+      }
+    }, "Save"), /*#__PURE__*/React.createElement("button", {
+      onClick: () => setEditId(null),
+      style: {
+        background: "none",
+        border: "none",
+        color: "#9CA3AF",
+        fontWeight: 800,
+        fontSize: 16,
+        cursor: "pointer"
+      }
+    }, "✕")) : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("span", {
+      onClick: () => setShowPins(p => ({
+        ...p,
+        [scout.name]: !p[scout.name]
+      })),
+      style: {
+        fontSize: 13,
+        fontWeight: 800,
+        color: "#6B7280",
+        cursor: "pointer",
+        letterSpacing: showPins[scout.name] ? 2 : 4,
+        minWidth: 40,
+        textAlign: "center"
+      }
+    }, showPins[scout.name] ? scout.pin : "••••"), /*#__PURE__*/React.createElement("button", {
+      onClick: () => {
+        setEditId(scout.name);
+        setEditPin("");
+      },
+      style: {
+        background: "#F0FDF4",
+        border: `1px solid ${G}`,
+        borderRadius: 8,
+        padding: "5px 10px",
+        color: G,
+        fontWeight: 700,
+        fontSize: 12,
+        cursor: "pointer",
+        fontFamily: "inherit"
+      }
+    }, "Reset PIN"), /*#__PURE__*/React.createElement("button", {
+      onClick: () => saveRoster(roster.filter(r => (typeof r === "string" ? r : r.name) !== scout.name)),
       style: {
         background: "none",
         border: "none",
@@ -1993,9 +2343,9 @@ function WreathPOS() {
         fontSize: 18,
         cursor: "pointer",
         lineHeight: 1,
-        padding: "0 4px"
+        padding: "0 2px"
       }
-    }, "×"))))));
+    }, "×")))))))));
   }
   function LeaderScreen() {
     const [invEdit, setInvEdit] = useState({
