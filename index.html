@@ -1218,7 +1218,10 @@ function WreathPOS() {
                       {/* Scout header */}
                       <div style={{ background: "#1A3D2B", padding: "12px 16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                         <div>
-                          <div style={{ color: WHITE, fontWeight: 900, fontSize: 16 }}>👤 {scout}{(() => { const r = scoutSales[0]?.sellerRank; return r ? <span style={{ fontSize: 12, fontWeight: 700, color: "#52B788", marginLeft: 8 }}>· {r}</span> : null; })()}</div>
+                          <div style={{ color: WHITE, fontWeight: 900, fontSize: 16 }}>
+                          👤 {scout}
+                          {scoutSales[0]?.sellerRank && <span style={{ fontSize: 12, fontWeight: 700, color: "#52B788", marginLeft: 8 }}>· {scoutSales[0].sellerRank}</span>}
+                        </div>
                           <div style={{ color: "#52B788", fontSize: 12, fontWeight: 700, marginTop: 2 }}>
                             {scoutSales.length} orders · {open > 0 ? `${open} pending` : "all picked up"}
                           </div>
