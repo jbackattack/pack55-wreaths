@@ -299,6 +299,7 @@ function WreathPOS() {
     });
     setPayment("cash");
     setCheckout("receipt");
+    loadData();
   };
   const updateSaleStatus = async (saleId, newStatus) => {
     const updated = sales.map(s => s.id === saleId ? {
