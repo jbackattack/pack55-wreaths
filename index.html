@@ -2052,7 +2052,9 @@ function WreathPOS() {
       await store.set("wreaths_roster", normalized);
     };
     const importBulk = () => {
-      const names = bulkText.split(/[\n\r,]+/).map(n => n.trim()).filter(n => n.length > 0);
+      const names = bulkText.split(/[
+
+,]+/).map(n => n.trim()).filter(n => n.length > 0);
       const existing = roster.map(r => typeof r === "string" ? r : r.name);
       const toAdd = names.filter(n => !existing.includes(n));
       const newEntries = toAdd.map(name => ({
@@ -2166,7 +2168,10 @@ function WreathPOS() {
         lineHeight: 1.6,
         marginBottom: 10
       },
-      placeholder: "John Smith\nJane Doe\nSam Johnson\n...",
+      placeholder: "John Smith
+Jane Doe
+Sam Johnson
+...",
       value: bulkText,
       onChange: e => setBulkText(e.target.value)
     }), /*#__PURE__*/React.createElement("button", {
@@ -2175,7 +2180,8 @@ function WreathPOS() {
       style: btn(G, WHITE, {
         opacity: bulkText.trim() ? 1 : 0.4
       })
-    }, "✓ Import ", bulkText.split(/[\n,]+/).filter(n => n.trim()).length, " Names")), roster.length === 0 ? /*#__PURE__*/React.createElement("p", {
+    }, "✓ Import ", bulkText.split(/[
+,]+/).filter(n => n.trim()).length, " Names")), roster.length === 0 ? /*#__PURE__*/React.createElement("p", {
       style: {
         color: "#9CA3AF",
         fontSize: 13
@@ -2356,6 +2362,8 @@ function WreathPOS() {
       ...inventory
     });
     const [pickupSearch, setPickupSearch] = useState("");
+    const [paymentModal, setPaymentModal] = useState(null); // { pmId, sortBy }
+
     const totalRev = sales.reduce((s, x) => s + x.total, 0);
     const totalItm = sales.reduce((s, x) => s + x.items.reduce((a, i) => a + i.qty, 0), 0);
     const sellers = [...new Set(sales.map(s => s.sellerName))];
@@ -2369,7 +2377,9 @@ function WreathPOS() {
       showToast("✅ Inventory saved!");
     };
     const clearAll = async () => {
-      if (!window.confirm("Clear ALL sales data and reset inventory to defaults?\n\nThis cannot be undone.")) return;
+      if (!window.confirm("Clear ALL sales data and reset inventory to defaults?
+
+This cannot be undone.")) return;
       setInventory(DEFAULT_INV);
       setSales([]);
       setInvEdit({
@@ -2558,17 +2568,36 @@ function WreathPOS() {
       const tot = pms.reduce((s, x) => s + x.total, 0);
       return /*#__PURE__*/React.createElement("div", {
         key: pm.id,
+        onClick: () => setPaymentModal({
+          pmId: pm.id,
+          sortBy: "date"
+        }),
         style: {
           display: "flex",
           justifyContent: "space-between",
+          alignItems: "center",
           marginBottom: 8,
-          fontSize: 14
-        }
+          fontSize: 14,
+          cursor: "pointer",
+          padding: "8px 10px",
+          borderRadius: 10,
+          background: "#F9FAFB",
+          border: "1.5px solid #F3F4F6",
+          transition: "background 0.15s"
+        },
+        onMouseEnter: e => e.currentTarget.style.background = "#F0FDF4",
+        onMouseLeave: e => e.currentTarget.style.background = "#F9FAFB"
       }, /*#__PURE__*/React.createElement("span", {
         style: {
-          fontWeight: 600
+          fontWeight: 700
         }
-      }, pm.icon, " ", pm.label), /*#__PURE__*/React.createElement("span", {
+      }, pm.icon, " ", pm.label), /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 8
+        }
+      }, /*#__PURE__*/React.createElement("span", {
         style: {
           fontWeight: 800,
           color: G
@@ -2578,7 +2607,12 @@ function WreathPOS() {
           color: "#9CA3AF",
           fontWeight: 600
         }
-      }, "(", pms.length, ")")));
+      }, "(", pms.length, ")")), /*#__PURE__*/React.createElement("span", {
+        style: {
+          color: "#9CA3AF",
+          fontSize: 12
+        }
+      }, "›")));
     }).filter(Boolean), sales.length === 0 && /*#__PURE__*/React.createElement("p", {
       style: {
         color: "#9CA3AF",
@@ -3609,7 +3643,196 @@ function WreathPOS() {
           }
         }, "↩ Undo Pickup"));
       });
-    })())), toast && /*#__PURE__*/React.createElement(Toast, {
+    })())), paymentModal && (() => {
+      const pm = PAYMENT_METHODS.find(p => p.id === paymentModal.pmId);
+      const pmSales = sales.filter(s => s.payment === paymentModal.pmId);
+      const total = pmSales.reduce((s, x) => s + x.total, 0);
+      const sortBy = paymentModal.sortBy || "date";
+      const sorted = [...pmSales].sort((a, b) => {
+        if (sortBy === "date") return new Date(b.timestamp) - new Date(a.timestamp);
+        if (sortBy === "amount") return b.total - a.total;
+        if (sortBy === "scout") return a.sellerName.localeCompare(b.sellerName);
+        return 0;
+      });
+      return /*#__PURE__*/React.createElement("div", {
+        style: {
+          position: "fixed",
+          inset: 0,
+          background: "rgba(0,0,0,0.6)",
+          zIndex: 100,
+          display: "flex",
+          alignItems: "flex-end",
+          justifyContent: "center"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          background: CREAM,
+          borderRadius: "24px 24px 0 0",
+          width: "100%",
+          maxWidth: 700,
+          maxHeight: "90vh",
+          display: "flex",
+          flexDirection: "column"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          padding: "20px 24px 16px",
+          borderBottom: "1.5px solid #E5E7EB",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flexShrink: 0
+        }
+      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+        style: {
+          margin: 0,
+          color: G,
+          fontSize: 20
+        }
+      }, pm?.icon, " ", pm?.label, " Orders"), /*#__PURE__*/React.createElement("p", {
+        style: {
+          margin: "4px 0 0",
+          color: "#6B7280",
+          fontSize: 13,
+          fontWeight: 600
+        }
+      }, pmSales.length, " transactions · ", /*#__PURE__*/React.createElement("strong", {
+        style: {
+          color: G
+        }
+      }, "$", total.toFixed(2)), " total")), /*#__PURE__*/React.createElement("button", {
+        onClick: () => setPaymentModal(null),
+        style: {
+          background: "#F3F4F6",
+          border: "none",
+          borderRadius: "50%",
+          width: 36,
+          height: 36,
+          cursor: "pointer",
+          fontSize: 18,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }
+      }, "✕")), /*#__PURE__*/React.createElement("div", {
+        style: {
+          padding: "12px 24px",
+          borderBottom: "1px solid #F3F4F6",
+          display: "flex",
+          gap: 8,
+          flexShrink: 0
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 13,
+          fontWeight: 700,
+          color: "#6B7280",
+          alignSelf: "center"
+        }
+      }, "Sort:"), [["date", "📅 Date"], ["amount", "💰 Amount"], ["scout", "👤 Scout"]].map(([val, lbl]) => /*#__PURE__*/React.createElement("button", {
+        key: val,
+        onClick: () => setPaymentModal(p => ({
+          ...p,
+          sortBy: val
+        })),
+        style: {
+          background: sortBy === val ? G : WHITE,
+          color: sortBy === val ? WHITE : G,
+          border: `1.5px solid ${sortBy === val ? G : "#E5E7EB"}`,
+          borderRadius: 20,
+          padding: "6px 14px",
+          fontSize: 12,
+          fontWeight: 800,
+          cursor: "pointer",
+          fontFamily: "inherit"
+        }
+      }, lbl))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          overflowY: "auto",
+          padding: "12px 24px 24px",
+          flex: 1
+        }
+      }, sorted.length === 0 ? /*#__PURE__*/React.createElement("p", {
+        style: {
+          color: "#9CA3AF",
+          textAlign: "center",
+          padding: "32px 0"
+        }
+      }, "No orders found.") : /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          flexDirection: "column",
+          gap: 10
+        }
+      }, sorted.map(sale => /*#__PURE__*/React.createElement("div", {
+        key: sale.id,
+        style: {
+          background: WHITE,
+          borderRadius: 14,
+          padding: "14px 16px",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.06)"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          marginBottom: 6
+        }
+      }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontWeight: 800,
+          fontSize: 15
+        }
+      }, sale.customer?.name || "Table Sale"), sale.customer?.phone && /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 12,
+          color: "#6B7280"
+        }
+      }, "📞 ", sale.customer.phone), sale.customer?.address && /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 12,
+          color: "#6B7280"
+        }
+      }, "📍 ", sale.customer.address), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 11,
+          color: "#9CA3AF",
+          marginTop: 2
+        }
+      }, "👤 ", sale.sellerName, " · ", new Date(sale.timestamp).toLocaleString("en-US", {
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      }))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          textAlign: "right"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontWeight: 900,
+          fontSize: 20,
+          color: G
+        }
+      }, "$", sale.total.toFixed(2)), /*#__PURE__*/React.createElement("span", {
+        style: {
+          background: sale.status === "pickedup" ? "#D1FAE5" : "#FEF3C7",
+          color: sale.status === "pickedup" ? "#065F46" : "#92400E",
+          borderRadius: 8,
+          padding: "3px 8px",
+          fontSize: 11,
+          fontWeight: 800
+        }
+      }, sale.status === "pickedup" ? "✅ Picked Up" : "🟡 Pending"))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 12,
+          color: "#6B7280",
+          borderTop: "1px solid #F3F4F6",
+          paddingTop: 6
+        }
+      }, sale.items.map(i => `${i.qty}× ${i.name}`).join(" · "))))))));
+    })(), toast && /*#__PURE__*/React.createElement(Toast, {
       msg: toast
     }));
   }
