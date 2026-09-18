@@ -170,11 +170,13 @@ function WreathPOS() {
   const [checkout, setCheckout] = useState(null);
   const [sellerName, setSellerName] = useState("");
   const [nameInput, setNameInput] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
   const [rankInput, setRankInput] = useState("");
   const [leaderInput, setLeaderInput] = useState("");
   const [cart, setCart] = useState([]);
   const [inventory, setInventory] = useState(DEFAULT_INV);
   const [sales, setSales] = useState([]);
+  const [roster, setRoster] = useState([]);
   const [customer, setCustomer] = useState({
     name: "",
     phone: ""
@@ -185,7 +187,6 @@ function WreathPOS() {
   const [toast, setToast] = useState(null);
   const [showLeader, setShowLeader] = useState(false);
   const [ltab, setLtab] = useState("summary");
-  const [pickupSearch, setPickupSearch] = useState("");
   const [lightbox, setLightbox] = useState(null); // product to show fullscreen
   const [tableMode, setTableMode] = useState(false);
   useEffect(() => {
@@ -220,8 +221,10 @@ function WreathPOS() {
     setLoading(true);
     const inv = await store.get("wreaths_inventory");
     const sal = await store.get("wreaths_sales");
+    const ros = await store.get("wreaths_roster");
     if (inv) setInventory(inv);
     if (sal) setSales(sal);
+    if (ros) setRoster(ros);
     setLoading(false);
   };
   const showToast = msg => {
@@ -434,12 +437,51 @@ function WreathPOS() {
     }
   }, "👋"), " Who's selling?"), /*#__PURE__*/React.createElement("label", {
     style: label
-  }, "Scout Name"), /*#__PURE__*/React.createElement("input", {
+  }, "Scout Name"), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "relative"
+    }
+  }, /*#__PURE__*/React.createElement("input", {
     style: inputStyle,
     placeholder: "e.g. Sarah Johnson",
     value: nameInput,
-    onChange: e => setNameInput(e.target.value)
-  }), /*#__PURE__*/React.createElement("div", {
+    autoComplete: "off",
+    onChange: e => {
+      setNameInput(e.target.value);
+      setShowSuggestions(true);
+    },
+    onFocus: () => setShowSuggestions(true),
+    onBlur: () => setTimeout(() => setShowSuggestions(false), 150)
+  }), showSuggestions && nameInput.trim() && roster.filter(n => n.toLowerCase().includes(nameInput.toLowerCase())).length > 0 && /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: "absolute",
+      top: "100%",
+      left: 0,
+      right: 0,
+      background: WHITE,
+      border: "1.5px solid #D1D5DB",
+      borderRadius: 12,
+      boxShadow: "0 4px 16px rgba(0,0,0,0.12)",
+      zIndex: 50,
+      overflow: "hidden",
+      marginTop: 4
+    }
+  }, roster.filter(n => n.toLowerCase().includes(nameInput.toLowerCase())).sort().map(name => /*#__PURE__*/React.createElement("div", {
+    key: name,
+    onMouseDown: () => {
+      setNameInput(name);
+      setShowSuggestions(false);
+    },
+    style: {
+      padding: "12px 16px",
+      cursor: "pointer",
+      fontSize: 15,
+      fontWeight: 700,
+      borderBottom: "1px solid #F3F4F6"
+    },
+    onMouseEnter: e => e.currentTarget.style.background = "#F0FDF4",
+    onMouseLeave: e => e.currentTarget.style.background = WHITE
+  }, name)))), /*#__PURE__*/React.createElement("div", {
     style: {
       height: 14
     }
@@ -1754,10 +1796,183 @@ function WreathPOS() {
   }
 
   // ── LEADER DASHBOARD ─────────────────────────────────────────
+  function RosterManager({
+    roster,
+    setRoster,
+    store
+  }) {
+    const [newName, setNewName] = useState("");
+    const [bulkText, setBulkText] = useState("");
+    const [showBulk, setShowBulk] = useState(false);
+    const saveRoster = async updated => {
+      setRoster(updated);
+      await store.set("wreaths_roster", updated);
+    };
+    const importBulk = () => {
+      const names = bulkText.split(/[\n,]+/).map(n => n.trim()).filter(n => n.length > 0);
+      const merged = [...new Set([...roster, ...names])].sort();
+      saveRoster(merged);
+      setBulkText("");
+      setShowBulk(false);
+    };
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        gap: 8,
+        marginBottom: 12
+      }
+    }, /*#__PURE__*/React.createElement("input", {
+      style: {
+        ...inputStyle,
+        flex: 1
+      },
+      placeholder: "Scout name...",
+      value: newName,
+      onChange: e => setNewName(e.target.value),
+      onKeyDown: e => {
+        if (e.key === "Enter" && newName.trim() && !roster.includes(newName.trim())) {
+          saveRoster([...roster, newName.trim()].sort());
+          setNewName("");
+        }
+      }
+    }), /*#__PURE__*/React.createElement("button", {
+      onClick: () => {
+        if (newName.trim() && !roster.includes(newName.trim())) {
+          saveRoster([...roster, newName.trim()].sort());
+          setNewName("");
+        }
+      },
+      style: {
+        background: G,
+        color: WHITE,
+        border: "none",
+        borderRadius: 12,
+        padding: "0 18px",
+        fontWeight: 800,
+        fontSize: 14,
+        cursor: "pointer",
+        fontFamily: "inherit",
+        flexShrink: 0
+      }
+    }, "+ Add")), /*#__PURE__*/React.createElement("button", {
+      onClick: () => setShowBulk(!showBulk),
+      style: {
+        background: "none",
+        border: `1.5px solid ${G}`,
+        borderRadius: 12,
+        padding: "9px 16px",
+        color: G,
+        fontWeight: 800,
+        fontSize: 13,
+        cursor: "pointer",
+        fontFamily: "inherit",
+        marginBottom: 14,
+        width: "100%"
+      }
+    }, showBulk ? "✕ Cancel Import" : "📋 Import from Spreadsheet"), showBulk && /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: "#F0FDF4",
+        border: `1.5px solid ${L}`,
+        borderRadius: 14,
+        padding: 14,
+        marginBottom: 14
+      }
+    }, /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontSize: 13,
+        fontWeight: 700,
+        color: G,
+        margin: "0 0 8px"
+      }
+    }, "In your spreadsheet, select the column of scout names, copy it, and paste below. One name per line."), /*#__PURE__*/React.createElement("textarea", {
+      style: {
+        ...inputStyle,
+        height: 120,
+        resize: "none",
+        lineHeight: 1.6,
+        marginBottom: 10
+      },
+      placeholder: "John Smith\nJane Doe\nSam Johnson\n...",
+      value: bulkText,
+      onChange: e => setBulkText(e.target.value)
+    }), /*#__PURE__*/React.createElement("button", {
+      onClick: importBulk,
+      disabled: !bulkText.trim(),
+      style: btn(G, WHITE, {
+        opacity: bulkText.trim() ? 1 : 0.4
+      })
+    }, "✓ Import ", bulkText.split(/[\n,]+/).filter(n => n.trim()).length, " Names")), roster.length === 0 ? /*#__PURE__*/React.createElement("p", {
+      style: {
+        color: "#9CA3AF",
+        fontSize: 13
+      }
+    }, "No scouts added yet.") : /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 8
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontSize: 13,
+        fontWeight: 700,
+        color: "#6B7280"
+      }
+    }, roster.length, " scouts"), /*#__PURE__*/React.createElement("button", {
+      onClick: () => {
+        if (window.confirm("Clear the entire roster?")) saveRoster([]);
+      },
+      style: {
+        background: "none",
+        border: "none",
+        color: "#EF4444",
+        fontSize: 12,
+        fontWeight: 700,
+        cursor: "pointer",
+        fontFamily: "inherit"
+      }
+    }, "Clear All")), /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        gap: 8
+      }
+    }, [...roster].sort().map(name => /*#__PURE__*/React.createElement("div", {
+      key: name,
+      style: {
+        background: WHITE,
+        border: "1.5px solid #E5E7EB",
+        borderRadius: 12,
+        padding: "10px 14px",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
+      }
+    }, /*#__PURE__*/React.createElement("span", {
+      style: {
+        fontWeight: 700,
+        fontSize: 14
+      }
+    }, "👤 ", name), /*#__PURE__*/React.createElement("button", {
+      onClick: () => saveRoster(roster.filter(n => n !== name)),
+      style: {
+        background: "none",
+        border: "none",
+        color: "#EF4444",
+        fontWeight: 800,
+        fontSize: 18,
+        cursor: "pointer",
+        lineHeight: 1,
+        padding: "0 4px"
+      }
+    }, "×"))))));
+  }
   function LeaderScreen() {
     const [invEdit, setInvEdit] = useState({
       ...inventory
     });
+    const [pickupSearch, setPickupSearch] = useState("");
     const totalRev = sales.reduce((s, x) => s + x.total, 0);
     const totalItm = sales.reduce((s, x) => s + x.items.reduce((a, i) => a + i.qty, 0), 0);
     const sellers = [...new Set(sales.map(s => s.sellerName))];
@@ -1781,7 +1996,7 @@ function WreathPOS() {
       await store.set("wreaths_sales", []);
       showToast("✅ All data cleared");
     };
-    const LTABS = [["summary", "📊", "Summary"], ["sellers", "👥", "Sellers"], ["inv", "📦", "Stock"], ["all", "📋", "Sales"], ["pickup", "🎒", "Pickup"]];
+    const LTABS = [["summary", "📊", "Summary"], ["sellers", "👥", "Sellers"], ["inv", "📦", "Stock"], ["all", "📋", "Sales"], ["pickup", "🎒", "Pickup"], ["roster", "👤", "Roster"]];
     const isWide = typeof window !== "undefined" && window.innerWidth >= 900;
     return /*#__PURE__*/React.createElement("div", {
       style: {
@@ -2199,7 +2414,18 @@ function WreathPOS() {
     })(), /*#__PURE__*/React.createElement("button", {
       onClick: clearAll,
       style: btn("#DC2626", WHITE, {})
-    }, "⚠️ Reset All Data")), ltab === "pickup" && /*#__PURE__*/React.createElement("div", {
+    }, "⚠️ Reset All Data")), ltab === "roster" && /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontSize: 13,
+        color: "#6B7280",
+        fontWeight: 600,
+        margin: "0 0 16px"
+      }
+    }, "Scout names added here appear as autocomplete suggestions on the login screen."), /*#__PURE__*/React.createElement(RosterManager, {
+      roster: roster,
+      setRoster: setRoster,
+      store: store
+    })), ltab === "pickup" && /*#__PURE__*/React.createElement("div", {
       style: {
         display: "flex",
         flexDirection: "column",
