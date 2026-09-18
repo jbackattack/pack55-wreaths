@@ -185,6 +185,7 @@ function WreathPOS() {
   const [toast, setToast] = useState(null);
   const [showLeader, setShowLeader] = useState(false);
   const [ltab, setLtab] = useState("summary");
+  const [pickupSearch, setPickupSearch] = useState("");
   const [lightbox, setLightbox] = useState(null); // product to show fullscreen
   const [tableMode, setTableMode] = useState(false);
   useEffect(() => {
@@ -303,6 +304,14 @@ function WreathPOS() {
   };
   const updateSaleStatus = async (saleId, newStatus) => {
     const updated = sales.map(s => s.id === saleId ? {
+      ...s,
+      status: newStatus
+    } : s);
+    setSales(updated);
+    await store.set("wreaths_sales", updated);
+  };
+  const updateScoutPickup = async (scoutName, newStatus) => {
+    const updated = sales.map(s => s.sellerName === scoutName && s.sellerName !== "Table Sale" ? {
       ...s,
       status: newStatus
     } : s);
@@ -2196,9 +2205,17 @@ function WreathPOS() {
         flexDirection: "column",
         gap: 14
       }
-    }, (() => {
+    }, /*#__PURE__*/React.createElement("input", {
+      style: {
+        ...inputStyle,
+        background: WHITE
+      },
+      placeholder: "🔍 Search by scout name...",
+      value: pickupSearch,
+      onChange: e => setPickupSearch(e.target.value)
+    }), (() => {
       const doorSales = sales.filter(s => s.sellerName !== "Table Sale");
-      const scouts = [...new Set(doorSales.map(s => s.sellerName))].sort();
+      const scouts = [...new Set(doorSales.map(s => s.sellerName))].sort().filter(s => s.toLowerCase().includes(pickupSearch.toLowerCase()));
       if (scouts.length === 0) return /*#__PURE__*/React.createElement("div", {
         style: {
           textAlign: "center",
@@ -2301,7 +2318,37 @@ function WreathPOS() {
             fontWeight: 900,
             fontSize: 14
           }
-        }, "×", qty)))));
+        }, "×", qty))), /*#__PURE__*/React.createElement("button", {
+          onClick: () => updateScoutPickup(scout, "pickedup"),
+          style: {
+            marginTop: 14,
+            width: "100%",
+            background: G,
+            color: WHITE,
+            border: "none",
+            borderRadius: 12,
+            padding: "12px",
+            fontSize: 14,
+            fontWeight: 900,
+            cursor: "pointer",
+            fontFamily: "inherit"
+          }
+        }, "🎒 Mark All Picked Up")), pending.length === 0 && done.length > 0 && /*#__PURE__*/React.createElement("button", {
+          onClick: () => updateScoutPickup(scout, "open"),
+          style: {
+            marginTop: 10,
+            width: "100%",
+            background: "none",
+            color: "#9CA3AF",
+            border: "1.5px solid #E5E7EB",
+            borderRadius: 12,
+            padding: "10px",
+            fontSize: 13,
+            fontWeight: 700,
+            cursor: "pointer",
+            fontFamily: "inherit"
+          }
+        }, "↩ Undo Pickup"));
       });
     })()), ltab === "sellers" && /*#__PURE__*/React.createElement("div", {
       style: {
