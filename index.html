@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
@@ -722,6 +722,7 @@ function WreathPOS() {
         pin: newPin1,
         firstLogin: false
       });
+      await loadData();
       setSellerName(nameInput.trim());
       setView("pos");
       setTab("sell");
@@ -2279,6 +2280,7 @@ function WreathPOS() {
               firstLogin: true
             };
           }));
+          await loadData();
           setEditId(null);
         }
       },
@@ -2790,6 +2792,199 @@ function WreathPOS() {
           }
         }, fmtHrShort(hour)));
       })));
+    })(), (() => {
+      const scoutSales = sales.filter(s => s.sellerName !== "Table Sale");
+      if (scoutSales.length === 0) return /*#__PURE__*/React.createElement("div", {
+        style: card({
+          marginBottom: 14
+        })
+      }, /*#__PURE__*/React.createElement("h3", {
+        style: {
+          margin: "0 0 6px",
+          color: G,
+          fontSize: 15
+        }
+      }, "🚪 Scout Door-to-Door Sales"), /*#__PURE__*/React.createElement("p", {
+        style: {
+          color: "#9CA3AF",
+          fontSize: 13,
+          margin: 0
+        }
+      }, "No scout sales recorded yet."));
+      const scoutRev = scoutSales.reduce((s, x) => s + x.total, 0);
+      const scoutItms = scoutSales.reduce((s, x) => s + x.items.reduce((a, i) => a + i.qty, 0), 0);
+      const cashSales = scoutSales.filter(s => s.payment === "cash");
+      const zelleSales = scoutSales.filter(s => s.payment === "zelle");
+      const scouts = [...new Set(scoutSales.map(s => s.sellerName))];
+      // Per-scout totals for leaderboard
+      const scoutTotals = scouts.map(name => ({
+        name,
+        total: scoutSales.filter(s => s.sellerName === name).reduce((s, x) => s + x.total, 0),
+        count: scoutSales.filter(s => s.sellerName === name).length
+      })).sort((a, b) => b.total - a.total);
+      // Product breakdown
+      const prodMap = {};
+      scoutSales.forEach(s => s.items.forEach(i => {
+        prodMap[i.name] = (prodMap[i.name] || 0) + i.qty;
+      }));
+      return /*#__PURE__*/React.createElement("div", {
+        style: card({
+          marginBottom: 14
+        })
+      }, /*#__PURE__*/React.createElement("h3", {
+        style: {
+          margin: "0 0 12px",
+          color: G,
+          fontSize: 15
+        }
+      }, "🚪 Scout Door-to-Door Sales"), /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gap: 8,
+          marginBottom: 12
+        }
+      }, [{
+        label: "Transactions",
+        value: scoutSales.length
+      }, {
+        label: "Wreaths",
+        value: scoutItms
+      }, {
+        label: "Revenue",
+        value: `$${scoutRev.toFixed(2)}`
+      }].map(s => /*#__PURE__*/React.createElement("div", {
+        key: s.label,
+        style: {
+          background: "#F0FDF4",
+          borderRadius: 10,
+          padding: "8px",
+          textAlign: "center"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontWeight: 900,
+          fontSize: 16,
+          color: G
+        }
+      }, s.value), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: "#9CA3AF",
+          fontWeight: 700
+        }
+      }, s.label)))), /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: "flex",
+          gap: 8,
+          marginBottom: 12
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          background: "#D1FAE5",
+          borderRadius: 10,
+          padding: "8px 10px",
+          textAlign: "center"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontWeight: 900,
+          fontSize: 15,
+          color: G
+        }
+      }, "💵 $", cashSales.reduce((s, x) => s + x.total, 0).toFixed(2)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: "#6B7280",
+          fontWeight: 700
+        }
+      }, "Cash (", cashSales.length, ")")), /*#__PURE__*/React.createElement("div", {
+        style: {
+          flex: 1,
+          background: "#EDE9FE",
+          borderRadius: 10,
+          padding: "8px 10px",
+          textAlign: "center"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontWeight: 900,
+          fontSize: 15,
+          color: "#5B21B6"
+        }
+      }, "💜 $", zelleSales.reduce((s, x) => s + x.total, 0).toFixed(2)), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
+          color: "#6B7280",
+          fontWeight: 700
+        }
+      }, "Zelle (", zelleSales.length, ")"))), Object.entries(prodMap).sort((a, b) => b[1] - a[1]).map(([name, qty]) => /*#__PURE__*/React.createElement("div", {
+        key: name,
+        style: {
+          display: "flex",
+          justifyContent: "space-between",
+          fontSize: 13,
+          padding: "5px 0",
+          borderBottom: "1px solid #F3F4F6"
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 600
+        }
+      }, name), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 900,
+          color: G
+        }
+      }, qty, " sold"))), scoutTotals.length > 0 && /*#__PURE__*/React.createElement("div", {
+        style: {
+          marginTop: 14
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 12,
+          fontWeight: 800,
+          color: G,
+          marginBottom: 8,
+          textTransform: "uppercase",
+          letterSpacing: 0.8
+        }
+      }, "🏆 Scout Leaderboard"), scoutTotals.map((s, i) => /*#__PURE__*/React.createElement("div", {
+        key: s.name,
+        style: {
+          display: "flex",
+          alignItems: "center",
+          gap: 10,
+          padding: "6px 0",
+          borderBottom: "1px solid #F3F4F6"
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 14,
+          fontWeight: 900,
+          color: i === 0 ? GOLD : "#9CA3AF",
+          minWidth: 20
+        }
+      }, i + 1), /*#__PURE__*/React.createElement("span", {
+        style: {
+          flex: 1,
+          fontSize: 13,
+          fontWeight: 700
+        }
+      }, s.name), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 12,
+          color: "#9CA3AF",
+          fontWeight: 600
+        }
+      }, s.count, " sales"), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 900,
+          fontSize: 14,
+          color: G
+        }
+      }, "$", s.total.toFixed(2))))));
     })(), (() => {
       const tableSales = sales.filter(s => s.sellerName === "Table Sale");
       if (tableSales.length === 0) return null;
