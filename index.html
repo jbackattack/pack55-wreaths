@@ -1772,7 +1772,7 @@ function WreathPOS() {
       await store.set("wreaths_sales", []);
       showToast("✅ All data cleared");
     };
-    const LTABS = [["summary", "📊", "Summary"], ["sellers", "👥", "Sellers"], ["inv", "📦", "Stock"], ["all", "📋", "Sales"]];
+    const LTABS = [["summary", "📊", "Summary"], ["sellers", "👥", "Sellers"], ["inv", "📦", "Stock"], ["all", "📋", "Sales"], ["pickup", "🎒", "Pickup"]];
     const isWide = typeof window !== "undefined" && window.innerWidth >= 900;
     return /*#__PURE__*/React.createElement("div", {
       style: {
@@ -2022,68 +2022,127 @@ function WreathPOS() {
           color: G,
           fontSize: 15
         }
-      }, "🕐 Peak Sale Hours"), /*#__PURE__*/React.createElement("p", {
+      }, "🕐 Table Sale Activity"), /*#__PURE__*/React.createElement("p", {
         style: {
           color: "#9CA3AF",
           fontSize: 13,
           margin: 0
         }
       }, "No table sales recorded yet."));
-      // Build hour buckets 0-23
-      const buckets = Array(24).fill(0);
+      // Build hour buckets with count and revenue
+      const buckets = Array(24).fill(null).map(() => ({
+        count: 0,
+        revenue: 0
+      }));
       tableSales.forEach(s => {
         const h = new Date(s.timestamp).getHours();
-        buckets[h]++;
+        buckets[h].count++;
+        buckets[h].revenue += s.total;
       });
-      const max = Math.max(...buckets, 1);
-      // Only show hours that have any sales, plus 1hr buffer either side
-      const firstHr = Math.max(0, buckets.findIndex(b => b > 0) - 1);
-      const lastHr = Math.min(23, buckets.length - 1 - [...buckets].reverse().findIndex(b => b > 0) + 1);
-      const visible = buckets.slice(firstHr, lastHr + 1).map((count, i) => ({
+      const maxCount = Math.max(...buckets.map(b => b.count), 1);
+      const totalRev = tableSales.reduce((s, x) => s + x.total, 0);
+      const totalTx = tableSales.length;
+      const avgSale = totalRev / totalTx;
+      // Only show hours with activity plus 1hr buffer
+      const firstHr = Math.max(0, buckets.findIndex(b => b.count > 0) - 1);
+      const lastHr = Math.min(23, buckets.length - 1 - [...buckets].reverse().findIndex(b => b.count > 0) + 1);
+      const visible = buckets.slice(firstHr, lastHr + 1).map((b, i) => ({
         hour: firstHr + i,
-        count
+        ...b
       }));
+      const peakHour = buckets.indexOf(buckets.reduce((a, b) => b.count > a.count ? b : a));
       const fmtHr = h => {
+        if (h === 0) return "12 AM";
+        if (h === 12) return "12 PM";
+        return h < 12 ? `${h} AM` : `${h - 12} PM`;
+      };
+      const fmtHrShort = h => {
         if (h === 0) return "12a";
         if (h === 12) return "12p";
         return h < 12 ? `${h}a` : `${h - 12}p`;
       };
-      const peakHour = buckets.indexOf(max);
       return /*#__PURE__*/React.createElement("div", {
         style: card({
           marginBottom: 14
         })
       }, /*#__PURE__*/React.createElement("h3", {
         style: {
-          margin: "0 0 4px",
+          margin: "0 0 12px",
           color: G,
           fontSize: 15
         }
-      }, "🕐 Peak Sale Hours"), /*#__PURE__*/React.createElement("p", {
+      }, "🕐 Table Sale Activity"), /*#__PURE__*/React.createElement("div", {
         style: {
-          margin: "0 0 14px",
-          fontSize: 12,
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gap: 8,
+          marginBottom: 16
+        }
+      }, [{
+        label: "Transactions",
+        value: totalTx
+      }, {
+        label: "Revenue",
+        value: `$${totalRev.toFixed(2)}`
+      }, {
+        label: "Avg Sale",
+        value: `$${avgSale.toFixed(2)}`
+      }].map(s => /*#__PURE__*/React.createElement("div", {
+        key: s.label,
+        style: {
+          background: "#F0FDF4",
+          borderRadius: 10,
+          padding: "8px 10px",
+          textAlign: "center"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontWeight: 900,
+          fontSize: 15,
+          color: G
+        }
+      }, s.value), /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 10,
           color: "#9CA3AF",
-          fontWeight: 600
+          fontWeight: 700
         }
-      }, "Table sales only · Busiest: ", /*#__PURE__*/React.createElement("span", {
+      }, s.label)))), /*#__PURE__*/React.createElement("div", {
         style: {
-          color: G,
-          fontWeight: 800
+          background: "#FEF3C7",
+          borderRadius: 10,
+          padding: "8px 12px",
+          marginBottom: 14,
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center"
         }
-      }, fmtHr(peakHour), "–", fmtHr(peakHour + 1))), /*#__PURE__*/React.createElement("div", {
+      }, /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontSize: 13,
+          fontWeight: 700,
+          color: "#92400E"
+        }
+      }, "⭐ Peak Hour"), /*#__PURE__*/React.createElement("span", {
+        style: {
+          fontWeight: 900,
+          color: "#92400E",
+          fontSize: 14
+        }
+      }, fmtHr(peakHour), " — ", buckets[peakHour].count, " sales · $", buckets[peakHour].revenue.toFixed(2))), /*#__PURE__*/React.createElement("div", {
         style: {
           display: "flex",
           alignItems: "flex-end",
-          gap: 4,
-          height: 80
+          gap: 3,
+          height: 90
         }
       }, visible.map(({
         hour,
-        count
+        count,
+        revenue
       }) => {
-        const pct = count / max;
-        const isTop = count === max && count > 0;
+        const pct = count / maxCount;
+        const isTop = count > 0 && count === maxCount;
         return /*#__PURE__*/React.createElement("div", {
           key: hour,
           style: {
@@ -2091,16 +2150,27 @@ function WreathPOS() {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 3
+            gap: 2
           }
-        }, /*#__PURE__*/React.createElement("div", {
+        }, count > 0 && /*#__PURE__*/React.createElement("div", {
           style: {
-            fontSize: 10,
+            fontSize: 9,
             fontWeight: 800,
-            color: isTop ? GOLD : "transparent",
-            lineHeight: 1
+            color: isTop ? "#92400E" : G,
+            lineHeight: 1,
+            textAlign: "center"
           }
-        }, count > 0 ? count : ""), /*#__PURE__*/React.createElement("div", {
+        }, count, /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontWeight: 600,
+            color: "#9CA3AF",
+            fontSize: 8
+          }
+        }, "$", revenue.toFixed(0))), count === 0 && /*#__PURE__*/React.createElement("div", {
+          style: {
+            flex: 1
+          }
+        }), /*#__PURE__*/React.createElement("div", {
           style: {
             width: "100%",
             borderRadius: "4px 4px 0 0",
@@ -2110,17 +2180,130 @@ function WreathPOS() {
           }
         }), /*#__PURE__*/React.createElement("div", {
           style: {
-            fontSize: 9,
+            fontSize: 8,
             color: "#9CA3AF",
             fontWeight: 700,
             whiteSpace: "nowrap"
           }
-        }, fmtHr(hour)));
+        }, fmtHrShort(hour)));
       })));
     })(), /*#__PURE__*/React.createElement("button", {
       onClick: clearAll,
       style: btn("#DC2626", WHITE, {})
-    }, "⚠️ Reset All Data")), ltab === "sellers" && /*#__PURE__*/React.createElement("div", {
+    }, "⚠️ Reset All Data")), ltab === "pickup" && /*#__PURE__*/React.createElement("div", {
+      style: {
+        display: "flex",
+        flexDirection: "column",
+        gap: 14
+      }
+    }, (() => {
+      const doorSales = sales.filter(s => s.sellerName !== "Table Sale");
+      const scouts = [...new Set(doorSales.map(s => s.sellerName))].sort();
+      if (scouts.length === 0) return /*#__PURE__*/React.createElement("div", {
+        style: {
+          textAlign: "center",
+          padding: "32px 0",
+          color: "#9CA3AF"
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          fontSize: 40
+        }
+      }, "🎒"), /*#__PURE__*/React.createElement("p", {
+        style: {
+          fontWeight: 700,
+          marginTop: 8
+        }
+      }, "No orders yet"));
+      return scouts.map(scout => {
+        const pending = doorSales.filter(s => s.sellerName === scout && (s.status || "open") !== "pickedup");
+        const done = doorSales.filter(s => s.sellerName === scout && s.status === "pickedup");
+        // Aggregate items across all pending orders
+        const itemMap = {};
+        pending.forEach(sale => {
+          sale.items.forEach(item => {
+            itemMap[item.name] = (itemMap[item.name] || 0) + item.qty;
+          });
+        });
+        const itemList = Object.entries(itemMap).sort();
+        const scoutTotal = pending.reduce((s, x) => s + x.total, 0);
+        return /*#__PURE__*/React.createElement("div", {
+          key: scout,
+          style: card()
+        }, /*#__PURE__*/React.createElement("div", {
+          style: {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            marginBottom: 10
+          }
+        }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontWeight: 900,
+            fontSize: 16,
+            color: G
+          }
+        }, "👤 ", scout), /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontSize: 12,
+            color: "#9CA3AF",
+            marginTop: 2
+          }
+        }, pending.length, " order", pending.length !== 1 ? "s" : "", " pending · ", done.length, " picked up")), pending.length === 0 ? /*#__PURE__*/React.createElement("span", {
+          style: {
+            background: "#D1FAE5",
+            color: "#065F46",
+            borderRadius: 10,
+            padding: "6px 12px",
+            fontSize: 12,
+            fontWeight: 800
+          }
+        }, "✅ All Picked Up") : /*#__PURE__*/React.createElement("span", {
+          style: {
+            background: "#FEF3C7",
+            color: "#92400E",
+            borderRadius: 10,
+            padding: "6px 12px",
+            fontSize: 13,
+            fontWeight: 900
+          }
+        }, "$", scoutTotal.toFixed(2))), pending.length === 0 ? /*#__PURE__*/React.createElement("p", {
+          style: {
+            fontSize: 13,
+            color: "#9CA3AF",
+            margin: 0
+          }
+        }, "Nothing left to pick up.") : /*#__PURE__*/React.createElement("div", {
+          style: {
+            borderTop: "1.5px solid #F3F4F6",
+            paddingTop: 10
+          }
+        }, itemList.map(([name, qty]) => /*#__PURE__*/React.createElement("div", {
+          key: name,
+          style: {
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "6px 0",
+            borderBottom: "1px solid #F9FAFB"
+          }
+        }, /*#__PURE__*/React.createElement("span", {
+          style: {
+            fontWeight: 700,
+            fontSize: 14
+          }
+        }, name), /*#__PURE__*/React.createElement("span", {
+          style: {
+            background: G,
+            color: WHITE,
+            borderRadius: 20,
+            padding: "3px 12px",
+            fontWeight: 900,
+            fontSize: 14
+          }
+        }, "×", qty)))));
+      });
+    })()), ltab === "sellers" && /*#__PURE__*/React.createElement("div", {
       style: {
         display: isWide ? "grid" : "flex",
         gridTemplateColumns: isWide ? "1fr 1fr" : undefined,
