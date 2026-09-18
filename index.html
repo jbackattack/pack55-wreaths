@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>Pack 55 Wreath Sale</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet"/>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html, body, #root { width: 100%; height: 100%; overflow: hidden; background: #FDF8EE; font-family: 'Nunito', sans-serif; }
 </style>
-  <script defer src="/_vercel/insights/script.js"></script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
 </head>
 <body>
 <div id="root"></div>
@@ -2052,9 +2052,7 @@ function WreathPOS() {
       await store.set("wreaths_roster", normalized);
     };
     const importBulk = () => {
-      const names = bulkText.split(/[
-
-,]+/).map(n => n.trim()).filter(n => n.length > 0);
+      const names = bulkText.split(/[\n\r,]+/).map(n => n.trim()).filter(n => n.length > 0);
       const existing = roster.map(r => typeof r === "string" ? r : r.name);
       const toAdd = names.filter(n => !existing.includes(n));
       const newEntries = toAdd.map(name => ({
@@ -2168,10 +2166,7 @@ function WreathPOS() {
         lineHeight: 1.6,
         marginBottom: 10
       },
-      placeholder: "John Smith
-Jane Doe
-Sam Johnson
-...",
+      placeholder: "John Smith\nJane Doe\nSam Johnson\n...",
       value: bulkText,
       onChange: e => setBulkText(e.target.value)
     }), /*#__PURE__*/React.createElement("button", {
@@ -2180,8 +2175,7 @@ Sam Johnson
       style: btn(G, WHITE, {
         opacity: bulkText.trim() ? 1 : 0.4
       })
-    }, "✓ Import ", bulkText.split(/[
-,]+/).filter(n => n.trim()).length, " Names")), roster.length === 0 ? /*#__PURE__*/React.createElement("p", {
+    }, "✓ Import ", bulkText.split(/[\n,]+/).filter(n => n.trim()).length, " Names")), roster.length === 0 ? /*#__PURE__*/React.createElement("p", {
       style: {
         color: "#9CA3AF",
         fontSize: 13
@@ -2377,9 +2371,7 @@ Sam Johnson
       showToast("✅ Inventory saved!");
     };
     const clearAll = async () => {
-      if (!window.confirm("Clear ALL sales data and reset inventory to defaults?
-
-This cannot be undone.")) return;
+      if (!window.confirm("Clear ALL sales data and reset inventory to defaults?\n\nThis cannot be undone.")) return;
       setInventory(DEFAULT_INV);
       setSales([]);
       setInvEdit({
