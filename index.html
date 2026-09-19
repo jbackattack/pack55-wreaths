@@ -196,6 +196,7 @@ function WreathPOS() {
   const [ltab, setLtab] = useState("summary");
   const [lightbox, setLightbox] = useState(null); // product to show fullscreen
   const [tableMode, setTableMode] = useState(false);
+  const [sessionStart, setSessionStart] = useState(null);
   useEffect(() => {
     loadData();
     const link = document.createElement("link");
@@ -733,6 +734,7 @@ function WreathPOS() {
     onClick: () => {
       setTableMode(true);
       setSellerName("Table Sale");
+      setSessionStart(Date.now());
       setView("pos");
     },
     style: {
@@ -811,7 +813,7 @@ function WreathPOS() {
   if (view === "leader") return /*#__PURE__*/React.createElement(LeaderScreen, null);
 
   // ── POS ───────────────────────────────────────────────────────
-  const mySales = sales.filter(s => s.sellerName === sellerName);
+  const mySales = sales.filter(s => s.sellerName === sellerName && (!tableMode || !sessionStart || new Date(s.timestamp).getTime() >= sessionStart));
   const myTotal = mySales.reduce((s, x) => s + x.total, 0);
   return /*#__PURE__*/React.createElement("div", {
     style: {
@@ -865,6 +867,7 @@ function WreathPOS() {
       setView("login");
       setLoginStep("name");
       setPinInput("");
+      setSessionStart(null);
     },
     style: {
       background: "rgba(255,255,255,0.12)",
