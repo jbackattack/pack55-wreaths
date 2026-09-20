@@ -83,6 +83,10 @@ const PAYMENT_METHODS = [{
   id: "zelle",
   label: "Zelle",
   icon: "💜"
+}, {
+  id: "check",
+  label: "Check",
+  icon: "📝"
 }];
 const G = "#1A3D2B";
 const M = "#2D6A4F";
@@ -1803,9 +1807,9 @@ function WreathPOS() {
     }, "Select how the customer is paying:"), /*#__PURE__*/React.createElement("div", {
       style: {
         display: "grid",
-        gridTemplateColumns: "1fr 1fr",
-        gap: 12,
-        marginBottom: 20
+        gridTemplateColumns: "1fr 1fr 1fr",
+        gap: 10,
+        marginBottom: payment === "check" ? 10 : 20
       }
     }, PAYMENT_METHODS.map(pm => /*#__PURE__*/React.createElement("button", {
       key: pm.id,
@@ -1815,7 +1819,7 @@ function WreathPOS() {
         color: payment === pm.id ? WHITE : G,
         border: `2.5px solid ${payment === pm.id ? G : "#E5E7EB"}`,
         borderRadius: 18,
-        padding: "18px 12px",
+        padding: "14px 8px",
         cursor: "pointer",
         fontFamily: "inherit",
         transition: "all 0.15s",
@@ -1823,15 +1827,26 @@ function WreathPOS() {
       }
     }, /*#__PURE__*/React.createElement("div", {
       style: {
-        fontSize: 34,
-        marginBottom: 6
+        fontSize: 28,
+        marginBottom: 4
       }
     }, pm.icon), /*#__PURE__*/React.createElement("div", {
       style: {
         fontWeight: 800,
-        fontSize: 16
+        fontSize: 13
       }
-    }, pm.label)))), /*#__PURE__*/React.createElement("div", {
+    }, pm.label)))), payment === "check" && /*#__PURE__*/React.createElement("div", {
+      style: {
+        background: "#DBEAFE",
+        border: "1.5px solid #93C5FD",
+        borderRadius: 12,
+        padding: "10px 14px",
+        marginBottom: 14,
+        fontSize: 13,
+        fontWeight: 700,
+        color: "#1E40AF"
+      }
+    }, "📝 Check made payable to: ", /*#__PURE__*/React.createElement("strong", null, "Cub Scout Pack 55")), /*#__PURE__*/React.createElement("div", {
       style: {
         background: CREAM,
         borderRadius: 14,
@@ -2844,8 +2859,6 @@ function WreathPOS() {
       }, "No scout sales recorded yet."));
       const scoutRev = scoutSales.reduce((s, x) => s + x.total, 0);
       const scoutItms = scoutSales.reduce((s, x) => s + x.items.reduce((a, i) => a + i.qty, 0), 0);
-      const cashSales = scoutSales.filter(s => s.payment === "cash");
-      const zelleSales = scoutSales.filter(s => s.payment === "zelle");
       const scouts = [...new Set(scoutSales.map(s => s.sellerName))];
       // Per-scout totals for leaderboard
       const scoutTotals = scouts.map(name => ({
@@ -2908,49 +2921,37 @@ function WreathPOS() {
         style: {
           display: "flex",
           gap: 8,
-          marginBottom: 12
+          marginBottom: 12,
+          flexWrap: "wrap"
         }
-      }, /*#__PURE__*/React.createElement("div", {
-        style: {
-          flex: 1,
-          background: "#D1FAE5",
-          borderRadius: 10,
-          padding: "8px 10px",
-          textAlign: "center"
-        }
-      }, /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontWeight: 900,
-          fontSize: 15,
-          color: G
-        }
-      }, "💵 $", cashSales.reduce((s, x) => s + x.total, 0).toFixed(2)), /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 10,
-          color: "#6B7280",
-          fontWeight: 700
-        }
-      }, "Cash (", cashSales.length, ")")), /*#__PURE__*/React.createElement("div", {
-        style: {
-          flex: 1,
-          background: "#EDE9FE",
-          borderRadius: 10,
-          padding: "8px 10px",
-          textAlign: "center"
-        }
-      }, /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontWeight: 900,
-          fontSize: 15,
-          color: "#5B21B6"
-        }
-      }, "💜 $", zelleSales.reduce((s, x) => s + x.total, 0).toFixed(2)), /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 10,
-          color: "#6B7280",
-          fontWeight: 700
-        }
-      }, "Zelle (", zelleSales.length, ")"))), Object.entries(prodMap).sort((a, b) => b[1] - a[1]).map(([name, qty]) => /*#__PURE__*/React.createElement("div", {
+      }, PAYMENT_METHODS.map(pm => {
+        const pmSales = scoutSales.filter(s => s.payment === pm.id);
+        if (!pmSales.length) return null;
+        const pmTotal = pmSales.reduce((s, x) => s + x.total, 0);
+        return /*#__PURE__*/React.createElement("div", {
+          key: pm.id,
+          style: {
+            flex: 1,
+            minWidth: 80,
+            background: pm.id === "cash" ? "#D1FAE5" : pm.id === "zelle" ? "#EDE9FE" : "#DBEAFE",
+            borderRadius: 10,
+            padding: "8px 10px",
+            textAlign: "center"
+          }
+        }, /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontWeight: 900,
+            fontSize: 14,
+            color: G
+          }
+        }, pm.icon, " $", pmTotal.toFixed(2)), /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontSize: 10,
+            color: "#6B7280",
+            fontWeight: 700
+          }
+        }, pm.label, " (", pmSales.length, ")"));
+      }).filter(Boolean)), Object.entries(prodMap).sort((a, b) => b[1] - a[1]).map(([name, qty]) => /*#__PURE__*/React.createElement("div", {
         key: name,
         style: {
           display: "flex",
@@ -3078,49 +3079,37 @@ function WreathPOS() {
         style: {
           display: "flex",
           gap: 8,
-          marginBottom: 12
+          marginBottom: 12,
+          flexWrap: "wrap"
         }
-      }, /*#__PURE__*/React.createElement("div", {
-        style: {
-          flex: 1,
-          background: "#D1FAE5",
-          borderRadius: 10,
-          padding: "8px 10px",
-          textAlign: "center"
-        }
-      }, /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontWeight: 900,
-          fontSize: 15,
-          color: G
-        }
-      }, "💵 $", cashSales.reduce((s, x) => s + x.total, 0).toFixed(2)), /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 10,
-          color: "#6B7280",
-          fontWeight: 700
-        }
-      }, "Cash (", cashSales.length, ")")), /*#__PURE__*/React.createElement("div", {
-        style: {
-          flex: 1,
-          background: "#EDE9FE",
-          borderRadius: 10,
-          padding: "8px 10px",
-          textAlign: "center"
-        }
-      }, /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontWeight: 900,
-          fontSize: 15,
-          color: "#5B21B6"
-        }
-      }, "💜 $", zelleSales.reduce((s, x) => s + x.total, 0).toFixed(2)), /*#__PURE__*/React.createElement("div", {
-        style: {
-          fontSize: 10,
-          color: "#6B7280",
-          fontWeight: 700
-        }
-      }, "Zelle (", zelleSales.length, ")"))), Object.entries(prodMap).sort((a, b) => b[1] - a[1]).map(([name, qty]) => /*#__PURE__*/React.createElement("div", {
+      }, PAYMENT_METHODS.map(pm => {
+        const pmSales = tableSales.filter(s => s.payment === pm.id);
+        if (!pmSales.length) return null;
+        const pmTotal = pmSales.reduce((s, x) => s + x.total, 0);
+        return /*#__PURE__*/React.createElement("div", {
+          key: pm.id,
+          style: {
+            flex: 1,
+            minWidth: 80,
+            background: pm.id === "cash" ? "#D1FAE5" : pm.id === "zelle" ? "#EDE9FE" : "#DBEAFE",
+            borderRadius: 10,
+            padding: "8px 10px",
+            textAlign: "center"
+          }
+        }, /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontWeight: 900,
+            fontSize: 14,
+            color: G
+          }
+        }, pm.icon, " $", pmTotal.toFixed(2)), /*#__PURE__*/React.createElement("div", {
+          style: {
+            fontSize: 10,
+            color: "#6B7280",
+            fontWeight: 700
+          }
+        }, pm.label, " (", pmSales.length, ")"));
+      }).filter(Boolean)), Object.entries(prodMap).sort((a, b) => b[1] - a[1]).map(([name, qty]) => /*#__PURE__*/React.createElement("div", {
         key: name,
         style: {
           display: "flex",
