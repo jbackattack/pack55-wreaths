@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pack 55 Wreath Sale Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbf7ee; --card:#ffffff; --fg:#1d2a22; --muted:#5a6a5f; --line:#e3dcc8;
+  --pine:#1f4a35; --pine-ink:#ffffff; --berry:#a8322d; --gold-bg:#fbf0cf; --gold-fg:#6b4d00;
+  --warn-bg:#fbe5e3; --warn-fg:#7a1f1b; --tip-bg:#e6f1ea; --tip-fg:#1f4a35;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121a15; --card:#1a251e; --fg:#ebf0e8; --muted:#a2b0a5; --line:#2c3b31;
+  --pine:#7fcf9f; --pine-ink:#0f1a13; --berry:#ef8a84; --gold-bg:#3a3012; --gold-fg:#f0d37a;
+  --warn-bg:#3b1d1b; --warn-fg:#f3b3ae; --tip-bg:#1d3326; --tip-fg:#a9e0bf; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121a15; --card:#1a251e; --fg:#ebf0e8; --muted:#a2b0a5; --line:#2c3b31;
+  --pine:#7fcf9f; --pine-ink:#0f1a13; --berry:#ef8a84; --gold-bg:#3a3012; --gold-fg:#f0d37a;
+  --warn-bg:#3b1d1b; --warn-fg:#f3b3ae; --tip-bg:#1d3326; --tip-fg:#a9e0bf; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font:16px/1.55 Inter,system-ui,sans-serif;margin:0;
+  padding-block:0 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:720px;margin:0 auto}
+header{padding-block:36px 8px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--berry);font-weight:600}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;text-wrap:balance;line-height:1.15;margin:0}
+h1{font-size:clamp(30px,7vw,44px);margin-top:8px;color:var(--pine)}
+h2{font-size:26px;color:var(--pine);margin-bottom:14px}
+h3{font-size:18px;margin-bottom:6px}
+.lede{color:var(--muted);font-size:17px;margin:12px 0 0}
+nav{display:flex;flex-wrap:wrap;gap:8px;margin-block:22px}
+nav a{font-size:14px;text-decoration:none;color:var(--pine);border:1px solid var(--line);background:var(--card);padding:6px 12px;border-radius:999px}
+section{margin-top:40px;scroll-margin-top:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.stack{display:flex;flex-direction:column;gap:12px}
+ol.steps{list-style:none;counter-reset:s;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+ol.steps li{counter-increment:s;position:relative;padding-left:44px;min-width:0}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;
+  background:var(--pine);color:var(--pine-ink);display:grid;place-items:center;font-weight:600;font-size:14px}
+.note{border-radius:10px;padding:12px 14px;font-size:15px}
+.tip{background:var(--tip-bg);color:var(--tip-fg)}
+.warn{background:var(--warn-bg);color:var(--warn-fg)}
+.gold{background:var(--gold-bg);color:var(--gold-fg)}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line)}
+th{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+td.p,th.p{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.scroll{overflow-x:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.grid>*{min-width:0}
+.pill{display:inline-block;font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--tip-bg);color:var(--tip-fg);margin-bottom:6px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:0 16px}
+details+details{margin-top:8px}
+summary{cursor:pointer;padding:14px 0;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--pine);font-size:20px;line-height:1}
+details[open] summary::after{content:"–"}
+details p{margin:0 0 14px;color:var(--fg)}
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+code{background:var(--tip-bg);color:var(--tip-fg);padding:1px 6px;border-radius:5px;font-size:.92em}
+.btn{font:inherit;font-weight:600;background:var(--pine);color:var(--pine-ink);border:0;border-radius:8px;padding:8px 14px;cursor:pointer}
+a{color:var(--pine)}
+</style>
+</head><body>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Cub Scout Pack 55 · Basking Ridge, NJ</div>
+  <h1>Wreath Sale Guide for Scouts &amp; Parents</h1>
+  <p class="lede">Everything you need to sell wreaths with the Pack 55 sales app: logging in, ringing up a sale, taking payment, sending receipts, and what to do when something goes sideways.</p>
+  <nav>
+    <a href="#start">Get started</a><a href="#door">Door-to-door</a><a href="#tables">Table sales</a><a href="#faq">FAQ</a>
+  </nav>
+</header>
+
+<section id="start">
+  <h2>Getting started</h2>
+  <div class="card stack">
+    <div>Open the app on your phone (save it to your home screen so it's one tap away):</div>
+    <div><strong>https://pack55-wreaths.vercel.app/</strong> <button class="btn" id="cp" type="button">Copy link</button></div>
+  </div>
+  <ol class="steps" style="margin-top:18px">
+    <li><h3>Type your Scout's name</h3>Start typing and pick the name from the list. Use the Scout's own name, not the parent's.</li>
+    <li><h3>Enter your 4-digit PIN</h3>The first time you sign in, you'll be asked to choose a new 4-digit PIN. Pick something you'll remember and write it down.</li>
+    <li><h3>Choose how you're selling</h3>Door-to-door is always available. The table sale buttons only work during their sale weekends.</li>
+  </ol>
+  <div class="note gold" style="margin-top:14px"><strong>Uniform on.</strong> Scouts should wear their uniform whenever they're selling. Always have a parent with you.</div>
+</section>
+
+<section id="prices">
+  <h2>What we sell</h2>
+  <div class="card scroll">
+    <table>
+      <thead><tr><th>Item</th><th class="p">Door-to-door</th><th class="p">Tables</th></tr></thead>
+      <tbody>
+        <tr><td>Decorated Wreath</td><td class="p">—</td><td class="p">$40</td></tr>
+        <tr><td>Wreath with Bow</td><td class="p">$25</td><td class="p">$25</td></tr>
+        <tr><td>Plain Wreath (14" double-faced balsam fir)</td><td class="p">$20</td><td class="p">$20</td></tr>
+        <tr><td>Bow (red holiday)</td><td class="p">$5</td><td class="p">$5</td></tr>
+        <tr><td>Donated Wreath for Veterans</td><td class="p">$25</td><td class="p">$25</td></tr>
+        <tr><td>Donation (any amount)</td><td class="p">you enter</td><td class="p">you enter</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note tip" style="margin-top:12px"><strong>Donated Wreath for Veterans</strong> supports Community Hope NJ and veterans at the Lyons VA Medical Center in Basking Ridge. <strong>Donation</strong> is for neighbors who'd like to give without taking a wreath. Any amount is welcome.</div>
+</section>
+
+<section id="door">
+  <h2>Door-to-door sales</h2>
+  <ol class="steps">
+    <li><h3>Tap the items</h3>Tap a product once for each one the customer wants. Use the minus button if you tap too many. The total updates as you go.</li>
+    <li><h3>Fill in customer info</h3>Name, address and phone number are required so we can deliver. Email and notes are optional. The address box grows as you type, so long addresses are fine.</li>
+    <li><h3>Choose how they're paying</h3>
+      <div class="grid" style="margin-top:8px">
+        <div class="card"><span class="pill">Cash</span><br>Take the cash now. Never promise to collect later.</div>
+        <div class="card"><span class="pill">Zelle</span><br>The Pack's Zelle QR code shows on screen. Tap it to enlarge so the customer's phone can scan it. Confirm the payment arrived before you finish.</div>
+        <div class="card"><span class="pill">Check</span><br>Payable to <strong>Cub Scout Pack 55</strong>.</div>
+      </div>
+    </li>
+    <li><h3>Complete the sale</h3>You'll see a confirmation. Offer the customer a receipt: tap <strong>Text</strong> or <strong>Email</strong> and the message opens on your phone, ready to send. Then tap <strong>Next Sale</strong>.</li>
+  </ol>
+  <div class="note tip" style="margin-top:14px"><strong>Check your work.</strong> Open <strong>My Sales</strong> any time to see every sale you've entered as its own entry, with your running totals. Do this after each outing so mistakes are caught early.</div>
+  <div class="note warn" style="margin-top:12px"><strong>Collect payment right away.</strong> Don't chase it later, and don't enter a sale that hasn't been paid for.</div>
+</section>
+
+<section id="tables">
+  <h2>Table sales</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="pill">St. James</span>
+      <h3>Quick checkout</h3>
+      <p style="margin:0">Customers walk up and buy on the spot, so no customer info is needed. Tap items, take payment, done. The list starts with the Decorated Wreath.</p>
+    </div>
+    <div class="card">
+      <span class="pill">Somerset Hills</span>
+      <h3>Presale</h3>
+      <p style="margin:0">Orders are taken one weekend and delivered the next. Enter the customer's name and phone number (address is optional). Orders show up in the <strong>Orders</strong> tab so we can fill them at delivery.</p>
+    </div>
+  </div>
+  <div class="note gold" style="margin-top:14px"><strong>Buttons turned off or asking for a PIN?</strong> Leaders switch each table sale on only during its sale hours and may lock it with a PIN. That keeps accidental table sales out of door-to-door totals. If you see a lock, find a leader at the table and they'll let you in.</div>
+</section>
+
+<section id="incentives">
+  <h2>Scout incentives</h2>
+  <div class="card stack">
+    <div>🏠 <strong>Sell 6 or more wreaths individually:</strong> a free gingerbread house at the December pack meeting.</div>
+    <div>🏆 <strong>Top 3 Scout salespeople:</strong> prizes at the December pack meeting.</div>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>Frequently asked questions</h2>
+  <details><summary>I forgot my PIN.</summary><p>Ask a pack leader. They can reset it, and you'll choose a new 4-digit PIN the next time you sign in.</p></details>
+  <details><summary>I can't find my Scout's name.</summary><p>Try the first few letters of the first name. If it's still missing, tell a leader so they can add your Scout to the roster.</p></details>
+  <details><summary>I entered a sale by mistake, or entered it twice.</summary><p>Don't try to fix it yourself. Tell a pack leader which sale it was (check <strong>My Sales</strong> for the time and customer). Leaders can remove individual sales so your totals stay correct.</p></details>
+  <details><summary>A wreath shows as sold out.</summary><p>Inventory is shared across all Scouts and updates live. If you're sure it's wrong, tell a leader. Don't promise delivery of an item the app says is gone.</p></details>
+  <details><summary>The St. James or Somerset Hills button is locked or won't open.</summary><p>That's on purpose. Leaders turn each table sale on only during its sale hours, and may require a PIN. Ask a leader at your table.</p></details>
+  <details><summary>How does a customer pay with Zelle?</summary><p>Choose Zelle at payment and show the QR code. Tap it to make it larger, and the customer scans it with their banking app. Make sure the payment went through before you tap complete.</p></details>
+  <details><summary>Who do checks go to?</summary><p>Make them payable to <strong>Cub Scout Pack 55</strong>. Hand checks and cash to a pack leader at the next meeting or pickup.</p></details>
+  <details><summary>Does the customer need the app or an account?</summary><p>No. Only Scouts and parents use the app. Customers just pay and, if they like, get a receipt by text or email from your phone.</p></details>
+  <details><summary>How do receipts work?</summary><p>After completing a sale, tap <strong>Text</strong> or <strong>Email</strong>. Your phone's messaging or mail app opens with the receipt filled in, and you press send. Nothing goes out until you do.</p></details>
+  <details><summary>What if I don't have internet at the door?</summary><p>The app needs a connection to record sales and check inventory. If you lose signal, wait until you have it back before completing the sale. Write the order on paper if you need to, then enter it afterward.</p></details>
+  <details><summary>Can parents see other Scouts' sales?</summary><p>No. You only see your own Scout's sales. Pack-wide totals and controls are for leaders.</p></details>
+  <details><summary>What is the Donated Wreath for Veterans?</summary><p>Customers buy a wreath for $25 that we donate through Community Hope NJ to disabled and homeless veterans at the Lyons VA Medical Center in Basking Ridge. Last year the pack donated 60 wreaths for their therapy program's decoration party.</p></details>
+  <details><summary>Can I sell outside our neighborhood or online?</summary><p>Stick to friends, family and neighbors, with a parent along. Ask a leader before selling anywhere else.</p></details>
+</section>
+
+<footer>
+  <strong>Questions?</strong> Reach out to Steve Bouffard, Pack 55 Cubmaster. Thank you for your support, and Yours in Scouting!
+</footer>
+</div>
+
+<script>
+document.getElementById('cp').addEventListener('click',function(){
+  var b=this,t='https://pack55-wreaths.vercel.app/';
+  function done(m){b.textContent=m;setTimeout(function(){b.textContent='Copy link'},1600)}
+  try{navigator.clipboard.writeText(t).then(function(){done('Copied')},function(){done('Select the link above')})}
+  catch(e){done('Select the link above')}
+});
+</script>
+
+</body></html>
